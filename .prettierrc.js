@@ -1,2 +1,2 @@
-/** @type import('prettier').Options */
+/** @type import('./lib').PrettierConfig */
 module.exports = require('./lib').getPrettierConfig()

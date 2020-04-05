@@ -111,8 +111,10 @@ yargs
           writeFileSync(
             path,
             `${dedent`
-              package-lock.json
               node_modules
+              package-lock.json
+              yarn.lock
+              pnpm-lock.yaml
               lib
               dist
             `}\n`,
