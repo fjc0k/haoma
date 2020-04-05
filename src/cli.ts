@@ -67,7 +67,7 @@ yargs
         writeFileSync(
           path,
           dedent`
-            /** @type import('eslint').Linter.Config */
+            /** @type import('${packageName}').ESLintConfig */
             module.exports = require('${packageName}').getESLintConfig()
           `,
         )
@@ -91,7 +91,7 @@ yargs
         writeFileSync(
           path,
           dedent`
-            /** @type import('prettier').Options */
+            /** @type import('${packageName}').PrettierConfig */
             module.exports = require('${packageName}').getPrettierConfig()
           `,
         )
