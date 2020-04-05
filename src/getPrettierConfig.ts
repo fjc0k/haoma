@@ -1,3 +1,4 @@
+import { join } from 'path'
 import { Options } from 'prettier'
 
 export function getPrettierConfig(): Options {
@@ -14,5 +15,13 @@ export function getPrettierConfig(): Options {
     jsxBracketSameLine: true,
     arrowParens: 'avoid',
     endOfLine: 'lf',
+    plugins: [
+      require.resolve('prettier-plugin-packagejson', {
+        paths: [
+          join(__dirname, '../node_modules'),
+          join(process.cwd(), 'node_modules'),
+        ],
+      }),
+    ],
   }
 }
