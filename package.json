@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "使用 EditorConfig + ESLint + Prettier，助你写出漂亮的前端代码。",
   "keywords": [
+    "editorconfig",
     "eslint",
     "prettier"
   ],
@@ -23,6 +24,9 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": "lib/cli.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.build.json",
     "dev": "rimraf lib && tsc -p tsconfig.build.json -w",
