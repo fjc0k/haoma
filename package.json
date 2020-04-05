@@ -22,6 +22,7 @@
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "bin": "lib/cli.js",
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.build.json",
     "dev": "rimraf lib && tsc -p tsconfig.build.json -w",
@@ -34,11 +35,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
+    "*.{css,less,scss,sass,html,htm,vue,yml,yaml,json,md}": [
       "prettier --write"
     ],
-    "*.{json,md}": [
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
       "prettier --write"
     ]
   },
@@ -49,6 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "babel-eslint": "^10.1.0",
+    "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-sort-imports-es6-autofix": "^0.5.0",

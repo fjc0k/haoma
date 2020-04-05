@@ -1,14 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import './fn'
-import React, { useState } from 'react'
+import React, { Component, FC, useState } from 'react'
 
-if (React) {
-  console.log(1)
-} else {
-  console.log(2)
-}
-
-export default class X extends React.Component {
+export default class X extends Component {
   static yyy = 3
 
   static y2yy = 3
@@ -27,8 +21,6 @@ export default class X extends React.Component {
     super(props)
   }
 
-  componentWillMount() {}
-
   x() {}
 
   mounted() {
@@ -36,7 +28,7 @@ export default class X extends React.Component {
     console.log(new Cc())
     try {
       const x = 1
-      console.log(x == 1)
+      console.log(x === 1)
       console.log(x && String(x))
     } catch (e) {}
   }
@@ -53,6 +45,7 @@ export default class X extends React.Component {
     return (
       <div>
         <span />
+        <div />
         <span id='dd' onClick={() => {}}>
           hello
           {[1, 2].map(x => (
@@ -72,3 +65,7 @@ export function Test() {
   const r = useState()
   return r
 }
+
+export const BButton: FC = () => <div />
+
+BButton.displayName = 'BButton'

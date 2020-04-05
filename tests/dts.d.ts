@@ -1,1 +1,1 @@
-export type Its = HTMLAllCollection
+export interface Its extends HTMLAllCollection, HTMLAnchorElement {}
