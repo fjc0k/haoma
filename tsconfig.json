@@ -11,6 +11,7 @@
     "newLine": "LF",
     "skipLibCheck": true,
     "sourceMap": false,
+    "preserveSymlinks": true,
     "jsx": "react",
     "outDir": "./lib",
     "lib": ["esnext", "dom"]

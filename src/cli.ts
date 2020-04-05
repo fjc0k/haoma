@@ -152,9 +152,16 @@ yargs
               stdio: 'inherit',
             })
           } else {
-            spawn.sync('npm', ['i', ...needInstallPackages, '-D'], {
-              stdio: 'inherit',
-            })
+            const usePnpm = existsSync(join(cwd, 'pnpm-lock.yaml'))
+            if (usePnpm) {
+              spawn.sync('pnpm', ['add', ...needInstallPackages, '-D'], {
+                stdio: 'inherit',
+              })
+            } else {
+              spawn.sync('npm', ['i', ...needInstallPackages, '-D'], {
+                stdio: 'inherit',
+              })
+            }
           }
         }
 
