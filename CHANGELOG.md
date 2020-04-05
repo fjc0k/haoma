@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/fjc0k/haoma/compare/v0.0.3...v1.0.0) (2020-04-05)
+
+### Features
+
+- 完善 .prettierignore ([dbe35b3](https://github.com/fjc0k/haoma/commit/dbe35b3df669d7cdb88d99789b61ba374637d140))
+
 ### [0.0.3](https://github.com/fjc0k/haoma/compare/v0.0.2...v0.0.3) (2020-04-05)
 
 ### Features
