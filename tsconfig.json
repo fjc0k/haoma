@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES6",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "declaration": true,
+    "removeComments": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "newLine": "LF",
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "jsx": "react",
+    "outDir": "./lib",
+    "lib": ["esnext", "dom"]
+  }
+}

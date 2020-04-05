@@ -1,0 +1,60 @@
+{
+  "name": "haoma",
+  "version": "0.0.0",
+  "description": "使用 EditorConfig + ESLint + Prettier，助你写出漂亮的前端代码。",
+  "keywords": [
+    "eslint",
+    "prettier"
+  ],
+  "homepage": "https://github.com/fjc0k/haoma",
+  "bugs": {
+    "url": "https://github.com/fjc0k/haoma/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fjc0k/haoma.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jay Fong",
+    "email": "fjc0kb@gmail.com",
+    "url": "https://github.com/fjc0k"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "dev": "rimraf lib && tsc -p tsconfig.build.json -w",
+    "build": "rimraf lib && tsc -p tsconfig.build.json",
+    "release": "standard-version -a && git push --follow-tags origin master && npm publish",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@rushstack/eslint-config": "^0.5.6",
+    "@types/eslint": "^6.1.9",
+    "@types/prettier": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "babel-eslint": "^10.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.5.0",
+    "vtils": "^2.57.0",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.34",
+    "@types/react": "^16.9.32",
+    "@types/yargs": "^15.0.4",
+    "eslint": "^6.8.0",
+    "prettier": "^2.0.2",
+    "react": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "standard-version": "^7.1.0",
+    "typescript": "^3.8.3"
+  },
+  "peerDependencies": {
+    "eslint": "^6",
+    "prettier": "^2",
+    "typescript": "^3"
+  }
+}
