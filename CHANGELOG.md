@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/fjc0k/haoma/compare/v1.0.0...v1.1.0) (2020-04-06)
+
+### Features
+
+- 禁用 react/display-name ([c78c40b](https://github.com/fjc0k/haoma/commit/c78c40bcadce885c3919b78502312f1c84f4cf53))
+
 ## [1.0.0](https://github.com/fjc0k/haoma/compare/v0.0.3...v1.0.0) (2020-04-05)
 
 ### Features
