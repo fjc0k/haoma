@@ -56,6 +56,7 @@ const ESLintConfig: Linter.Config = {
       },
     ],
     'react/prop-types': 'off',
+    'react/display-name': 'off',
     'react/jsx-boolean-value': ['error', 'always'],
     'react/self-closing-comp': [
       'error',
