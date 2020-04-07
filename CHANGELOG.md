@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/fjc0k/haoma/compare/v1.1.0...v1.2.0) (2020-04-07)
+
+### Features
+
+- 添加 reactPragma, reactVersion 配置项 ([87a6e19](https://github.com/fjc0k/haoma/commit/87a6e195f8f3e94ff0e211cb3c20b77aec73655c))
+
 ## [1.1.0](https://github.com/fjc0k/haoma/compare/v1.0.0...v1.1.0) (2020-04-06)
 
 ### Features
