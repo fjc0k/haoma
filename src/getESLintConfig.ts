@@ -35,21 +35,17 @@ export function getESLintConfig({
   // This is a workaround for https://github.com/eslint/eslint/issues/3458
   require('@rushstack/eslint-config/patch-eslint6')
 
-  process.env.HAOMA_PROJECT_ROOT = projectRoot
-
   const {
     pragma: reactPragma = 'React',
     version: reactVersion = 'detect',
   } = react
 
+  process.env.HAOMA_PROJECT_ROOT = projectRoot
+  process.env.HAOMA_REACT_PRAGMA = reactPragma
+  process.env.HAOMA_REACT_VERSION = reactVersion
+
   return {
     root: true,
     extends: [require.resolve('./ESLintConfig')],
-    settings: {
-      react: {
-        pragma: reactPragma,
-        version: reactVersion,
-      },
-    },
   }
 }

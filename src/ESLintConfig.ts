@@ -16,6 +16,12 @@ const ESLintConfig: Linter.Config = {
     'prettier',
     'prettier/react',
   ],
+  settings: {
+    react: {
+      pragma: process.env.HAOMA_REACT_PRAGMA,
+      version: process.env.HAOMA_REACT_VERSION,
+    },
+  },
   env: {
     browser: true,
     node: true,
