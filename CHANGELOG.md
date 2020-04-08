@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/fjc0k/haoma/compare/v1.2.0...v1.3.0) (2020-04-08)
+
+### Features
+
+- 将 React 配置移入 ESLintConfig 文件 ([2c5f19e](https://github.com/fjc0k/haoma/commit/2c5f19e1e695da1baa1c885436704c6a55e4ad03))
+- 改进配置结构 ([6555447](https://github.com/fjc0k/haoma/commit/6555447e275033c78f72127327d2f34301ad91c4))
+- 禁用 @typescript-eslint/no-misused-promises ([40a3a2f](https://github.com/fjc0k/haoma/commit/40a3a2f67bcd37ea184706ef7bddd4635aff09c1))
+
 ## [1.2.0](https://github.com/fjc0k/haoma/compare/v1.1.0...v1.2.0) (2020-04-07)
 
 ### Features
