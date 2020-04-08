@@ -10,29 +10,37 @@ export interface GetESLintConfigPayload {
   projectRoot?: string
 
   /**
-   * React 标识符。
-   *
-   * @default 'React'
+   * React 配置。
    */
-  reactPragma?: string
-
-  /**
-   * React 版本。默认自动检测。
-   *
-   * @default 'detect'
-   */
-  reactVersion?: LiteralUnion<'detect', string>
+  react?: {
+    /**
+     * React 标识符。
+     *
+     * @default 'React'
+     */
+    pragma?: LiteralUnion<'React', string>
+    /**
+     * React 版本。默认自动检测。
+     *
+     * @default 'detect'
+     */
+    version?: LiteralUnion<'detect', string>
+  }
 }
 
 export function getESLintConfig({
   projectRoot = process.cwd(),
-  reactPragma = 'React',
-  reactVersion = 'detect',
+  react = {},
 }: GetESLintConfigPayload = {}): Linter.Config {
   // This is a workaround for https://github.com/eslint/eslint/issues/3458
   require('@rushstack/eslint-config/patch-eslint6')
 
   process.env.HAOMA_PROJECT_ROOT = projectRoot
+
+  const {
+    pragma: reactPragma = 'React',
+    version: reactVersion = 'detect',
+  } = react
 
   return {
     root: true,
