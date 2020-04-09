@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/fjc0k/haoma/compare/v1.3.0...v1.4.0) (2020-04-09)
+
+### Features
+
+- 初始化安装 typescript, 当为 pnpm 时检查 npmrc ([be666bf](https://github.com/fjc0k/haoma/commit/be666bfede2709b43fdd178ba4c317dba918e563))
+
 ## [1.3.0](https://github.com/fjc0k/haoma/compare/v1.2.0...v1.3.0) (2020-04-08)
 
 ### Features
