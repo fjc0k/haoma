@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/fjc0k/haoma/compare/v1.4.0...v1.4.1) (2020-04-09)
+
+### Bug Fixes
+
+- 使用 pnpm 的 shamefully-hoist 前删除 node_modules ([3242dc4](https://github.com/fjc0k/haoma/commit/3242dc4c4dd8e72c996d8d533d35dd2ee388e5ee))
+
 ## [1.4.0](https://github.com/fjc0k/haoma/compare/v1.3.0...v1.4.0) (2020-04-09)
 
 ### Features
