@@ -141,6 +141,7 @@ yargs
 
         const needInstallPackages = [
           packageName,
+          'typescript',
           'eslint',
           'prettier',
           'husky',
@@ -156,6 +157,23 @@ yargs
           } else {
             const usePnpm = existsSync(join(cwd, 'pnpm-lock.yaml'))
             if (usePnpm) {
+              // npmrc 配置
+              {
+                const currentNpmrc = join(cwd, '.npmrc')
+                const currentNpmrcInfo: string = existsSync(currentNpmrc)
+                  ? readFileSync(currentNpmrc).toString()
+                  : ''
+                if (!currentNpmrcInfo.includes('shamefully-hoist')) {
+                  writeFileSync(
+                    currentNpmrc,
+                    currentNpmrcInfo
+                      .split('\n')
+                      .filter(Boolean)
+                      .concat('shamefully-hoist=true', '')
+                      .join('\n'),
+                  )
+                }
+              }
               spawn.sync('pnpm', ['add', ...needInstallPackages, '-D'], {
                 stdio: 'inherit',
               })
