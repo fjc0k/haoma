@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import rimraf from 'rimraf'
 import spawn from 'cross-spawn'
 import yargs from 'yargs'
 import { dedent } from 'vtils'
@@ -164,6 +165,8 @@ yargs
                   ? readFileSync(currentNpmrc).toString()
                   : ''
                 if (!currentNpmrcInfo.includes('shamefully-hoist')) {
+                  const currentNodeModules = join(cwd, 'node_modules')
+                  rimraf.sync(currentNodeModules)
                   writeFileSync(
                     currentNpmrc,
                     currentNpmrcInfo
