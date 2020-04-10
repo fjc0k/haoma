@@ -41,6 +41,25 @@ yargs
           }
         }
 
+        // .gitattributes
+        writeable(join(cwd, '.gitattributes'), path => {
+          writeFileSync(
+            path,
+            dedent`
+              * text eol=lf
+
+              *.png binary
+              *.jpg binary
+              *.gif binary
+              *.jpeg binary
+              *.mp3 binary
+              *.aac binary
+              *.mp4 binary
+              *.json linguist-language=JSON-with-Comments
+            `,
+          )
+        })
+
         // .editorconfig
         writeable(join(cwd, '.editorconfig'), path => {
           writeFileSync(
