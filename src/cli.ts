@@ -27,7 +27,8 @@ yargs
     },
     argv => {
       const cwd = process.cwd()
-      const packageName: string = require('../package.json').name
+      const { name: packageName, version: packageVersion } =
+        require('../package.json') as PackageJson
 
       // ========= 文件写入 =========
       {
@@ -159,14 +160,19 @@ yargs
           }),
         )
 
-        const needInstallPackages = [
-          packageName,
-          'typescript',
-          'eslint',
-          'prettier',
-          'husky',
-          'lint-staged',
-        ].filter(name => !currentPackageDeps.has(name))
+        const needInstallPackages = (
+          [
+            {
+              name: packageName!,
+              version: `^${packageVersion!.split('.')[0]}`,
+            },
+            { name: 'typescript', version: '^3' },
+            { name: 'eslint', version: '^6' },
+            { name: 'prettier', version: '^2' },
+            { name: 'husky', version: '^4' },
+            { name: 'lint-staged', version: '^10' },
+          ] as Array<{ name: string; version: string }>
+        ).filter(pkg => !currentPackageDeps.has(pkg.name))
 
         const userAgent = process.env.npm_config_user_agent
         const usePackageManager: 'yarn' | 'npm' | 'pnpm' =
@@ -207,10 +213,18 @@ yargs
         }
 
         if (needInstallPackages.length > 0) {
-          spawn.sync(usePackageManager, ['add', ...needInstallPackages, '-D'], {
-            stdio: 'inherit',
-            cwd: cwd,
-          })
+          spawn.sync(
+            usePackageManager,
+            [
+              'add',
+              ...needInstallPackages.map(pkg => `${pkg.name}@${pkg.version}`),
+              '-D',
+            ],
+            {
+              stdio: 'inherit',
+              cwd: cwd,
+            },
+          )
         }
 
         if (!currentPackageInfo.husky && !currentPackageInfo['lint-staged']) {
