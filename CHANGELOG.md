@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/fjc0k/haoma/compare/v1.4.1...v1.5.0) (2020-04-10)
+
+
+### Features
+
+* 增加 .gitattributes ([7a39493](https://github.com/fjc0k/haoma/commit/7a394937002425cde35eaa5875c3485ecde8d554))
+* 完善包管理器检测 ([7602973](https://github.com/fjc0k/haoma/commit/7602973794354786785cf48e7f872a038e3ce597))
+* 指定依赖版本 ([e7b56b6](https://github.com/fjc0k/haoma/commit/e7b56b6cc231149322498401325125bba77dce60))
+* 新增 tsconfig.json ([d752d33](https://github.com/fjc0k/haoma/commit/d752d33f3e0717836ec682a25ce2e96995f9e57f))
+
 ### [1.4.1](https://github.com/fjc0k/haoma/compare/v1.4.0...v1.4.1) (2020-04-09)
 
 ### Bug Fixes
