@@ -5,7 +5,7 @@ import yargs from 'yargs'
 import { dedent } from 'vtils'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
-import { PackageJson } from 'type-fest'
+import { PackageJson, TsConfigJson } from 'type-fest'
 
 yargs
   .usage('Usage: $0 <command> [options]')
@@ -139,6 +139,38 @@ yargs
               lib
               dist
             `}\n`,
+          )
+        })
+
+        // tsconfig.json
+        writeable(join(cwd, 'tsconfig.json'), path => {
+          writeFileSync(
+            path,
+            JSON.stringify(
+              {
+                compilerOptions: {
+                  strict: true,
+                  target: 'ESNext',
+                  module: 'ESNext',
+                  moduleResolution: 'node',
+                  declaration: true,
+                  removeComments: false,
+                  esModuleInterop: true,
+                  allowSyntheticDefaultImports: true,
+                  experimentalDecorators: true,
+                  skipLibCheck: true,
+                  sourceMap: false,
+                  preserveSymlinks: true,
+                  incremental: true,
+                  tsBuildInfoFile: './node_modules/.cache/tsbif',
+                  newLine: 'LF',
+                  jsx: 'react',
+                  lib: ['esnext', 'dom'],
+                },
+              } as TsConfigJson,
+              null,
+              2,
+            ),
           )
         })
 
