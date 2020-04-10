@@ -168,43 +168,49 @@ yargs
           'lint-staged',
         ].filter(name => !currentPackageDeps.has(name))
 
-        if (needInstallPackages.length > 0) {
-          const useYarn = existsSync(join(cwd, 'yarn.lock'))
-          if (useYarn) {
-            spawn.sync('yarn', ['add', ...needInstallPackages, '-D'], {
-              stdio: 'inherit',
-            })
-          } else {
-            const usePnpm = existsSync(join(cwd, 'pnpm-lock.yaml'))
-            if (usePnpm) {
-              // npmrc 配置
-              {
-                const currentNpmrc = join(cwd, '.npmrc')
-                const currentNpmrcInfo: string = existsSync(currentNpmrc)
-                  ? readFileSync(currentNpmrc).toString()
-                  : ''
-                if (!currentNpmrcInfo.includes('shamefully-hoist')) {
-                  const currentNodeModules = join(cwd, 'node_modules')
-                  rimraf.sync(currentNodeModules)
-                  writeFileSync(
-                    currentNpmrc,
-                    currentNpmrcInfo
-                      .split('\n')
-                      .filter(Boolean)
-                      .concat('shamefully-hoist=true', '')
-                      .join('\n'),
-                  )
-                }
-              }
-              spawn.sync('pnpm', ['add', ...needInstallPackages, '-D'], {
-                stdio: 'inherit',
-              })
-            } else {
-              spawn.sync('npm', ['i', ...needInstallPackages, '-D'], {
-                stdio: 'inherit',
-              })
-            }
+        const userAgent = process.env.npm_config_user_agent
+        const usePackageManager: 'yarn' | 'npm' | 'pnpm' =
+          (userAgent &&
+            (userAgent.startsWith('yarn')
+              ? 'yarn'
+              : userAgent.startsWith('pnpm')
+              ? 'pnpm'
+              : userAgent.startsWith('npm')
+              ? 'npm'
+              : '')) ||
+          (existsSync(join(cwd, 'yarn.lock'))
+            ? 'yarn'
+            : existsSync(join(cwd, 'pnpm-lock.yaml'))
+            ? 'pnpm'
+            : existsSync(join(cwd, 'package-lock.json'))
+            ? 'npm'
+            : '') ||
+          'npm'
+
+        if (usePackageManager === 'pnpm') {
+          const currentNpmrc = join(cwd, '.npmrc')
+          const currentNpmrcInfo: string = existsSync(currentNpmrc)
+            ? readFileSync(currentNpmrc).toString()
+            : ''
+          if (!currentNpmrcInfo.includes('shamefully-hoist')) {
+            const currentNodeModules = join(cwd, 'node_modules')
+            rimraf.sync(currentNodeModules)
+            writeFileSync(
+              currentNpmrc,
+              currentNpmrcInfo
+                .split('\n')
+                .filter(Boolean)
+                .concat('shamefully-hoist=true', '')
+                .join('\n'),
+            )
           }
+        }
+
+        if (needInstallPackages.length > 0) {
+          spawn.sync(usePackageManager, ['add', ...needInstallPackages, '-D'], {
+            stdio: 'inherit',
+            cwd: cwd,
+          })
         }
 
         if (!currentPackageInfo.husky && !currentPackageInfo['lint-staged']) {
@@ -225,6 +231,18 @@ yargs
           writeFileSync(
             currentPackageJson,
             JSON.stringify(currentPackageInfo, null, 2),
+          )
+          spawn.sync(
+            'node',
+            [
+              join(cwd, './node_modules/prettier/bin-prettier.js'),
+              '--write',
+              currentPackageJson,
+            ],
+            {
+              stdio: 'inherit',
+              cwd: cwd,
+            },
           )
         }
 
