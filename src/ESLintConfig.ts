@@ -1,5 +1,3 @@
-import { existsSync } from 'fs'
-import { join } from 'path'
 import { Linter } from 'eslint'
 
 const ESLintConfig: Linter.Config = {
@@ -10,12 +8,7 @@ const ESLintConfig: Linter.Config = {
       jsx: true,
     },
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'prettier',
-    'prettier/react',
-  ],
+  extends: ['eslint:recommended', 'prettier'],
   settings: {
     react: {
       pragma: process.env.HAOMA_REACT_PRAGMA,
@@ -29,7 +22,7 @@ const ESLintConfig: Linter.Config = {
     es6: true,
     jest: true,
   },
-  plugins: ['sort-imports-es6-autofix', 'import', 'react'],
+  plugins: ['sort-imports-es6-autofix', 'import'],
   rules: {
     'no-var': 'error',
     'prefer-const': 'error',
@@ -61,26 +54,6 @@ const ESLintConfig: Linter.Config = {
         memberSyntaxSortOrder: ['none', 'all', 'single', 'multiple'],
       },
     ],
-    'react/prop-types': 'off',
-    'react/display-name': 'off',
-    'react/jsx-boolean-value': ['error', 'always'],
-    'react/self-closing-comp': [
-      'error',
-      {
-        component: true,
-        html: true,
-      },
-    ],
-    'react/jsx-pascal-case': 'error',
-    'react/no-array-index-key': 'error',
-    'react/jsx-sort-props': [
-      'error',
-      {
-        callbacksLast: true,
-        noSortAlphabetically: true,
-        reservedFirst: true,
-      },
-    ],
   },
   overrides: [
     {
@@ -90,17 +63,21 @@ const ESLintConfig: Linter.Config = {
       plugins: ['@typescript-eslint'],
       parserOptions: {
         sourceType: 'module',
-        project: existsSync(
-          join(process.env.HAOMA_PROJECT_ROOT!, 'tsconfig.eslint.json'),
-        )
-          ? './tsconfig.eslint.json'
-          : './tsconfig.json',
-        tsconfigRootDir: process.env.HAOMA_PROJECT_ROOT!,
+        // NOTE: 性能问题，去掉
+        // ref: https://github.com/typescript-eslint/typescript-eslint/issues/1132
+        // project: existsSync(
+        //   join(process.env.HAOMA_PROJECT_ROOT!, 'tsconfig.eslint.json'),
+        // )
+        //   ? './tsconfig.eslint.json'
+        //   : './tsconfig.json',
+        // tsconfigRootDir: process.env.HAOMA_PROJECT_ROOT!,
       },
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        // NOTE: 性能问题，去掉
+        // ref: https://github.com/typescript-eslint/typescript-eslint/issues/1132
+        // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'prettier/@typescript-eslint',
       ],
       rules: {
@@ -122,6 +99,34 @@ const ESLintConfig: Linter.Config = {
           'error',
           {
             allowSingleExtends: true,
+          },
+        ],
+      },
+    },
+    {
+      files: ['*.jsx', '*.tsx'],
+      // @ts-ignore
+      plugins: ['react'],
+      extends: ['plugin:react/recommended', 'prettier/react'],
+      rules: {
+        'react/prop-types': 'off',
+        'react/display-name': 'off',
+        'react/jsx-boolean-value': ['error', 'always'],
+        'react/self-closing-comp': [
+          'error',
+          {
+            component: true,
+            html: true,
+          },
+        ],
+        'react/jsx-pascal-case': 'error',
+        'react/no-array-index-key': 'error',
+        'react/jsx-sort-props': [
+          'error',
+          {
+            callbacksLast: true,
+            noSortAlphabetically: true,
+            reservedFirst: true,
           },
         ],
       },
