@@ -1,6 +1,6 @@
-import { Linter } from 'eslint'
+import { ESLintConfig as ESLintConfigTypes } from './types'
 
-const ESLintConfig: Linter.Config = {
+const ESLintConfig: ESLintConfigTypes = {
   parser: 'babel-eslint',
   parserOptions: {
     sourceType: 'module',

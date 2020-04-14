@@ -1,4 +1,4 @@
-import { Linter } from 'eslint'
+import { ESLintConfig } from './types'
 import { LiteralUnion } from 'vtils'
 
 export interface GetESLintConfigPayload {
@@ -31,7 +31,7 @@ export interface GetESLintConfigPayload {
 export function getESLintConfig({
   projectRoot = process.cwd(),
   react = {},
-}: GetESLintConfigPayload = {}): Linter.Config {
+}: GetESLintConfigPayload = {}): ESLintConfig {
   // This is a workaround for https://github.com/eslint/eslint/issues/3458
   require('@rushstack/eslint-config/patch-eslint6')
 
