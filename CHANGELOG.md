@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/fjc0k/haoma/compare/v1.6.0...v1.7.0) (2020-04-14)
+
+
+### Features
+
+* 新增 prettier-plugin-sh ([e8bbb0a](https://github.com/fjc0k/haoma/commit/e8bbb0a372d41e38d13d9f3888e5fbfee9584cf0))
+
 ## [1.6.0](https://github.com/fjc0k/haoma/compare/v1.5.0...v1.6.0) (2020-04-11)
 
 
