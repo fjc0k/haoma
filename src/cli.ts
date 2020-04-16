@@ -14,16 +14,23 @@ yargs
   // Show help if no args
   // ref: https://github.com/yargs/yargs/issues/895
   .demandCommand(1, '')
-  .command<{ override: boolean }>(
+  .command<{ override: boolean; jest: boolean }>(
     'init',
     'Initialize the config files',
     yargs => {
-      yargs.option('override', {
-        alias: 'o',
-        type: 'boolean',
-        describe: 'Override existing files',
-        default: false,
-      })
+      yargs
+        .option('override', {
+          alias: 'o',
+          type: 'boolean',
+          describe: 'Override existing files',
+          default: false,
+        })
+        .option('jest', {
+          alias: 'j',
+          type: 'boolean',
+          describe: 'Install jest',
+          default: false,
+        })
     },
     argv => {
       const cwd = process.cwd()
@@ -203,6 +210,14 @@ yargs
             { name: 'prettier', version: '^2' },
             { name: 'husky', version: '^4' },
             { name: 'lint-staged', version: '^10' },
+            ...(!argv.jest
+              ? []
+              : ([
+                  { name: 'jest', version: '^25' },
+                  { name: 'ts-jest', version: '^25' },
+                  { name: 'codecov', version: '^3' },
+                  { name: '@types/jest', version: '^25' },
+                ] as Array<{ name: string; version: string }>)),
           ] as Array<{ name: string; version: string }>
         ).filter(pkg => !currentPackageDeps.has(pkg.name))
 
@@ -259,38 +274,48 @@ yargs
           )
         }
 
-        if (!currentPackageInfo.husky && !currentPackageInfo['lint-staged']) {
-          const currentPackageInfo = JSON.parse(
-            readFileSync(currentPackageJson).toString(),
-          )
-          currentPackageInfo.husky = {
+        const nextPackageInfo = JSON.parse(
+          readFileSync(currentPackageJson).toString(),
+        )
+
+        if (!nextPackageInfo.husky && !nextPackageInfo['lint-staged']) {
+          nextPackageInfo.husky = {
             hooks: {
               'pre-commit': 'lint-staged',
             },
           }
-          currentPackageInfo['lint-staged'] = {
+          nextPackageInfo['lint-staged'] = {
             '*.{css,less,scss,sass,html,htm,vue,yml,yaml,json,md}': [
               'prettier --write',
             ],
             '*.{js,jsx,ts,tsx}': ['eslint --fix', 'prettier --write'],
           }
-          writeFileSync(
-            currentPackageJson,
-            JSON.stringify(currentPackageInfo, null, 2),
-          )
-          spawn.sync(
-            'node',
-            [
-              join(cwd, './node_modules/prettier/bin-prettier.js'),
-              '--write',
-              currentPackageJson,
-            ],
-            {
-              stdio: 'inherit',
-              cwd: cwd,
-            },
-          )
         }
+
+        if (argv.jest && !nextPackageInfo.jest) {
+          nextPackageInfo.jest = {
+            collectCoverageFrom: [
+              'src/**/*.ts',
+              '!src/**/*.test.ts',
+              '!src/**/__*__/**/*',
+            ],
+            globals: {
+              'ts-jest': {
+                packageJson: './package.json',
+              },
+            },
+            preset: 'ts-jest',
+          }
+        }
+
+        writeFileSync(
+          currentPackageJson,
+          JSON.stringify(nextPackageInfo, null, 2),
+        )
+        spawn.sync('npx', ['prettier', '--write', currentPackageJson], {
+          stdio: 'inherit',
+          cwd: cwd,
+        })
 
         console.log('✔️ Install dependencies')
       }
