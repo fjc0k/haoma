@@ -2,29 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.7.0](https://github.com/fjc0k/haoma/compare/v1.6.0...v1.7.0) (2020-04-14)
-
+## [1.8.0](https://github.com/fjc0k/haoma/compare/v1.7.0...v1.8.0) (2020-04-16)
 
 ### Features
 
-* 新增 prettier-plugin-sh ([e8bbb0a](https://github.com/fjc0k/haoma/commit/e8bbb0a372d41e38d13d9f3888e5fbfee9584cf0))
+- 新增 jest ([f12d81a](https://github.com/fjc0k/haoma/commit/f12d81ac4cd508fc38c7c499ff93ceb50857356c))
+
+## [1.7.0](https://github.com/fjc0k/haoma/compare/v1.6.0...v1.7.0) (2020-04-14)
+
+### Features
+
+- 新增 prettier-plugin-sh ([e8bbb0a](https://github.com/fjc0k/haoma/commit/e8bbb0a372d41e38d13d9f3888e5fbfee9584cf0))
 
 ## [1.6.0](https://github.com/fjc0k/haoma/compare/v1.5.0...v1.6.0) (2020-04-11)
 
-
 ### Features
 
-* 性能优化 ([26bdb2b](https://github.com/fjc0k/haoma/commit/26bdb2b10b815bd5a267a88940fdd2fdcc60904d))
+- 性能优化 ([26bdb2b](https://github.com/fjc0k/haoma/commit/26bdb2b10b815bd5a267a88940fdd2fdcc60904d))
 
 ## [1.5.0](https://github.com/fjc0k/haoma/compare/v1.4.1...v1.5.0) (2020-04-10)
 
-
 ### Features
 
-* 增加 .gitattributes ([7a39493](https://github.com/fjc0k/haoma/commit/7a394937002425cde35eaa5875c3485ecde8d554))
-* 完善包管理器检测 ([7602973](https://github.com/fjc0k/haoma/commit/7602973794354786785cf48e7f872a038e3ce597))
-* 指定依赖版本 ([e7b56b6](https://github.com/fjc0k/haoma/commit/e7b56b6cc231149322498401325125bba77dce60))
-* 新增 tsconfig.json ([d752d33](https://github.com/fjc0k/haoma/commit/d752d33f3e0717836ec682a25ce2e96995f9e57f))
+- 增加 .gitattributes ([7a39493](https://github.com/fjc0k/haoma/commit/7a394937002425cde35eaa5875c3485ecde8d554))
+- 完善包管理器检测 ([7602973](https://github.com/fjc0k/haoma/commit/7602973794354786785cf48e7f872a038e3ce597))
+- 指定依赖版本 ([e7b56b6](https://github.com/fjc0k/haoma/commit/e7b56b6cc231149322498401325125bba77dce60))
+- 新增 tsconfig.json ([d752d33](https://github.com/fjc0k/haoma/commit/d752d33f3e0717836ec682a25ce2e96995f9e57f))
 
 ### [1.4.1](https://github.com/fjc0k/haoma/compare/v1.4.0...v1.4.1) (2020-04-09)
 
