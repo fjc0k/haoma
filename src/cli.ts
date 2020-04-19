@@ -2,9 +2,9 @@
 import rimraf from 'rimraf'
 import spawn from 'cross-spawn'
 import yargs from 'yargs'
+import { basename, join } from 'path'
 import { dedent } from 'vtils'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
-import { join } from 'path'
 import { PackageJson, TsConfigJson } from 'type-fest'
 
 yargs
@@ -34,8 +34,10 @@ yargs
     },
     argv => {
       const cwd = process.cwd()
-      const { name: packageName, version: packageVersion } =
-        require('../package.json') as PackageJson
+      const {
+        name: packageName,
+        version: packageVersion,
+      } = require('../package.json') as PackageJson
 
       // ========= 文件写入 =========
       {
@@ -199,30 +201,43 @@ yargs
           }),
         )
 
-        const needInstallPackages = (
-          [
-            {
-              name: packageName!,
-              version: `^${packageVersion!.split('.')[0]}`,
-            },
-            { name: 'typescript', version: '^3' },
-            { name: 'eslint', version: '^6' },
-            { name: 'prettier', version: '^2' },
-            { name: 'husky', version: '^4' },
-            { name: 'lint-staged', version: '^10' },
-            ...(!argv.jest
-              ? []
-              : ([
-                  { name: 'jest', version: '^25' },
-                  { name: 'ts-jest', version: '^25' },
-                  { name: 'codecov', version: '^3' },
-                  { name: '@types/jest', version: '^25' },
-                ] as Array<{ name: string; version: string }>)),
-          ] as Array<{ name: string; version: string }>
-        ).filter(pkg => !currentPackageDeps.has(pkg.name))
+        const needInstallPackages = ([
+          {
+            name: packageName!,
+            version: `^${packageVersion!.split('.')[0]}`,
+          },
+          { name: 'typescript', version: '^3' },
+          { name: 'eslint', version: '^6' },
+          { name: 'prettier', version: '^2' },
+          { name: 'husky', version: '^4' },
+          { name: 'lint-staged', version: '^10' },
+          ...(!argv.jest
+            ? []
+            : ([
+                { name: 'jest', version: '^25' },
+                { name: 'ts-jest', version: '^25' },
+                { name: 'codecov', version: '^3' },
+                { name: '@types/jest', version: '^25' },
+              ] as Array<{ name: string; version: string }>)),
+        ] as Array<{ name: string; version: string }>).filter(
+          pkg => !currentPackageDeps.has(pkg.name),
+        )
 
         const userAgent = process.env.npm_config_user_agent
-        const usePackageManager: 'yarn' | 'npm' | 'pnpm' =
+        const userAgentX = basename(process.env._ || '')
+        const usePackageManager: 'yarn' | 'tyarn' | 'npm' | 'pnpm' | 'cpnpm' =
+          (userAgentX &&
+            (userAgentX === 'yarn'
+              ? 'yarn'
+              : userAgentX === 'tyarn'
+              ? 'tyarn'
+              : userAgentX === 'pnpx'
+              ? 'pnpm'
+              : userAgentX === 'cpnpx' || userAgentX === 'tpx'
+              ? 'cpnpm'
+              : userAgentX === 'npx'
+              ? 'npm'
+              : '')) ||
           (userAgent &&
             (userAgent.startsWith('yarn')
               ? 'yarn'
