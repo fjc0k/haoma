@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/fjc0k/haoma/compare/v1.8.0...v1.9.0) (2020-04-19)
+
+
+### Features
+
+* 完善包管理工具检测 ([a464b9d](https://github.com/fjc0k/haoma/commit/a464b9da052a8e9299e32cbfa1c3a7f140b0fd76))
+* 添加 .gitignore, LICENSE ([bccadb4](https://github.com/fjc0k/haoma/commit/bccadb407bfb95939c60374260d50339e2f0905c))
+
 ## [1.8.0](https://github.com/fjc0k/haoma/compare/v1.7.0...v1.8.0) (2020-04-16)
 
 ### Features
