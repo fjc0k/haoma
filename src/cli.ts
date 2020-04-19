@@ -14,7 +14,7 @@ yargs
   // Show help if no args
   // ref: https://github.com/yargs/yargs/issues/895
   .demandCommand(1, '')
-  .command<{ override: boolean; jest: boolean }>(
+  .command<{ override: boolean; jest: boolean; license: boolean }>(
     'init',
     'Initialize the config files',
     yargs => {
@@ -29,6 +29,12 @@ yargs
           alias: 'j',
           type: 'boolean',
           describe: 'Install jest',
+          default: false,
+        })
+        .option('license', {
+          alias: 'l',
+          type: 'boolean',
+          describe: 'Generate LICENSE',
           default: false,
         })
     },
@@ -51,11 +57,28 @@ yargs
           }
         }
 
+        // .gitignore
+        writeable(join(cwd, '.gitignore'), path => {
+          writeFileSync(
+            path,
+            `${dedent`
+              .DS_Store
+              Thumbs.db
+              node_modules
+              coverage
+              lib
+              dist
+              *.tsbuildinfo
+              *.log*
+            `}\n`,
+          )
+        })
+
         // .gitattributes
         writeable(join(cwd, '.gitattributes'), path => {
           writeFileSync(
             path,
-            dedent`
+            `${dedent`
               * text eol=lf
 
               *.png binary
@@ -66,7 +89,7 @@ yargs
               *.aac binary
               *.mp4 binary
               *.json linguist-language=JSON-with-Comments
-            `,
+            `}\n`,
           )
         })
 
@@ -182,6 +205,47 @@ yargs
             ),
           )
         })
+
+        if (argv.license) {
+          const gitUser =
+            spawn
+              .sync('git', ['config', '--get', 'user.name'])
+              .output.join('')
+              .trim() || 'GIT_USER'
+          const gitEmail = spawn
+            .sync('git', ['config', '--get', 'user.email'])
+            .output.join('')
+            .trim()
+          // LICENSE
+          writeable(join(cwd, 'LICENSE'), path => {
+            writeFileSync(
+              path,
+              `${dedent`
+                MIT License
+
+                Copyright (c) ${new Date().getFullYear()}-present ${gitUser} <${gitEmail}>
+
+                Permission is hereby granted, free of charge, to any person obtaining a copy
+                of this software and associated documentation files (the "Software"), to deal
+                in the Software without restriction, including without limitation the rights
+                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                copies of the Software, and to permit persons to whom the Software is
+                furnished to do so, subject to the following conditions:
+
+                The above copyright notice and this permission notice shall be included in all
+                copies or substantial portions of the Software.
+
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                SOFTWARE.
+            `}\n`,
+            )
+          })
+        }
 
         console.log('✔️ Write config files')
       }
