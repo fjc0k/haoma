@@ -211,11 +211,12 @@ yargs
             spawn
               .sync('git', ['config', '--get', 'user.name'])
               .output.join('')
-              .trim() || 'GIT_USER'
-          const gitEmail = spawn
-            .sync('git', ['config', '--get', 'user.email'])
-            .output.join('')
-            .trim()
+              .trim() || 'AUTHOR_NAME'
+          const gitEmail =
+            spawn
+              .sync('git', ['config', '--get', 'user.email'])
+              .output.join('')
+              .trim() || 'AUTHOR_EMAIL'
           // LICENSE
           writeable(join(cwd, 'LICENSE'), path => {
             writeFileSync(

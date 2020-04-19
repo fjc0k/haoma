@@ -19,7 +19,7 @@ yarn add haoma -D
 
 ## 使用
 
-使用以下命令初始化 `.gitattributes`、`.editorconfig`、`.eslintrc.js`、`.eslintignore`、`.prettierrc.js`、`.prettierignore`、`tsconfig.json` 配置文件并安装 `haoma`、`typescript`、`eslint`、`prettier`、`husky`、`lint-staged` 依赖：
+使用以下命令初始化 `.gitignore`、 `.gitattributes`、`.editorconfig`、`.eslintrc.js`、`.eslintignore`、`.prettierrc.js`、`.prettierignore`、`tsconfig.json` 配置文件并安装 `haoma`、`typescript`、`eslint`、`prettier`、`husky`、`lint-staged` 依赖：
 
 ```bash
 # npm
