@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.3](https://github.com/fjc0k/haoma/compare/v1.11.2...v1.11.3) (2020-04-27)
+
+
+### Bug Fixes
+
+* 生产 jest 类型 ([d261611](https://github.com/fjc0k/haoma/commit/d2616111b2ed85e9607854dd5702f5976bc1c904))
+
 ### [1.11.2](https://github.com/fjc0k/haoma/compare/v1.11.1...v1.11.2) (2020-04-27)
 
 
