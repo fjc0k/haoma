@@ -248,6 +248,36 @@ yargs
           })
         }
 
+        if (argv.jest) {
+          writeable(join(cwd, 'tsconfig.test.json'), path => {
+            writeFileSync(
+              path,
+              JSON.stringify(
+                {
+                  extends: './tsconfig.json',
+                  compilerOptions: {
+                    target: 'ES2019',
+                    module: 'CommonJS',
+                    moduleResolution: 'node',
+                    lib: ['ES2019', 'DOM'],
+                  },
+                } as TsConfigJson,
+                null,
+                2,
+              ),
+            )
+          })
+          writeable(join(cwd, 'jest.config.js'), path => {
+            writeFileSync(
+              path,
+              `${dedent`
+                /** @type import('${packageName}').JestConfig */
+                module.exports = require('${packageName}').getJestConfig()
+              `}\n`,
+            )
+          })
+        }
+
         console.log('✔️ Write config files')
       }
 
@@ -280,9 +310,7 @@ yargs
             ? []
             : ([
                 { name: 'jest', version: '^25' },
-                { name: 'ts-jest', version: '^25' },
                 { name: 'codecov', version: '^3' },
-                { name: '@types/jest', version: '^25' },
               ] as Array<{ name: string; version: string }>)),
         ] as Array<{ name: string; version: string }>).filter(
           pkg => !currentPackageDeps.has(pkg.name),

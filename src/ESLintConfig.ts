@@ -11,8 +11,8 @@ const ESLintConfig: ESLintConfigTypes = {
   extends: ['eslint:recommended', 'prettier'],
   settings: {
     react: {
-      pragma: process.env.HAOMA_REACT_PRAGMA,
-      version: process.env.HAOMA_REACT_VERSION,
+      pragma: 'React',
+      version: 'detect',
     },
   },
   env: {
@@ -22,7 +22,7 @@ const ESLintConfig: ESLintConfigTypes = {
     es6: true,
     jest: true,
   },
-  plugins: ['sort-imports-es6-autofix', 'import'],
+  plugins: ['sort-imports-es6-autofix'],
   rules: {
     'no-var': 'error',
     'prefer-const': 'error',
@@ -45,7 +45,6 @@ const ESLintConfig: ESLintConfigTypes = {
         properties: true,
       },
     ],
-    'import/newline-after-import': 'error',
     'sort-imports-es6-autofix/sort-imports-es6': [
       'error',
       {
@@ -63,21 +62,10 @@ const ESLintConfig: ESLintConfigTypes = {
       plugins: ['@typescript-eslint'],
       parserOptions: {
         sourceType: 'module',
-        // NOTE: 性能问题，去掉
-        // ref: https://github.com/typescript-eslint/typescript-eslint/issues/1132
-        // project: existsSync(
-        //   join(process.env.HAOMA_PROJECT_ROOT!, 'tsconfig.eslint.json'),
-        // )
-        //   ? './tsconfig.eslint.json'
-        //   : './tsconfig.json',
-        // tsconfigRootDir: process.env.HAOMA_PROJECT_ROOT!,
       },
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        // NOTE: 性能问题，去掉
-        // ref: https://github.com/typescript-eslint/typescript-eslint/issues/1132
-        // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'prettier/@typescript-eslint',
       ],
       rules: {

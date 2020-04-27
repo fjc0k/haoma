@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`diff 1`] = `
+Snapshot Diff:
+- First value
++ Second value
+
+  Object {
+-   "x": 1,
++   "x": 2,
+    "y": 2,
++   "z": 9,
+  }
+`;
+
+exports[`函数 1`] = `[Function namedFn]`;

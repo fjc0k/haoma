@@ -4,10 +4,11 @@ import { PrettierConfig } from './types'
 
 export function getPrettierConfig(
   customConfig: PrettierConfig = {},
+  projectRoot: string = process.cwd(),
 ): PrettierConfig {
   const paths: string[] = [
     join(__dirname, '../node_modules'),
-    join(process.cwd(), 'node_modules'),
+    join(projectRoot, 'node_modules'),
   ]
 
   return merge<PrettierConfig>(
