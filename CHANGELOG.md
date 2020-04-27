@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/fjc0k/haoma/compare/v1.9.1...v1.10.0) (2020-04-27)
+
+
+### Features
+
+* 集成 jest ([aaeedc8](https://github.com/fjc0k/haoma/commit/aaeedc86e55faacb1e25491801e068217484cfe7))
+
 ### [1.9.1](https://github.com/fjc0k/haoma/compare/v1.9.0...v1.9.1) (2020-04-19)
 
 ## [1.9.0](https://github.com/fjc0k/haoma/compare/v1.8.0...v1.9.0) (2020-04-19)
