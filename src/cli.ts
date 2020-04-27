@@ -196,7 +196,6 @@ yargs
                   newLine: 'LF',
                   jsx: 'react',
                   lib: ['esnext', 'dom'],
-                  typeRoots: ['node_modules/@types', 'node_modules/haoma'],
                 },
               } as TsConfigJson,
               null,

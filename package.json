@@ -30,6 +30,7 @@
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.build.json",
     "dev": "rimraf lib && tsc -p tsconfig.build.json -w",
+    "postinstall": "node lib/generateTypes.js",
     "prepublishOnly": "npm run build",
     "release": "standard-version -a && git push --follow-tags origin master && npm publish",
     "test": "jest"
