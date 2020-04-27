@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/fjc0k/haoma/compare/v1.11.0...v1.11.1) (2020-04-27)
+
+
+### Bug Fixes
+
+* 导出 jestTypes ([52b7595](https://github.com/fjc0k/haoma/commit/52b7595b9466ca29ebad298674b5cd8c514bc114))
+
 ## [1.11.0](https://github.com/fjc0k/haoma/compare/v1.10.0...v1.11.0) (2020-04-27)
 
 
