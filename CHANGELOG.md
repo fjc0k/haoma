@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/fjc0k/haoma/compare/v1.10.0...v1.11.0) (2020-04-27)
+
+
+### Features
+
+* 添加 jest-chain, jest-extended，并生成全局 types ([9c90268](https://github.com/fjc0k/haoma/commit/9c9026870fee6cc8c1430be81a3507d71e205dac))
+
 ## [1.10.0](https://github.com/fjc0k/haoma/compare/v1.9.1...v1.10.0) (2020-04-27)
 
 
