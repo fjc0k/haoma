@@ -20,3 +20,7 @@ test('React', () => {
   expect(getByText('按钮')).toBeInTheDocument()
   expect(getByText('按钮')).toHaveAttribute('type', 'reset')
 })
+
+test('字符串', () => {
+  expect('1222').toMatchSnapshot()
+})

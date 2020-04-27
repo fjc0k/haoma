@@ -39,7 +39,7 @@ export function getJestConfig(
             paths,
           }),
         ),
-        // 移除 jest 包裹在快照字符串两边的引号
+        // 移除 jest 包裹在 diff 快照两边的引号
         normalizeFilePath(
           require.resolve('snapshot-diff/serializer.js', { paths }),
         ),

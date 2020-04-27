@@ -14,3 +14,5 @@ Snapshot Diff:
 `;
 
 exports[`函数 1`] = `[Function namedFn]`;
+
+exports[`字符串 1`] = `"1222"`;
