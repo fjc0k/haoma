@@ -24,3 +24,7 @@ test('React', () => {
 test('字符串', () => {
   expect('1222').toMatchSnapshot()
 })
+
+test('chain', () => {
+  expect(1).toBeNumber().toBeLessThan(2).toBe(1)
+})

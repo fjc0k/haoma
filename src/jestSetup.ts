@@ -6,8 +6,10 @@ if (typeof expect === 'undefined') {
   }
 }
 
-import '@testing-library/jest-dom'
-import 'snapshot-diff/extend-expect'
+import 'jest-chain'
 
-// 仅仅为了导入其类型定义
-import 'snapshot-diff'
+import 'jest-extended'
+
+import '@testing-library/jest-dom'
+
+import 'snapshot-diff/extend-expect'
