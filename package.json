@@ -69,6 +69,7 @@
     "jest-chain": "^1.1.5",
     "jest-extended": "^0.11.5",
     "jest-snapshot-serializer-function-name": "^1.1.0",
+    "pkg-dir": "^4.2.0",
     "prettier-plugin-packagejson": "^2.1.2",
     "prettier-plugin-sh": "^0.3.2",
     "react-test-renderer": "^16.13.1",
