@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/fjc0k/haoma/compare/v1.11.5...v1.12.0) (2020-04-28)
+
+
+### Features
+
+* **jest:** 添加 jest-serializer-html ([16eac3d](https://github.com/fjc0k/haoma/commit/16eac3ddc70f9a8cc22eb55ad13a74a83772fb72))
+
 ### [1.11.5](https://github.com/fjc0k/haoma/compare/v1.11.4...v1.11.5) (2020-04-27)
 
 ### [1.11.4](https://github.com/fjc0k/haoma/compare/v1.11.3...v1.11.4) (2020-04-27)
