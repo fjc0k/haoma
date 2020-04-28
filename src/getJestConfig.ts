@@ -39,6 +39,10 @@ export function getJestConfig(
             paths,
           }),
         ),
+        // 漂亮的 html 快照
+        normalizeFilePath(
+          require.resolve('jest-serializer-html/index.js', { paths }),
+        ),
         // 移除 jest 包裹在 diff 快照两边的引号
         normalizeFilePath(
           require.resolve('snapshot-diff/serializer.js', { paths }),
