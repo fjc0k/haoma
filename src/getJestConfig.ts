@@ -14,13 +14,11 @@ export function getJestConfig(
   ]
 
   const normalizeFilePath = (filePath: string) => {
-    const relativeFilePath = relative(projectRoot, filePath)
-    return (relativeFilePath[0] === '.'
+    const relativeFilePath = relative(projectRoot, filePath).replace(/\\/g, '/')
+    return (/^[.]+\//.test(relativeFilePath)
       ? relativeFilePath
       : `./${relativeFilePath}`
-    )
-      .replace(/\\/g, '/')
-      .replace(/\/{2,}/g, '/')
+    ).replace(/\/{2,}/g, '/')
   }
 
   return merge<JestConfig>(
