@@ -19,7 +19,6 @@ if (appRoot) {
   writeFileSync(
     join(generatedHaomaTypesPath, 'index.d.ts'),
     `
-      import 'haoma/lib/externalTypes'
       import 'haoma/lib/jestSetup'
     `,
   )
