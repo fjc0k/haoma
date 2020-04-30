@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.4](https://github.com/fjc0k/haoma/compare/v1.12.3...v1.12.4) (2020-04-30)
+
+
+### Bug Fixes
+
+* 删除遗留的 jest 代码 ([a6c07f5](https://github.com/fjc0k/haoma/commit/a6c07f52202fd3a6ca3c264c3cb14eb5f33eb241))
+
 ### [1.12.3](https://github.com/fjc0k/haoma/compare/v1.12.2...v1.12.3) (2020-04-30)
 
 
