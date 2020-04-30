@@ -398,22 +398,6 @@ yargs
           }
         }
 
-        if (argv.jest && !nextPackageInfo.jest) {
-          nextPackageInfo.jest = {
-            collectCoverageFrom: [
-              'src/**/*.ts',
-              '!src/**/*.test.ts',
-              '!src/**/__*__/**/*',
-            ],
-            globals: {
-              'ts-jest': {
-                packageJson: './package.json',
-              },
-            },
-            preset: 'ts-jest',
-          }
-        }
-
         writeFileSync(
           currentPackageJson,
           JSON.stringify(nextPackageInfo, null, 2),
