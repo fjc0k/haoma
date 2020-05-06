@@ -76,6 +76,7 @@ const ESLintConfig: ESLintConfigTypes = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/unbound-method': 'off',
         '@typescript-eslint/no-misused-promises': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/consistent-type-assertions': [
           'error',
           {
