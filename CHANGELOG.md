@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/fjc0k/haoma/compare/v1.12.4...v1.13.0) (2020-05-06)
+
+
+### Features
+
+* 禁用 no-var-requires ([9269ee5](https://github.com/fjc0k/haoma/commit/9269ee53cbd6a128fe00b01785bb7287a039e38b))
+
 ### [1.12.4](https://github.com/fjc0k/haoma/compare/v1.12.3...v1.12.4) (2020-04-30)
 
 
