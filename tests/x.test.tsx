@@ -1,3 +1,4 @@
+import * as _ from 'lodash-es'
 import React from 'react'
 import { render } from '@testing-library/react'
 
@@ -27,4 +28,8 @@ test('字符串', () => {
 
 test('chain', () => {
   expect(1).toBeNumber().toBeLessThan(2).toBe(1)
+})
+
+test('esm', () => {
+  expect(_).toBe(_)
 })

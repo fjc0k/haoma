@@ -1,6 +1,6 @@
 import './jestSetup'
 import merge from 'deepmerge'
-import { existsSync } from 'fs'
+import { escapeRegExp, omit } from 'vtils'
 import { JestConfig } from './types'
 import { join, relative } from 'path'
 
@@ -21,9 +21,27 @@ export function getJestConfig(
     ).replace(/\/{2,}/g, '/')
   }
 
+  const transformIgnorePatterns: string[] =
+    customConfig.transformPackages && customConfig.transformPackages.length > 0
+      ? [
+          `<rootDir>/node_modules/(?!.*/(${customConfig.transformPackages
+            .map(pkg => escapeRegExp(pkg))
+            .join('|')})/)`,
+        ]
+      : ['<rootDir>/node_modules/']
+
   return merge<JestConfig>(
     {
       rootDir: projectRoot,
+      transform: {
+        '^.+\\.[t|j]sx?$': normalizeFilePath(
+          require.resolve('./jestTransform'),
+        ),
+      },
+      transformIgnorePatterns: [
+        ...transformIgnorePatterns,
+        ...(customConfig.transformIgnorePatterns || []),
+      ],
       collectCoverageFrom: [
         '<rootDir>/src/**/*.{ts,tsx}',
         '!<rootDir>/src/**/__*__/**/*',
@@ -46,20 +64,8 @@ export function getJestConfig(
           require.resolve('snapshot-diff/serializer.js', { paths }),
         ),
       ],
-      globals: {
-        'ts-jest': {
-          packageJson: join(projectRoot, './package.json'),
-          // 优先使用 tsconfig.test.json
-          tsConfig: existsSync(join(projectRoot, './tsconfig.test.json'))
-            ? join(projectRoot, './tsconfig.test.json')
-            : join(projectRoot, './tsconfig.json'),
-        },
-      },
-      preset: normalizeFilePath(
-        require.resolve('ts-jest/jest-preset.js', { paths }),
-      ),
       cacheDirectory: '<rootDir>/node_modules/.cache/jest',
     },
-    customConfig,
+    omit(customConfig, ['transformPackages']),
   )
 }

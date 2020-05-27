@@ -2,7 +2,6 @@ import * as eslint from 'eslint'
 import * as jest from '@jest/types'
 import * as prettier from 'prettier'
 import { LiteralUnion } from 'vtils'
-import { TsJestGlobalOptions } from 'ts-jest/dist/types'
 
 export type ESLintConfig = eslint.Linter.Config & {
   settings?: {
@@ -46,11 +45,10 @@ export type PrettierConfig = prettier.Options & {
 }
 
 export type JestConfig = Partial<jest.Config.InitialOptions> & {
-  globals?: {
-    /**
-     * [ts-jest](https://github.com/kulshekhar/ts-jest#readme) 的选项。
-     */
-    'ts-jest'?: TsJestGlobalOptions
-    [key: string]: any
-  }
+  /**
+   * 要转换的包的名称列表。
+   *
+   * @example ['lodash-es']
+   */
+  transformPackages?: string[]
 }

@@ -247,24 +247,6 @@ yargs
         }
 
         if (argv.jest) {
-          writeable(join(cwd, 'tsconfig.test.json'), path => {
-            writeFileSync(
-              path,
-              JSON.stringify(
-                {
-                  extends: './tsconfig.json',
-                  compilerOptions: {
-                    target: 'ES2019',
-                    module: 'CommonJS',
-                    moduleResolution: 'node',
-                    lib: ['ES2019', 'DOM'],
-                  },
-                } as TsConfigJson,
-                null,
-                2,
-              ),
-            )
-          })
           writeable(join(cwd, 'jest.config.js'), path => {
             writeFileSync(
               path,
@@ -307,7 +289,7 @@ yargs
           ...(!argv.jest
             ? []
             : ([
-                { name: 'jest', version: '^25' },
+                { name: 'jest', version: '^26' },
                 { name: 'codecov', version: '^3' },
               ] as Array<{ name: string; version: string }>)),
         ] as Array<{ name: string; version: string }>).filter(
@@ -316,16 +298,12 @@ yargs
 
         const userAgent = process.env.npm_config_user_agent
         const userAgentX = basename(process.env._ || '')
-        const usePackageManager: 'yarn' | 'tyarn' | 'npm' | 'pnpm' | 'cpnpm' =
+        const usePackageManager: 'yarn' | 'npm' | 'pnpm' =
           (userAgentX &&
             (userAgentX === 'yarn'
               ? 'yarn'
-              : userAgentX === 'tyarn'
-              ? 'tyarn'
               : userAgentX === 'pnpx'
               ? 'pnpm'
-              : userAgentX === 'cpnpx' || userAgentX === 'tpx'
-              ? 'cpnpm'
               : userAgentX === 'npx'
               ? 'npm'
               : '')) ||
@@ -376,6 +354,7 @@ yargs
             {
               stdio: 'inherit',
               cwd: cwd,
+              env: process.env,
             },
           )
         }
@@ -405,6 +384,7 @@ yargs
         spawn.sync('npx', ['prettier', '--write', currentPackageJson], {
           stdio: 'inherit',
           cwd: cwd,
+          env: process.env,
         })
 
         console.log('✔️ Install dependencies')
