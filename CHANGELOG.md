@@ -2,96 +2,90 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.13.0](https://github.com/fjc0k/haoma/compare/v1.12.4...v1.13.0) (2020-05-06)
-
+## [2.0.0-beta.0](https://github.com/fjc0k/haoma/compare/v1.13.0...v2.0.0-beta.0) (2020-05-27)
 
 ### Features
 
-* 禁用 no-var-requires ([9269ee5](https://github.com/fjc0k/haoma/commit/9269ee53cbd6a128fe00b01785bb7287a039e38b))
+- 升级 jest 到 26 ([38f55ff](https://github.com/fjc0k/haoma/commit/38f55ffe42eeb9aa7ece1236289aba30b2a5e655))
+
+## [1.13.0](https://github.com/fjc0k/haoma/compare/v1.12.4...v1.13.0) (2020-05-06)
+
+### Features
+
+- 禁用 no-var-requires ([9269ee5](https://github.com/fjc0k/haoma/commit/9269ee53cbd6a128fe00b01785bb7287a039e38b))
 
 ### [1.12.4](https://github.com/fjc0k/haoma/compare/v1.12.3...v1.12.4) (2020-04-30)
 
-
 ### Bug Fixes
 
-* 删除遗留的 jest 代码 ([a6c07f5](https://github.com/fjc0k/haoma/commit/a6c07f52202fd3a6ca3c264c3cb14eb5f33eb241))
+- 删除遗留的 jest 代码 ([a6c07f5](https://github.com/fjc0k/haoma/commit/a6c07f52202fd3a6ca3c264c3cb14eb5f33eb241))
 
 ### [1.12.3](https://github.com/fjc0k/haoma/compare/v1.12.2...v1.12.3) (2020-04-30)
 
-
 ### Bug Fixes
 
-* 导出第三方类型定义 ([f93fffc](https://github.com/fjc0k/haoma/commit/f93fffc1f949380ef1a90aa116c7b323d9d58ebc))
+- 导出第三方类型定义 ([f93fffc](https://github.com/fjc0k/haoma/commit/f93fffc1f949380ef1a90aa116c7b323d9d58ebc))
 
 ### [1.12.2](https://github.com/fjc0k/haoma/compare/v1.12.1...v1.12.2) (2020-04-29)
 
-
 ### Bug Fixes
 
-* 修复 jest 路径解析 ([56c618b](https://github.com/fjc0k/haoma/commit/56c618b5de9c376ec95e7bff4cdbf1d134c9fb90))
+- 修复 jest 路径解析 ([56c618b](https://github.com/fjc0k/haoma/commit/56c618b5de9c376ec95e7bff4cdbf1d134c9fb90))
 
 ### [1.12.1](https://github.com/fjc0k/haoma/compare/v1.12.0...v1.12.1) (2020-04-29)
 
 ## [1.12.0](https://github.com/fjc0k/haoma/compare/v1.11.5...v1.12.0) (2020-04-28)
 
-
 ### Features
 
-* **jest:** 添加 jest-serializer-html ([16eac3d](https://github.com/fjc0k/haoma/commit/16eac3ddc70f9a8cc22eb55ad13a74a83772fb72))
+- **jest:** 添加 jest-serializer-html ([16eac3d](https://github.com/fjc0k/haoma/commit/16eac3ddc70f9a8cc22eb55ad13a74a83772fb72))
 
 ### [1.11.5](https://github.com/fjc0k/haoma/compare/v1.11.4...v1.11.5) (2020-04-27)
 
 ### [1.11.4](https://github.com/fjc0k/haoma/compare/v1.11.3...v1.11.4) (2020-04-27)
 
-
 ### Bug Fixes
 
-* 查找应用根目录 ([58f60a8](https://github.com/fjc0k/haoma/commit/58f60a8e644f300b50543849ecbc85e074a18d18))
+- 查找应用根目录 ([58f60a8](https://github.com/fjc0k/haoma/commit/58f60a8e644f300b50543849ecbc85e074a18d18))
 
 ### [1.11.3](https://github.com/fjc0k/haoma/compare/v1.11.2...v1.11.3) (2020-04-27)
 
-
 ### Bug Fixes
 
-* 生产 jest 类型 ([d261611](https://github.com/fjc0k/haoma/commit/d2616111b2ed85e9607854dd5702f5976bc1c904))
+- 生产 jest 类型 ([d261611](https://github.com/fjc0k/haoma/commit/d2616111b2ed85e9607854dd5702f5976bc1c904))
 
 ### [1.11.2](https://github.com/fjc0k/haoma/compare/v1.11.1...v1.11.2) (2020-04-27)
 
-
 ### Bug Fixes
 
-* 去除 postinstall ([abfcb00](https://github.com/fjc0k/haoma/commit/abfcb002dac9df5ddc5ac703868a33d1d44c7cb6))
+- 去除 postinstall ([abfcb00](https://github.com/fjc0k/haoma/commit/abfcb002dac9df5ddc5ac703868a33d1d44c7cb6))
 
 ### [1.11.1](https://github.com/fjc0k/haoma/compare/v1.11.0...v1.11.1) (2020-04-27)
 
-
 ### Bug Fixes
 
-* 导出 jestTypes ([52b7595](https://github.com/fjc0k/haoma/commit/52b7595b9466ca29ebad298674b5cd8c514bc114))
+- 导出 jestTypes ([52b7595](https://github.com/fjc0k/haoma/commit/52b7595b9466ca29ebad298674b5cd8c514bc114))
 
 ## [1.11.0](https://github.com/fjc0k/haoma/compare/v1.10.0...v1.11.0) (2020-04-27)
 
-
 ### Features
 
-* 添加 jest-chain, jest-extended，并生成全局 types ([9c90268](https://github.com/fjc0k/haoma/commit/9c9026870fee6cc8c1430be81a3507d71e205dac))
+- 添加 jest-chain, jest-extended，并生成全局 types ([9c90268](https://github.com/fjc0k/haoma/commit/9c9026870fee6cc8c1430be81a3507d71e205dac))
 
 ## [1.10.0](https://github.com/fjc0k/haoma/compare/v1.9.1...v1.10.0) (2020-04-27)
 
-
 ### Features
 
-* 集成 jest ([aaeedc8](https://github.com/fjc0k/haoma/commit/aaeedc86e55faacb1e25491801e068217484cfe7))
+- 集成 jest ([aaeedc8](https://github.com/fjc0k/haoma/commit/aaeedc86e55faacb1e25491801e068217484cfe7))
 
 ### [1.9.1](https://github.com/fjc0k/haoma/compare/v1.9.0...v1.9.1) (2020-04-19)
 
 ## [1.9.0](https://github.com/fjc0k/haoma/compare/v1.8.0...v1.9.0) (2020-04-19)
 
-
 ### Features
 
-* 完善包管理工具检测 ([a464b9d](https://github.com/fjc0k/haoma/commit/a464b9da052a8e9299e32cbfa1c3a7f140b0fd76))
-* 添加 .gitignore, LICENSE ([bccadb4](https://github.com/fjc0k/haoma/commit/bccadb407bfb95939c60374260d50339e2f0905c))
+- 完善包管理工具检测 ([a464b9d](https://github.com/fjc0k/haoma/commit/a464b9da052a8e9299e32cbfa1c3a7f140b0fd76))
+- 添加 .gitignore, LICENSE ([bccadb4](https://github.com/fjc0k/haoma/commit/bccadb407bfb95939c60374260d50339e2f0905c))
 
 ## [1.8.0](https://github.com/fjc0k/haoma/compare/v1.7.0...v1.8.0) (2020-04-16)
 
