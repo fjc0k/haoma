@@ -1,6 +1,6 @@
 {
   "name": "haoma",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0-beta.1",
   "description": "使用 EditorConfig + ESLint + Prettier，助你写出漂亮的前端代码。",
   "keywords": [
     "editorconfig",
@@ -34,9 +34,9 @@
     "prepublishOnly": "npm run build",
     "pupu": "git push --follow-tags origin master && npm publish",
     "release": "standard-version -a && npm run pupu",
-    "releaseBeta": "standard-version -a --prerelease beta && npm run pupu",
+    "releaseBeta": "standard-version -a --prerelease beta && npm run pupu -- --tag next",
     "releaseMajor": "standard-version -a --release-as major && npm run pupu",
-    "releaseMajorBeta": "standard-version -a --release-as major --prerelease beta && npm run pupu",
+    "releaseMajorBeta": "standard-version -a --release-as major --prerelease beta && npm run pupu -- --tag next",
     "test": "jest"
   },
   "husky": {
