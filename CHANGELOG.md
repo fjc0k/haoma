@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta.2](https://github.com/fjc0k/haoma/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2020-05-30)
+
+### Features
+
+- 完善 ESLint 规则 ([6c72514](https://github.com/fjc0k/haoma/commit/6c72514d96838cc058eb72629cbc4fcbff7715a3))
+
 ## [2.0.0-beta.1](https://github.com/fjc0k/haoma/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2020-05-27)
 
 ## [2.0.0-beta.0](https://github.com/fjc0k/haoma/compare/v1.13.0...v2.0.0-beta.0) (2020-05-27)
