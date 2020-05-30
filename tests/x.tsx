@@ -69,3 +69,12 @@ export function Test() {
 export const BButton: FC = () => <div />
 
 BButton.displayName = 'BButton'
+
+switch (1) {
+  case 1:
+    const x = 1
+    console.log(x)
+    break
+  default:
+    break
+}

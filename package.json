@@ -34,7 +34,7 @@
     "prepublishOnly": "npm run build",
     "pupu": "git push --follow-tags origin master && npm publish",
     "release": "standard-version -a && npm run pupu",
-    "releaseBeta": "standard-version -a --prerelease beta && npm run pupu -- --tag next",
+    "releaseBeta": "standard-version -a --release-as patch --prerelease beta && npm run pupu -- --tag next",
     "releaseMajor": "standard-version -a --release-as major && npm run pupu",
     "releaseMajorBeta": "standard-version -a --release-as major --prerelease beta && npm run pupu -- --tag next",
     "test": "jest"

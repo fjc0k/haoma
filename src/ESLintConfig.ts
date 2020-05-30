@@ -53,11 +53,19 @@ const ESLintConfig: ESLintConfigTypes = {
         memberSyntaxSortOrder: ['none', 'all', 'single', 'multiple'],
       },
     ],
+    'no-control-regex': 'off',
+    'no-case-declarations': 'off',
+    'no-unused-vars': [
+      'error',
+      {
+        varsIgnorePattern: '[iI]gnored$',
+        argsIgnorePattern: '^_',
+      },
+    ],
   },
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
-      // @ts-ignore
       parser: '@typescript-eslint/parser',
       plugins: ['@typescript-eslint'],
       parserOptions: {
@@ -77,6 +85,14 @@ const ESLintConfig: ESLintConfigTypes = {
         '@typescript-eslint/unbound-method': 'off',
         '@typescript-eslint/no-misused-promises': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            varsIgnorePattern: '[iI]gnored$',
+            argsIgnorePattern: '^_',
+          },
+        ],
         '@typescript-eslint/consistent-type-assertions': [
           'error',
           {
@@ -94,7 +110,6 @@ const ESLintConfig: ESLintConfigTypes = {
     },
     {
       files: ['*.jsx', '*.tsx'],
-      // @ts-ignore
       plugins: ['react'],
       extends: ['plugin:react/recommended', 'prettier/react'],
       rules: {

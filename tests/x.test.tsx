@@ -30,6 +30,7 @@ test('chain', () => {
   expect(1).toBeNumber().toBeLessThan(2).toBe(1)
 })
 
-test('esm', () => {
+test('esm', (_x: any) => {
+  const xxIgnored = 1
   expect(_).toBe(_)
 })
