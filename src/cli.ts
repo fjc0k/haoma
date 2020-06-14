@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+import deepmerge from 'deepmerge'
 import rimraf from 'rimraf'
 import spawn from 'cross-spawn'
 import yargs from 'yargs'
 import { basename, join } from 'path'
 import { dedent } from 'vtils'
-import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { PackageJson, TsConfigJson } from 'type-fest'
 
 yargs
@@ -388,6 +389,33 @@ yargs
         })
 
         console.log('✔️ Install dependencies')
+      }
+
+      // patch eslint 7 for vscode
+      // issue: https://github.com/microsoft/vscode-eslint/issues/972
+      {
+        const vscodePath = join(cwd, '.vscode')
+        const vscodeSettingsFile = join(vscodePath, 'settings.json')
+        if (!existsSync(vscodePath)) {
+          mkdirSync(vscodePath)
+        }
+        writeFileSync(
+          vscodeSettingsFile,
+          JSON.stringify(
+            deepmerge(
+              existsSync(vscodeSettingsFile)
+                ? JSON.parse(readFileSync(vscodeSettingsFile, 'utf8'))
+                : {},
+              {
+                'eslint.options': {
+                  resolvePluginsRelativeTo: '.',
+                },
+              },
+            ),
+            null,
+            2,
+          ),
+        )
       }
     },
   ).argv
