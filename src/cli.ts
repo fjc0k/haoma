@@ -283,7 +283,7 @@ yargs
             version: `^${packageVersion!.split('.')[0]}`,
           },
           { name: 'typescript', version: '^3' },
-          { name: 'eslint', version: '^6' },
+          { name: 'eslint', version: '^7' },
           { name: 'prettier', version: '^2' },
           { name: 'husky', version: '^4' },
           { name: 'lint-staged', version: '^10' },
