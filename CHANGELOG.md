@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/fjc0k/haoma/compare/v2.0.0...v2.0.1) (2020-06-14)
+
+### Bug Fixes
+
+- eslint 7 ([465944e](https://github.com/fjc0k/haoma/commit/465944e79ca5bc4eea3cb47bdead6c4ac42c7b36))
+
 ## [2.0.0](https://github.com/fjc0k/haoma/compare/v2.0.0-beta.2...v2.0.0) (2020-06-14)
 
 ### Features
