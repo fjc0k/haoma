@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/fjc0k/haoma/compare/v2.0.1...v2.0.2) (2020-06-15)
+
+### Bug Fixes
+
+- 更新 babel 和 eslint 配置 ([836c683](https://github.com/fjc0k/haoma/commit/836c683b56c36b61fd1b6fc1d50fb58dc41c8bb0))
+
 ### [2.0.1](https://github.com/fjc0k/haoma/compare/v2.0.0...v2.0.1) (2020-06-14)
 
 ### Bug Fixes
