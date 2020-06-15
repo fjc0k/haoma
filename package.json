@@ -55,10 +55,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.10.0",
-    "@babel/plugin-proposal-decorators": "^7.10.1",
-    "@babel/preset-env": "^7.10.0",
-    "@babel/preset-react": "^7.10.0",
-    "@babel/preset-typescript": "^7.9.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@jest/types": "^26.0.1",
     "@testing-library/jest-dom": "^5.8.0",
     "@types/eslint": "^7.2.0",
@@ -84,6 +81,7 @@
     "react-test-renderer": "^16.13.1",
     "rimraf": "^3.0.2",
     "snapshot-diff": "^0.7.0",
+    "ts-jest": "^26.1.0",
     "vtils": "^2.57.0",
     "yargs": "^15.3.1"
   },

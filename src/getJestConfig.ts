@@ -1,6 +1,7 @@
 import './jestSetup'
 import merge from 'deepmerge'
 import { escapeRegExp, omit } from 'vtils'
+import { existsSync } from 'fs'
 import { JestConfig } from './types'
 import { join, relative } from 'path'
 
@@ -34,14 +35,24 @@ export function getJestConfig(
     {
       rootDir: projectRoot,
       transform: {
-        '^.+\\.[t|j]sx?$': normalizeFilePath(
-          require.resolve('./jestTransform'),
+        '^.+\\.tsx?$': require.resolve('ts-jest'),
+        '^.+\\.jsx?$': normalizeFilePath(
+          require.resolve('./jestJavaScriptTransform'),
         ),
       },
       transformIgnorePatterns: [
         ...transformIgnorePatterns,
         ...(customConfig.transformIgnorePatterns || []),
       ],
+      globals: {
+        'ts-jest': {
+          packageJson: join(projectRoot, './package.json'),
+          // 优先使用 tsconfig.test.json
+          tsConfig: existsSync(join(projectRoot, './tsconfig.test.json'))
+            ? join(projectRoot, './tsconfig.test.json')
+            : join(projectRoot, './tsconfig.json'),
+        },
+      },
       collectCoverageFrom: [
         '<rootDir>/src/**/*.{ts,tsx}',
         '!<rootDir>/src/**/__*__/**/*',
