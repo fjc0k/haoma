@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/fjc0k/haoma/compare/v2.0.2...v2.1.0) (2020-06-15)
+
+### Features
+
+- **jest:** ts 使用 ts-jest, js 使用 babel-jest ([012da23](https://github.com/fjc0k/haoma/commit/012da23bf7dedbaa646d42d7fe235fb9b41f35bd))
+
 ### [2.0.2](https://github.com/fjc0k/haoma/compare/v2.0.1...v2.0.2) (2020-06-15)
 
 ### Bug Fixes
