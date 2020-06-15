@@ -30,7 +30,24 @@ test('chain', () => {
   expect(1).toBeNumber().toBeLessThan(2).toBe(1)
 })
 
-test('esm', (_x: any) => {
-  const xxIgnored = 1
+test('esm', () => {
+  const xxIgnored = function (_x: any) {
+    return 1
+  }
   expect(_).toBe(_)
+})
+
+test('decorator', () => {
+  function DD() {
+    return function (..._args: any[]) {
+      // ...
+    }
+  }
+  class Test {
+    @DD()
+    hello() {
+      return 1
+    }
+  }
+  new Test().hello()
 })

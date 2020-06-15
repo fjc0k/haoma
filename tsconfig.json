@@ -8,6 +8,7 @@
     "removeComments": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
     "newLine": "LF",
     "skipLibCheck": true,
     "sourceMap": false,
