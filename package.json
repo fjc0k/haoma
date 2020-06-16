@@ -82,7 +82,7 @@
     "rimraf": "^3.0.2",
     "snapshot-diff": "^0.7.0",
     "ts-jest": "^26.1.0",
-    "vtils": "^2.57.0",
+    "vtils": "^3.2.0",
     "yargs": "^15.3.1"
   },
   "devDependencies": {

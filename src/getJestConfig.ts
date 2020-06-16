@@ -1,6 +1,6 @@
 import './jestSetup'
 import merge from 'deepmerge'
-import { escapeRegExp, omit } from 'vtils'
+import { escapeRegExp, omitStrict } from 'vtils'
 import { existsSync } from 'fs'
 import { JestConfig } from './types'
 import { join, relative } from 'path'
@@ -77,6 +77,6 @@ export function getJestConfig(
       ],
       cacheDirectory: '<rootDir>/node_modules/.cache/jest',
     },
-    omit(customConfig, ['transformPackages']),
+    omitStrict(customConfig, ['transformPackages']),
   )
 }

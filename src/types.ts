@@ -1,7 +1,7 @@
 import * as eslint from 'eslint'
 import * as jest from '@jest/types'
 import * as prettier from 'prettier'
-import { LiteralUnion } from 'vtils'
+import { LiteralUnion } from 'vtils/types'
 
 export type ESLintConfig = eslint.Linter.Config & {
   settings?: {

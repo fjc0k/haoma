@@ -4,7 +4,7 @@ import rimraf from 'rimraf'
 import spawn from 'cross-spawn'
 import yargs from 'yargs'
 import { basename, join } from 'path'
-import { dedent } from 'vtils'
+import { dedent, uniq } from 'vtils'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { PackageJson, TsConfigJson } from 'type-fest'
 
@@ -59,21 +59,28 @@ yargs
         }
 
         // .gitignore
-        writeable(join(cwd, '.gitignore'), path => {
-          writeFileSync(
-            path,
-            `${dedent`
-              .DS_Store
-              Thumbs.db
-              node_modules
-              coverage
-              lib
-              dist
-              *.tsbuildinfo
-              *.log*
-            `}\n`,
-          )
-        })
+        const gitignoreFile = join(cwd, '.gitignore')
+        const gitignoreContent = existsSync(gitignoreFile)
+          ? readFileSync(gitignoreFile, 'utf8')
+          : ''
+        const gitignoreItems = gitignoreContent.split(/[\r\n]+/g)
+        const newGitignoreItems = dedent`
+          .DS_Store
+          Thumbs.db
+          node_modules
+          coverage
+          lib
+          dist
+          *.tsbuildinfo
+          *.log*
+        `.split(/[\r\n]+/g)
+        const finalGitignoreItems = uniq([
+          ...gitignoreItems,
+          ...newGitignoreItems,
+        ])
+        const finalGitignoreContent = finalGitignoreItems.join('\n')
+        writeFileSync(gitignoreFile, finalGitignoreContent)
+        console.log(`✔️ Write ${gitignoreFile}`)
 
         // .gitattributes
         writeable(join(cwd, '.gitattributes'), path => {
@@ -130,8 +137,8 @@ yargs
           writeFileSync(
             path,
             `${dedent`
-              /** @type import('${packageName}').ESLintConfig */
-              module.exports = require('${packageName}').getESLintConfig()
+              /** @type import('${packageName!}').ESLintConfig */
+              module.exports = require('${packageName!}').getESLintConfig()
             `}\n`,
           )
         })
@@ -154,8 +161,8 @@ yargs
           writeFileSync(
             path,
             `${dedent`
-              /** @type import('${packageName}').PrettierConfig */
-              module.exports = require('${packageName}').getPrettierConfig()
+              /** @type import('${packageName!}').PrettierConfig */
+              module.exports = require('${packageName!}').getPrettierConfig()
             `}\n`,
           )
         })
@@ -223,7 +230,9 @@ yargs
               `${dedent`
                 MIT License
 
-                Copyright (c) ${new Date().getFullYear()}-present ${gitUser} <${gitEmail}>
+                Copyright (c) ${String(
+                  new Date().getFullYear(),
+                )}-present ${gitUser} <${gitEmail}>
 
                 Permission is hereby granted, free of charge, to any person obtaining a copy
                 of this software and associated documentation files (the "Software"), to deal
@@ -252,8 +261,8 @@ yargs
             writeFileSync(
               path,
               `${dedent`
-                /** @type import('${packageName}').JestConfig */
-                module.exports = require('${packageName}').getJestConfig()
+                /** @type import('${packageName!}').JestConfig */
+                module.exports = require('${packageName!}').getJestConfig()
               `}\n`,
             )
           })

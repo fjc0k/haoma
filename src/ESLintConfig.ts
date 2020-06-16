@@ -79,6 +79,7 @@ const ESLintConfig: ESLintConfigTypes = {
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/await-thenable': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/unbound-method': 'off',
