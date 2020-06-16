@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/fjc0k/haoma/compare/v2.1.0...v2.2.0) (2020-06-16)
+
+### Features
+
+- off explicit-module-boundary-types ([ecc7eb0](https://github.com/fjc0k/haoma/commit/ecc7eb0a279f7ace7849b0b000f2694559c264cd))
+
 ## [2.1.0](https://github.com/fjc0k/haoma/compare/v2.0.2...v2.1.0) (2020-06-15)
 
 ### Features
