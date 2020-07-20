@@ -106,6 +106,7 @@ const ESLintConfig: ESLintConfigTypes = {
             allowSingleExtends: true,
           },
         ],
+        '@typescript-eslint/ban-types': 'off',
       },
     },
     {
