@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/fjc0k/haoma/compare/v2.2.0...v2.3.0) (2020-07-20)
+
+### Features
+
+- disable @typescript-eslint/ban-types ([bea8c9f](https://github.com/fjc0k/haoma/commit/bea8c9f3f387a6a06516170b2084311b203e0a13))
+
 ## [2.2.0](https://github.com/fjc0k/haoma/compare/v2.1.0...v2.2.0) (2020-06-16)
 
 ### Features
