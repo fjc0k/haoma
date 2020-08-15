@@ -25,6 +25,7 @@ export function getPrettierConfig(
       jsxBracketSameLine: true,
       arrowParens: 'avoid',
       endOfLine: 'lf',
+      vueIndentScriptAndStyle: true,
       plugins: [
         require.resolve('prettier-plugin-packagejson', { paths }),
         require.resolve('prettier-plugin-sh', { paths }),

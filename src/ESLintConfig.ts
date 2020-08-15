@@ -136,6 +136,19 @@ const ESLintConfig: ESLintConfigTypes = {
         ],
       },
     },
+    {
+      files: ['*.vue'],
+      plugins: ['vue'],
+      extends: ['plugin:vue/recommended', 'prettier/vue'],
+      parser: 'vue-eslint-parser',
+      parserOptions: {
+        parser: 'babel-eslint',
+        sourceType: 'module',
+      },
+      rules: {
+        'vue/html-self-closing': 'error',
+      },
+    },
   ],
 }
 
