@@ -142,7 +142,7 @@ const ESLintConfig: ESLintConfigTypes = {
       extends: ['plugin:vue/recommended', 'prettier/vue'],
       parser: 'vue-eslint-parser',
       parserOptions: {
-        parser: 'babel-eslint',
+        parser: '@typescript-eslint/parser',
         sourceType: 'module',
       },
       rules: {

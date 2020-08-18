@@ -9,8 +9,13 @@
   import Vue from 'vue'
   import xx from './index'
 
+  export interface x {}
+
   export default Vue.extend({
-    data: () => ({ xx }),
+    data: () => ({
+      xx,
+      z: 0 as number,
+    }),
     computed: {
       yy() {
         return `${this.xx}2`
