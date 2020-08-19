@@ -1,3 +1,4 @@
+import { Defined } from 'vtils/types'
 import { ESLintConfig as ESLintConfigTypes } from './types'
 
 const ESLintConfig: ESLintConfigTypes = {
@@ -65,7 +66,7 @@ const ESLintConfig: ESLintConfigTypes = {
   },
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['*.ts', '*.tsx', ...(process.env.VUE_DISABLED ? [] : ['*.vue'])],
       parser: '@typescript-eslint/parser',
       plugins: ['@typescript-eslint'],
       parserOptions: {
@@ -136,19 +137,23 @@ const ESLintConfig: ESLintConfigTypes = {
         ],
       },
     },
-    {
-      files: ['*.vue'],
-      plugins: ['vue'],
-      extends: ['plugin:vue/recommended', 'prettier/vue'],
-      parser: 'vue-eslint-parser',
-      parserOptions: {
-        parser: '@typescript-eslint/parser',
-        sourceType: 'module',
-      },
-      rules: {
-        'vue/html-self-closing': 'error',
-      },
-    },
+    ...(process.env.VUE_DISABLED
+      ? []
+      : ([
+          {
+            files: ['*.vue'],
+            plugins: ['vue'],
+            extends: ['plugin:vue/recommended', 'prettier/vue'],
+            parser: 'vue-eslint-parser',
+            parserOptions: {
+              parser: '@typescript-eslint/parser',
+              sourceType: 'module',
+            },
+            rules: {
+              'vue/html-self-closing': 'error',
+            },
+          },
+        ] as Defined<ESLintConfigTypes['overrides']>)),
   ],
 }
 

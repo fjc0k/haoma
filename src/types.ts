@@ -33,6 +33,9 @@ export type ESLintConfig = eslint.Linter.Config & {
        */
       flowVersion?: string
     }
+    vue?: {
+      enabled?: boolean
+    }
     [key: string]: any
   }
 }
