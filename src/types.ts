@@ -54,4 +54,11 @@ export type JestConfig = Partial<jest.Config.InitialOptions> & {
    * @example ['lodash-es']
    */
   transformPackages?: string[]
+
+  /**
+   * 转换器。
+   *
+   * @default swc
+   */
+  transformer?: 'swc' | 'typescript+babel'
 }

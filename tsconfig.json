@@ -14,7 +14,6 @@
     "sourceMap": false,
     "preserveSymlinks": true,
     "jsx": "react",
-    "typeRoots": ["node_modules/@types", "./lib/index.d.ts"],
     "outDir": "./lib",
     "lib": ["esnext", "dom"]
   }

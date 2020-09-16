@@ -1,7 +1,8 @@
 import './jestSetup'
+import json5 from 'json5'
 import merge from 'deepmerge'
 import { escapeRegExp, omitStrict } from 'vtils'
-import { existsSync } from 'fs'
+import { existsSync, readFileSync } from 'fs'
 import { JestConfig } from './types'
 import { join, relative } from 'path'
 
@@ -34,25 +35,51 @@ export function getJestConfig(
   return merge<JestConfig>(
     {
       rootDir: projectRoot,
-      transform: {
-        '^.+\\.tsx?$': require.resolve('ts-jest'),
-        '^.+\\.jsx?$': normalizeFilePath(
-          require.resolve('./jestJavaScriptTransform'),
-        ),
-      },
+      transform:
+        customConfig.transformer === 'typescript+babel'
+          ? {
+              '^.+\\.tsx?$': require.resolve('ts-jest'),
+              '^.+\\.jsx?$': normalizeFilePath(
+                require.resolve('./jestJavaScriptTransform'),
+              ),
+            }
+          : (() => {
+              const tsConfigFile = join(projectRoot, './tsconfig.json')
+              const tsConfig = existsSync(tsConfigFile)
+                ? json5.parse(readFileSync(tsConfigFile, 'utf8'))
+                : {}
+              const compilerOptions = tsConfig.compilerOptions || {}
+              return {
+                '^.+\\.(t|j)sx?$': [
+                  require.resolve('@swc-node/jest'),
+                  {
+                    dynamicImport: true,
+                    experimentalDecorators: Boolean(
+                      compilerOptions.experimentalDecorators,
+                    ),
+                    emitDecoratorMetadata: Boolean(
+                      compilerOptions.emitDecoratorMetadata,
+                    ),
+                  },
+                ],
+              } as any
+            })(),
       transformIgnorePatterns: [
         ...transformIgnorePatterns,
         ...(customConfig.transformIgnorePatterns || []),
       ],
-      globals: {
-        'ts-jest': {
-          packageJson: join(projectRoot, './package.json'),
-          // 优先使用 tsconfig.test.json
-          tsConfig: existsSync(join(projectRoot, './tsconfig.test.json'))
-            ? join(projectRoot, './tsconfig.test.json')
-            : join(projectRoot, './tsconfig.json'),
-        },
-      },
+      globals:
+        customConfig.transformer === 'typescript+babel'
+          ? {
+              'ts-jest': {
+                packageJson: join(projectRoot, './package.json'),
+                // 优先使用 tsconfig.test.json
+                tsConfig: existsSync(join(projectRoot, './tsconfig.test.json'))
+                  ? join(projectRoot, './tsconfig.test.json')
+                  : join(projectRoot, './tsconfig.json'),
+              },
+            }
+          : {},
       collectCoverageFrom: [
         '<rootDir>/src/**/*.{ts,tsx}',
         '!<rootDir>/src/**/__*__/**/*',
@@ -77,6 +104,6 @@ export function getJestConfig(
       ],
       cacheDirectory: '<rootDir>/node_modules/.cache/jest',
     },
-    omitStrict(customConfig, ['transformPackages']),
+    omitStrict(customConfig, ['transformPackages', 'transformer']),
   )
 }
