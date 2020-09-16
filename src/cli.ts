@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import deepmerge from 'deepmerge'
+import exec from 'execa'
 import rimraf from 'rimraf'
 import spawn from 'cross-spawn'
 import yargs from 'yargs'
@@ -426,5 +427,21 @@ yargs
           ),
         )
       }
+    },
+  )
+  .command(
+    'run',
+    'Run a js/ts script',
+    () => undefined,
+    argv => {
+      exec.sync(
+        'node',
+        ['-r', require.resolve('@swc-node/register'), argv._[1]],
+        {
+          cwd: process.cwd(),
+          env: process.env,
+          stdio: 'inherit',
+        },
+      )
     },
   ).argv
