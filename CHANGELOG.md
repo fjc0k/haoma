@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/fjc0k/haoma/compare/v2.4.4...v2.5.0) (2020-09-16)
+
+### Features
+
+- 新增 run 命令 ([101b271](https://github.com/fjc0k/haoma/commit/101b2714dc43085349ce7ded3f8e425a1e74bec8))
+
 ### [2.4.4](https://github.com/fjc0k/haoma/compare/v2.4.3...v2.4.4) (2020-09-16)
 
 ### [2.4.3](https://github.com/fjc0k/haoma/compare/v2.4.2...v2.4.3) (2020-08-19)
