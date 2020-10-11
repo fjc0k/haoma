@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/fjc0k/haoma/compare/v2.5.0...v2.6.0) (2020-10-11)
+
+### Features
+
+- --unhandled-rejections=strict ([4198fa3](https://github.com/fjc0k/haoma/commit/4198fa3e3c453c8ddf92ad10b3da246b65668dd6))
+
 ## [2.5.0](https://github.com/fjc0k/haoma/compare/v2.4.4...v2.5.0) (2020-09-16)
 
 ### Features
