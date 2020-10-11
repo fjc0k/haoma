@@ -436,7 +436,12 @@ yargs
     argv => {
       exec.sync(
         'node',
-        ['-r', require.resolve('@swc-node/register'), argv._[1]],
+        [
+          '--unhandled-rejections=strict',
+          '-r',
+          require.resolve('@swc-node/register'),
+          argv._[1],
+        ],
         {
           cwd: process.cwd(),
           env: process.env,
