@@ -61,4 +61,11 @@ export type JestConfig = Partial<jest.Config.InitialOptions> & {
    * @default swc
    */
   transformer?: 'swc' | 'typescript+babel' | 'babel'
+
+  /**
+   * jsx 变种。
+   *
+   * @default React
+   */
+  jsxPragma?: 'React' | 'Vue'
 }

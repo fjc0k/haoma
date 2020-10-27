@@ -10,6 +10,8 @@ export function getJestConfig(
   customConfig: JestConfig = {},
   projectRoot: string = process.cwd(),
 ): JestConfig {
+  process.env.JSX_PRAGMA = customConfig.jsxPragma ?? 'React'
+
   const paths: string[] = [
     join(__dirname, '../node_modules'),
     join(projectRoot, 'node_modules'),
@@ -40,6 +42,12 @@ export function getJestConfig(
           ? {
               '^.+\\.tsx?$': require.resolve('ts-jest'),
               '^.+\\.jsx?$': normalizeFilePath(
+                require.resolve('./jestJavaScriptTransform'),
+              ),
+            }
+          : customConfig.transformer === 'babel'
+          ? {
+              '^.+\\.[j|t]sx?$': normalizeFilePath(
                 require.resolve('./jestJavaScriptTransform'),
               ),
             }
@@ -109,6 +117,6 @@ export function getJestConfig(
       ],
       cacheDirectory: '<rootDir>/node_modules/.cache/jest',
     },
-    omitStrict(customConfig, ['transformPackages', 'transformer']),
+    omitStrict(customConfig, ['transformPackages', 'transformer', 'jsxPragma']),
   )
 }
