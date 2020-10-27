@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import './fn'
+import './xx.scss'
 import React, { Component, FC, useState } from 'react'
 
 export default class X extends Component {

@@ -1,5 +1,6 @@
 import * as _ from 'lodash-es'
 import React from 'react'
+import Xy from './x'
 import { render } from '@testing-library/react'
 
 test('函数', () => {
@@ -38,6 +39,7 @@ test('esm', () => {
 })
 
 test('decorator', () => {
+  console.log(Xy)
   function DD() {
     return function (..._args: any[]) {
       // ...

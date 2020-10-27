@@ -60,5 +60,5 @@ export type JestConfig = Partial<jest.Config.InitialOptions> & {
    *
    * @default swc
    */
-  transformer?: 'swc' | 'typescript+babel'
+  transformer?: 'swc' | 'typescript+babel' | 'babel'
 }
