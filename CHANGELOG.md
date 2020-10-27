@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/fjc0k/haoma/compare/v2.6.0...v2.7.0) (2020-10-27)
+
+### Features
+
+- 支持 Vue JSX ([0e35994](https://github.com/fjc0k/haoma/commit/0e359949083884aa5b319ea67aad134e2c034827))
+- 支持文件 ([5e0897f](https://github.com/fjc0k/haoma/commit/5e0897f26345c18d19c5157be0b1a631a5e47ed9))
+
 ## [2.6.0](https://github.com/fjc0k/haoma/compare/v2.5.0...v2.6.0) (2020-10-11)
 
 ### Features
