@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.2](https://github.com/fjc0k/haoma/compare/v2.7.1...v2.7.2) (2020-10-29)
+
+### Bug Fixes
+
+- 解决 babel 问题 ([7f685a5](https://github.com/fjc0k/haoma/commit/7f685a5f142130033c445917abacb6bd749ef07d))
+
 ### [2.7.1](https://github.com/fjc0k/haoma/compare/v2.7.0...v2.7.1) (2020-10-29)
 
 ### Bug Fixes
