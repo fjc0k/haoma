@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.1](https://github.com/fjc0k/haoma/compare/v2.7.0...v2.7.1) (2020-10-29)
+
+### Bug Fixes
+
+- 调整 @babel/plugin-transform-modules-commonjs 的位置 ([f901f9f](https://github.com/fjc0k/haoma/commit/f901f9f0f5eda8ecb4bfff8ff59654d09b175a70))
+
 ## [2.7.0](https://github.com/fjc0k/haoma/compare/v2.6.0...v2.7.0) (2020-10-27)
 
 ### Features
