@@ -3,7 +3,18 @@ import { TransformOptions } from '@babel/core'
 
 module.exports = babelJest.createTransformer({
   babelrc: false,
-  presets: [[require.resolve('@babel/preset-typescript')]],
+  presets: [
+    [require.resolve('@babel/preset-typescript')],
+    [
+      '@babel/preset-env',
+      {
+        loose: true,
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
+  ],
   plugins: [
     [
       require.resolve('@babel/plugin-proposal-decorators'),
@@ -16,6 +27,5 @@ module.exports = babelJest.createTransformer({
         ? require.resolve('@vue/babel-plugin-jsx')
         : require.resolve('@babel/plugin-transform-react-jsx'),
     ],
-    [require.resolve('@babel/plugin-transform-modules-commonjs')],
   ],
 } as TransformOptions)

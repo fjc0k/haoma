@@ -4,6 +4,8 @@ import Xy from './x'
 import { render } from '@testing-library/react'
 
 test('函数', () => {
+  const x: any = {}
+  console.log(x?.u)
   expect(function namedFn() {
     return 0
   }).toMatchSnapshot()

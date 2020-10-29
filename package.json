@@ -58,6 +58,7 @@
     "@babel/plugin-proposal-decorators": "^7.12.1",
     "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@babel/plugin-transform-react-jsx": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
     "@jest/types": "^26.0.1",
     "@swc-node/jest": "^0.3.7",
