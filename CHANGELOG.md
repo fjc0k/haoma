@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/fjc0k/haoma/compare/v2.7.2...v2.8.0) (2020-11-01)
+
+### Features
+
+- 增加 compile 命令 ([dea5bee](https://github.com/fjc0k/haoma/commit/dea5bee4c56fcd73e8ba5676588bc149d10eff47))
+
 ### [2.7.2](https://github.com/fjc0k/haoma/compare/v2.7.1...v2.7.2) (2020-10-29)
 
 ### Bug Fixes
