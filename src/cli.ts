@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import * as babel from '@babel/core'
-import commonDir from 'common-dir'
 import deepmerge from 'deepmerge'
 import exec from 'execa'
 import globby from 'globby'
@@ -18,6 +17,9 @@ import {
   writeFileSync,
 } from 'fs-extra'
 import { PackageJson, TsConfigJson } from 'type-fest'
+
+// @ts-ignore
+import commonDir from 'common-dir'
 
 yargs
   .usage('Usage: $0 <command> [options]')
