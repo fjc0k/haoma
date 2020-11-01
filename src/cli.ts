@@ -1,12 +1,22 @@
 #!/usr/bin/env node
+import * as babel from '@babel/core'
+import commonDir from 'common-dir'
 import deepmerge from 'deepmerge'
 import exec from 'execa'
+import globby from 'globby'
 import rimraf from 'rimraf'
 import spawn from 'cross-spawn'
 import yargs from 'yargs'
-import { basename, join } from 'path'
+import { basename, join, resolve } from 'path'
 import { dedent, uniq } from 'vtils'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
+import {
+  existsSync,
+  mkdirSync,
+  outputFile,
+  readFile,
+  readFileSync,
+  writeFileSync,
+} from 'fs-extra'
 import { PackageJson, TsConfigJson } from 'type-fest'
 
 yargs
@@ -447,6 +457,111 @@ yargs
           env: process.env,
           stdio: 'inherit',
         },
+      )
+    },
+  )
+  .command<{
+    outDir: string
+    target: 'node' | 'browser'
+    module: 'cjs' | 'esm'
+    jsx: 'react' | 'vue'
+    noClean: boolean
+  }>(
+    'compile',
+    'Compile files',
+    yargs => {
+      yargs
+        .option('out-dir', {
+          alias: 'o',
+          type: 'string',
+          describe: 'Out dir',
+          demandOption: true,
+        })
+        .option('target', {
+          alias: 't',
+          type: 'string',
+          choices: ['node', 'browser'],
+          describe: 'Target',
+          demandOption: true,
+        })
+        .option('module', {
+          alias: 'm',
+          type: 'string',
+          choices: ['cjs', 'esm'],
+          describe: 'Module',
+          demandOption: true,
+        })
+        .option('jsx', {
+          alias: 'x',
+          type: 'string',
+          choices: ['react', 'vue'],
+          describe: 'JSX',
+          default: 'react',
+        })
+        .option('no-clean', {
+          alias: 'k',
+          type: 'boolean',
+          describe: 'No clean',
+          default: false,
+        })
+    },
+    async argv => {
+      const outDir = resolve(process.cwd(), argv.outDir)
+      if (!argv.noClean) {
+        rimraf.sync(outDir, { disableGlob: true })
+      }
+      const files = await globby(argv._.slice(1), {
+        onlyFiles: true,
+        absolute: true,
+      })
+      const inputDir = commonDir(files)
+      await Promise.all(
+        files.map(async file => {
+          const code = await readFile(file, 'utf8')
+          const isTs = /\.tsx?/i.test(file)
+          const isJsx = /\.[j|t]sx/i.test(file)
+          const res = await babel.transformAsync(code, {
+            filename: file,
+            babelrc: false,
+            configFile: false,
+            presets: [
+              ...(isTs ? [require.resolve('@babel/preset-typescript')] : []),
+              [
+                require.resolve('@babel/preset-env'),
+                {
+                  loose: true,
+                  modules: argv.module === 'esm' ? false : 'cjs',
+                  targets:
+                    argv.target === 'node'
+                      ? {
+                          node: '12',
+                        }
+                      : {
+                          ios: '8',
+                          android: '4',
+                        },
+                },
+              ],
+            ],
+            plugins: [
+              ...(isJsx
+                ? [
+                    argv.jsx === 'vue'
+                      ? require.resolve('@vue/babel-plugin-jsx')
+                      : require.resolve('@babel/plugin-transform-react-jsx'),
+                  ]
+                : []),
+              [require.resolve('@babel/plugin-transform-runtime')],
+            ],
+          })
+          if (res) {
+            const outFile = join(
+              outDir,
+              file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
+            )
+            await outputFile(outFile, res.code)
+          }
+        }),
       )
     },
   ).argv

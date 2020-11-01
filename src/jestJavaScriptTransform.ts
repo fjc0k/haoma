@@ -6,7 +6,7 @@ module.exports = babelJest.createTransformer({
   presets: [
     [require.resolve('@babel/preset-typescript')],
     [
-      '@babel/preset-env',
+      require.resolve('@babel/preset-env'),
       {
         loose: true,
         targets: {
