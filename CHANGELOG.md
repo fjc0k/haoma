@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/fjc0k/haoma/compare/v2.8.1...v2.9.0) (2020-11-02)
+
+### Features
+
+- **compile:** 支持生成 dts ([bdee2c2](https://github.com/fjc0k/haoma/commit/bdee2c22667271071a16067303f895c6895e4172))
+
 ### [2.8.1](https://github.com/fjc0k/haoma/compare/v2.8.0...v2.8.1) (2020-11-01)
 
 ## [2.8.0](https://github.com/fjc0k/haoma/compare/v2.7.2...v2.8.0) (2020-11-01)
