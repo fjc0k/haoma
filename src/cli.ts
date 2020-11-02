@@ -468,6 +468,7 @@ yargs
     module: 'cjs' | 'esm'
     jsx: 'react' | 'vue'
     noClean: boolean
+    noDts: boolean
   }>(
     'compile',
     'Compile files',
@@ -494,16 +495,19 @@ yargs
           demandOption: true,
         })
         .option('jsx', {
-          alias: 'x',
           type: 'string',
           choices: ['react', 'vue'],
           describe: 'JSX',
           default: 'react',
         })
         .option('no-clean', {
-          alias: 'k',
           type: 'boolean',
           describe: 'No clean',
+          default: false,
+        })
+        .option('no-dts', {
+          type: 'boolean',
+          describe: 'No dts',
           default: false,
         })
     },
@@ -517,11 +521,15 @@ yargs
         absolute: true,
       })
       const inputDir = commonDir(files)
+      const tsFiles: string[] = []
       await Promise.all(
         files.map(async file => {
           const code = await readFile(file, 'utf8')
           const isTs = /\.tsx?/i.test(file)
           const isJsx = /\.[j|t]sx/i.test(file)
+          if (isTs) {
+            tsFiles.push(file)
+          }
           const res = await babel.transformAsync(code, {
             filename: file,
             babelrc: false,
@@ -565,5 +573,25 @@ yargs
           }
         }),
       )
+      if (!argv.noDts && tsFiles.length) {
+        await exec(
+          'npx',
+          [
+            'tsc',
+            '--declaration',
+            '--emitDeclarationOnly',
+            '--skipLibCheck',
+            '--esModuleInterop',
+            '--allowSyntheticDefaultImports',
+            '--outDir',
+            outDir,
+            ...tsFiles,
+          ],
+          {
+            cwd: process.cwd(),
+            stdio: 'inherit',
+          },
+        )
+      }
     },
   ).argv
