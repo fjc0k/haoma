@@ -90,6 +90,8 @@ export async function compile(config: CompileConfig) {
             '--skipLibCheck',
             '--esModuleInterop',
             '--allowSyntheticDefaultImports',
+            '--jsx',
+            'preserve',
             '--outDir',
             config.outDir,
             ...tsFiles,
