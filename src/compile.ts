@@ -112,9 +112,9 @@ export async function compile(config: CompileConfig) {
   if (config.emitDts !== false && tsFiles.length) {
     spinner.text = '生成类型文件...'
     await exec(
-      'npx',
+      'node',
       [
-        'tsc',
+        require.resolve('typescript').replace(/typescript\.js$/, 'tsc.js'),
         '--declaration',
         '--emitDeclarationOnly',
         '--skipLibCheck',
