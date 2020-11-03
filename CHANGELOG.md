@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.1](https://github.com/fjc0k/haoma/compare/v2.10.0...v2.10.1) (2020-11-03)
+
+### Bug Fixes
+
+- jsx preserve ([8b8e8ea](https://github.com/fjc0k/haoma/commit/8b8e8ea7a4560a9b8d542ca5ffe268d2498fd837))
+
 ## [2.10.0](https://github.com/fjc0k/haoma/compare/v2.9.0...v2.10.0) (2020-11-03)
 
 ### Features
