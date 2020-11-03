@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.12.0](https://github.com/fjc0k/haoma/compare/v2.11.0...v2.12.0) (2020-11-03)
+
+### Features
+
+- **compile:** 支持 ts 配置文件 ([3af7cfb](https://github.com/fjc0k/haoma/commit/3af7cfba3e754a51d2d3d54dc39aa6be3c0d9b6c))
+
 ## [2.11.0](https://github.com/fjc0k/haoma/compare/v2.10.2...v2.11.0) (2020-11-03)
 
 ### Features
