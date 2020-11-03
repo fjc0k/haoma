@@ -80,7 +80,13 @@ export async function compile(config: CompileConfig) {
                   : require.resolve('@babel/plugin-transform-react-jsx'),
               ]
             : []),
-          [require.resolve('@babel/plugin-transform-runtime')],
+          [
+            require.resolve('@babel/plugin-transform-runtime'),
+            {
+              useESModules: config.module === 'esm',
+              version: require('@babel/runtime/package.json').version,
+            },
+          ],
           ...(config.babel?.renameImports?.length
             ? [
                 [
