@@ -18,10 +18,22 @@ import {
 } from 'fs-extra'
 import { PackageJson, TsConfigJson } from 'type-fest'
 
-require('@swc-node/register/lib/register').register({
-  target: 'ES2018',
-  module: 'CommonJS',
-  esModuleInterop: true,
+require('@babel/register')({
+  babelrc: false,
+  configFile: false,
+  presets: [
+    [require.resolve('@babel/preset-typescript')],
+    [
+      require.resolve('@babel/preset-env'),
+      {
+        loose: true,
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
+  ],
+  extensions: ['.js', '.ts'],
 })
 
 yargs
