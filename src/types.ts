@@ -77,6 +77,11 @@ export type JestConfig = Partial<jest.Config.InitialOptions> & {
 
 export interface CompileConfig {
   /**
+   * 名称，显示用。
+   */
+  name: string
+
+  /**
    * 输入文件列表。
    */
   inputFiles: string[]

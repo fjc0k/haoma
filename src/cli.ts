@@ -469,20 +469,18 @@ yargs
         throw new Error('找不到配置文件 haoma-compile.config.js')
       }
       const config = castArray(require(configFile) as CompileCliConfig)
-      await Promise.all(
-        config.map(async configItem => {
-          const inputFiles = await globby(configItem.inputFiles, {
-            cwd: process.cwd(),
-            onlyFiles: true,
-            absolute: true,
-          })
-          const outDir = resolve(process.cwd(), configItem.outDir)
-          await compile({
-            ...configItem,
-            inputFiles,
-            outDir,
-          })
-        }),
-      )
+      for (const configItem of config) {
+        const inputFiles = await globby(configItem.inputFiles, {
+          cwd: process.cwd(),
+          onlyFiles: true,
+          absolute: true,
+        })
+        const outDir = resolve(process.cwd(), configItem.outDir)
+        await compile({
+          ...configItem,
+          inputFiles,
+          outDir,
+        })
+      }
     },
   ).argv
