@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.2](https://github.com/fjc0k/haoma/compare/v2.10.1...v2.10.2) (2020-11-03)
+
+### Bug Fixes
+
+- compile ([75342bb](https://github.com/fjc0k/haoma/commit/75342bb48861f89abdb90ef8c7ee82871d87493e))
+
 ### [2.10.1](https://github.com/fjc0k/haoma/compare/v2.10.0...v2.10.1) (2020-11-03)
 
 ### Bug Fixes
