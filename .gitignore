@@ -1,6 +1,6 @@
 *.log
 node_modules
-lib
+lib*
 example
 package-lock.json
 yarn.lock

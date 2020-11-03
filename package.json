@@ -74,6 +74,7 @@
     "@vue/babel-plugin-jsx": "^1.0.0-rc.3",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
+    "babel-plugin-transform-rename-import": "^2.3.0",
     "common-dir": "^3.0.0",
     "cross-spawn": "^7.0.2",
     "deepmerge": "^4.2.2",
@@ -128,6 +129,6 @@
     "eslint": "^7",
     "jest": "^26",
     "prettier": "^2",
-    "typescript": "^3"
+    "typescript": "^3 || ^4"
   }
 }

@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import * as babel from '@babel/core'
 import deepmerge from 'deepmerge'
 import exec from 'execa'
 import globby from 'globby'
@@ -7,19 +6,17 @@ import rimraf from 'rimraf'
 import spawn from 'cross-spawn'
 import yargs from 'yargs'
 import { basename, join, resolve } from 'path'
-import { dedent, uniq } from 'vtils'
+import { castArray, dedent, uniq } from 'vtils'
+import { compile } from './compile'
+import { CompileCliConfig } from './types'
 import {
   existsSync,
   mkdirSync,
-  outputFile,
-  readFile,
+  pathExists,
   readFileSync,
   writeFileSync,
 } from 'fs-extra'
 import { PackageJson, TsConfigJson } from 'type-fest'
-
-// @ts-ignore
-import commonDir from 'common-dir'
 
 yargs
   .usage('Usage: $0 <command> [options]')
@@ -462,136 +459,30 @@ yargs
       )
     },
   )
-  .command<{
-    outDir: string
-    target: 'node' | 'browser'
-    module: 'cjs' | 'esm'
-    jsx: 'react' | 'vue'
-    noClean: boolean
-    noDts: boolean
-  }>(
+  .command(
     'compile',
     'Compile files',
-    yargs => {
-      yargs
-        .option('out-dir', {
-          alias: 'o',
-          type: 'string',
-          describe: 'Out dir',
-          demandOption: true,
-        })
-        .option('target', {
-          alias: 't',
-          type: 'string',
-          choices: ['node', 'browser'],
-          describe: 'Target',
-          demandOption: true,
-        })
-        .option('module', {
-          alias: 'm',
-          type: 'string',
-          choices: ['cjs', 'esm'],
-          describe: 'Module',
-          demandOption: true,
-        })
-        .option('jsx', {
-          type: 'string',
-          choices: ['react', 'vue'],
-          describe: 'JSX',
-          default: 'react',
-        })
-        .option('no-clean', {
-          type: 'boolean',
-          describe: 'No clean',
-          default: false,
-        })
-        .option('no-dts', {
-          type: 'boolean',
-          describe: 'No dts',
-          default: false,
-        })
-    },
-    async argv => {
-      const outDir = resolve(process.cwd(), argv.outDir)
-      if (!argv.noClean) {
-        rimraf.sync(outDir, { disableGlob: true })
+    () => undefined,
+    async () => {
+      const configFile = join(process.cwd(), 'haoma-compile.config.js')
+      if (!(await pathExists(configFile))) {
+        throw new Error('找不到配置文件 haoma-compile.config.js')
       }
-      const files = await globby(argv._.slice(1), {
-        onlyFiles: true,
-        absolute: true,
-      })
-      const inputDir = commonDir(files)
-      const tsFiles: string[] = []
+      const config = castArray(require(configFile) as CompileCliConfig)
       await Promise.all(
-        files.map(async file => {
-          const code = await readFile(file, 'utf8')
-          const isTs = /\.tsx?/i.test(file)
-          const isJsx = /\.[j|t]sx/i.test(file)
-          if (isTs) {
-            tsFiles.push(file)
-          }
-          const res = await babel.transformAsync(code, {
-            filename: file,
-            babelrc: false,
-            configFile: false,
-            presets: [
-              ...(isTs ? [require.resolve('@babel/preset-typescript')] : []),
-              [
-                require.resolve('@babel/preset-env'),
-                {
-                  loose: true,
-                  modules: argv.module === 'esm' ? false : 'cjs',
-                  targets:
-                    argv.target === 'node'
-                      ? {
-                          node: '12',
-                        }
-                      : {
-                          ios: '8',
-                          android: '4',
-                        },
-                },
-              ],
-            ],
-            plugins: [
-              ...(isJsx
-                ? [
-                    argv.jsx === 'vue'
-                      ? require.resolve('@vue/babel-plugin-jsx')
-                      : require.resolve('@babel/plugin-transform-react-jsx'),
-                  ]
-                : []),
-              [require.resolve('@babel/plugin-transform-runtime')],
-            ],
+        config.map(async configItem => {
+          const inputFiles = await globby(configItem.inputFiles, {
+            cwd: process.cwd(),
+            onlyFiles: true,
+            absolute: true,
           })
-          if (res) {
-            const outFile = join(
-              outDir,
-              file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
-            )
-            await outputFile(outFile, res.code)
-          }
+          const outDir = resolve(process.cwd(), configItem.outDir)
+          await compile({
+            ...configItem,
+            inputFiles,
+            outDir,
+          })
         }),
       )
-      if (!argv.noDts && tsFiles.length) {
-        await exec(
-          'npx',
-          [
-            'tsc',
-            '--declaration',
-            '--emitDeclarationOnly',
-            '--skipLibCheck',
-            '--esModuleInterop',
-            '--allowSyntheticDefaultImports',
-            '--outDir',
-            outDir,
-            ...tsFiles,
-          ],
-          {
-            cwd: process.cwd(),
-            stdio: 'inherit',
-          },
-        )
-      }
     },
   ).argv
