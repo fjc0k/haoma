@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.12.2](https://github.com/fjc0k/haoma/compare/v2.12.1...v2.12.2) (2020-11-03)
+
+### Bug Fixes
+
+- swc ([97c5c99](https://github.com/fjc0k/haoma/commit/97c5c991d526408d83cb595836df3ac487fcf5f1))
+
 ### [2.12.1](https://github.com/fjc0k/haoma/compare/v2.12.0...v2.12.1) (2020-11-03)
 
 ### Bug Fixes
