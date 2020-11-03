@@ -80,28 +80,28 @@ export async function compile(config: CompileConfig) {
         )
         await fs.outputFile(outFile, res.code)
       }
-      if (config.emitDts !== false && tsFiles.length) {
-        await exec(
-          'npx',
-          [
-            'tsc',
-            '--declaration',
-            '--emitDeclarationOnly',
-            '--skipLibCheck',
-            '--esModuleInterop',
-            '--allowSyntheticDefaultImports',
-            '--jsx',
-            'preserve',
-            '--outDir',
-            config.outDir,
-            ...tsFiles,
-          ],
-          {
-            cwd: process.cwd(),
-            stdio: 'inherit',
-          },
-        )
-      }
     }),
   )
+  if (config.emitDts !== false && tsFiles.length) {
+    await exec(
+      'npx',
+      [
+        'tsc',
+        '--declaration',
+        '--emitDeclarationOnly',
+        '--skipLibCheck',
+        '--esModuleInterop',
+        '--allowSyntheticDefaultImports',
+        '--jsx',
+        'preserve',
+        '--outDir',
+        config.outDir,
+        ...tsFiles,
+      ],
+      {
+        cwd: process.cwd(),
+        stdio: 'inherit',
+      },
+    )
+  }
 }
