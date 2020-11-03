@@ -18,6 +18,12 @@ import {
 } from 'fs-extra'
 import { PackageJson, TsConfigJson } from 'type-fest'
 
+require('@swc-node/register/lib/register').register({
+  target: 'ES2018',
+  module: 'CommonJS',
+  esModuleInterop: true,
+})
+
 yargs
   .usage('Usage: $0 <command> [options]')
   .help('help', 'Show help')
@@ -464,11 +470,18 @@ yargs
     'Compile files',
     () => undefined,
     async () => {
-      const configFile = join(process.cwd(), 'haoma-compile.config.js')
+      const configTsFile = join(process.cwd(), 'haoma-compile.config.ts')
+      const configJsFile = join(process.cwd(), 'haoma-compile.config.js')
+      const configFile = (await pathExists(configTsFile))
+        ? configTsFile
+        : configJsFile
       if (!(await pathExists(configFile))) {
-        throw new Error('找不到配置文件 haoma-compile.config.js')
+        throw new Error('找不到配置文件')
       }
-      const config = castArray(require(configFile) as CompileCliConfig)
+      const config = castArray(
+        (require(configFile).default ||
+          require(configFile)) as CompileCliConfig,
+      )
       for (const configItem of config) {
         const inputFiles = await globby(configItem.inputFiles, {
           cwd: process.cwd(),

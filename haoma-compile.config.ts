@@ -1,4 +1,6 @@
-module.exports = require('./lib').getCompileConfig([
+import { getCompileConfig } from './lib'
+
+export default getCompileConfig([
   {
     name: 'cjs',
     inputFiles: ['src/*.ts', '!**/*.test.*'],
