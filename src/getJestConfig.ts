@@ -42,7 +42,7 @@ export function getJestConfig(
           ? {
               '^.+\\.tsx?$': require.resolve('ts-jest'),
               '^.+\\.jsx?$': normalizeFilePath(
-                require.resolve('./jestSimpleJavaScriptTransform'),
+                require.resolve('./jestJavaScriptTransform'),
               ),
             }
           : customConfig.transformer === 'babel'

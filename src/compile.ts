@@ -5,6 +5,7 @@ import fs from 'fs-extra'
 import ora from 'ora'
 import rimraf from 'rimraf'
 import { CompileConfig } from './types'
+import { getBabelConfig } from './getBabelConfig'
 import { join } from 'path'
 
 // @ts-ignore
@@ -44,62 +45,18 @@ export async function compile(config: CompileConfig) {
     config.inputFiles.map(async file => {
       const code = await fs.readFile(file, 'utf8')
       const isTs = /\.tsx?/i.test(file)
-      const isJsx = /\.[j|t]sx/i.test(file)
       if (isTs) {
         tsFiles.push(file)
       }
-      const res = await babel.transformAsync(code, {
-        filename: file,
-        babelrc: false,
-        configFile: false,
-        presets: [
-          ...(isTs ? [require.resolve('@babel/preset-typescript')] : []),
-          [
-            require.resolve('@babel/preset-env'),
-            {
-              loose: true,
-              modules: config.module === 'esm' ? false : 'cjs',
-              targets:
-                config.target === 'node'
-                  ? {
-                      node: '12',
-                    }
-                  : {
-                      ios: '8',
-                      android: '4',
-                    },
-            },
-          ],
-          ...(config.babel?.presets || []),
-        ],
-        plugins: [
-          ...(isJsx
-            ? [
-                config.jsxPragma === 'vue'
-                  ? require.resolve('@vue/babel-plugin-jsx')
-                  : require.resolve('@babel/plugin-transform-react-jsx'),
-              ]
-            : []),
-          [
-            require.resolve('@babel/plugin-transform-runtime'),
-            {
-              useESModules: config.module === 'esm',
-              version: require('@babel/runtime/package.json').version,
-            },
-          ],
-          ...(config.babel?.renameImports?.length
-            ? [
-                [
-                  require.resolve('babel-plugin-transform-rename-import'),
-                  {
-                    replacements: config.babel.renameImports,
-                  },
-                ],
-              ]
-            : []),
-          ...(config.babel?.plugins || []),
-        ],
-      })
+      const res = await babel.transformAsync(
+        code,
+        getBabelConfig({
+          filename: file,
+          module: config.module || 'cjs',
+          target: config.target || 'browser',
+          legacyDecorator: true,
+        }),
+      )
       if (res) {
         const outFile = join(
           config.outDir,

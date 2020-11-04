@@ -16,23 +16,14 @@ import {
   readFileSync,
   writeFileSync,
 } from 'fs-extra'
+import { getBabelConfig } from './getBabelConfig'
 import { PackageJson, TsConfigJson } from 'type-fest'
 
 require('@babel/register')({
-  babelrc: false,
-  configFile: false,
-  presets: [
-    [require.resolve('@babel/preset-typescript')],
-    [
-      require.resolve('@babel/preset-env'),
-      {
-        loose: true,
-        targets: {
-          node: 'current',
-        },
-      },
-    ],
-  ],
+  ...getBabelConfig({
+    typescript: true,
+    target: 'node',
+  }),
   extensions: ['.js', '.ts'],
 })
 

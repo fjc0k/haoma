@@ -1,32 +1,11 @@
 import babelJest from 'babel-jest'
-import { TransformOptions } from '@babel/core'
+import { getBabelConfig } from './getBabelConfig'
 
-module.exports = babelJest.createTransformer({
-  babelrc: false,
-  configFile: false,
-  presets: [
-    [require.resolve('@babel/preset-typescript')],
-    [
-      require.resolve('@babel/preset-env'),
-      {
-        loose: true,
-        targets: {
-          node: 'current',
-        },
-      },
-    ],
-  ],
-  plugins: [
-    [
-      require.resolve('@babel/plugin-proposal-decorators'),
-      {
-        legacy: true,
-      },
-    ],
-    [
-      process.env.JSX_PRAGMA === 'Vue'
-        ? require.resolve('@vue/babel-plugin-jsx')
-        : require.resolve('@babel/plugin-transform-react-jsx'),
-    ],
-  ],
-} as TransformOptions)
+module.exports = babelJest.createTransformer(
+  getBabelConfig({
+    target: 'node',
+    typescript: true,
+    legacyDecorator: true,
+    jsx: process.env.JSX_PRAGMA === 'Vue' ? 'vue' : 'react',
+  }),
+)

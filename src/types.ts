@@ -75,6 +75,52 @@ export type JestConfig = Partial<jest.Config.InitialOptions> & {
   jsxPragma?: 'React' | 'Vue'
 }
 
+export interface BabelConfig extends babel.TransformOptions {
+  /**
+   * 模块类型。
+   *
+   * @default 'cjs'
+   */
+  module?: 'cjs' | 'esm'
+
+  /**
+   * 目标类型。
+   *
+   * @default 'browser'
+   */
+  target?: 'node' | 'browser'
+
+  /**
+   * 是否启用 JSX。
+   */
+  jsx?: 'react' | 'vue'
+
+  /**
+   * 是否启用 TypeScript 支持。
+   */
+  typescript?: boolean
+
+  /**
+   * 是否启用初版装饰器支持。
+   */
+  legacyDecorator?: boolean
+
+  /**
+   * 是否启用导入更名插件。
+   */
+  renameImport?: Array<{
+    /**
+     * 要更名的导入，正则。
+     */
+    original: string
+
+    /**
+     * 更名后的替换，支持占位符，如：$1。
+     */
+    replacement: string
+  }>
+}
+
 export interface CompileConfig {
   /**
    * 名称，显示用。
