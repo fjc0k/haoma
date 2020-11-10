@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.13.2](https://github.com/fjc0k/haoma/compare/v2.13.1...v2.13.2) (2020-11-10)
+
+### Bug Fixes
+
+- 透传 babel 配置 ([fd832cb](https://github.com/fjc0k/haoma/commit/fd832cbeb50a9f78329758d0de8d1390c4d84340))
+
 ### [2.13.1](https://github.com/fjc0k/haoma/compare/v2.13.0...v2.13.1) (2020-11-10)
 
 ### Bug Fixes
