@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.13.1](https://github.com/fjc0k/haoma/compare/v2.13.0...v2.13.1) (2020-11-10)
+
+### Bug Fixes
+
+- 修正 babel 配置 ([8d3ff92](https://github.com/fjc0k/haoma/commit/8d3ff92d48ae9b76af1f57ba55c8f1f5621f5ffd))
+
 ## [2.13.0](https://github.com/fjc0k/haoma/compare/v2.12.3...v2.13.0) (2020-11-04)
 
 ### Features
