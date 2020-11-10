@@ -14,22 +14,24 @@ import commonDir from 'common-dir'
 export async function compile(config: CompileConfig) {
   const startTime = Date.now()
 
+  const { name, inputFiles, outDir, emitDts, clean, ...babelConfig } = config
+
   const spinner = ora({
-    prefixText: `[${config.name}]: `,
+    prefixText: `[${name}]: `,
   })
 
-  if (!config.inputFiles.length) {
+  if (!inputFiles.length) {
     spinner.fail('输入文件列表为空！')
     return
   }
 
   spinner.start('编译中...')
 
-  if (config.clean !== false) {
+  if (clean !== false) {
     spinner.text = '清空输出目录...'
     await new Promise(resolve =>
       rimraf(
-        config.outDir,
+        outDir,
         {
           disableGlob: true,
         },
@@ -39,10 +41,10 @@ export async function compile(config: CompileConfig) {
   }
 
   spinner.text = '编译文件...'
-  const inputDir = commonDir(config.inputFiles)
+  const inputDir = commonDir(inputFiles)
   const tsFiles: string[] = []
   await Promise.all(
-    config.inputFiles.map(async file => {
+    inputFiles.map(async file => {
       const code = await fs.readFile(file, 'utf8')
       const isTs = /\.tsx?/i.test(file)
       if (isTs) {
@@ -51,21 +53,21 @@ export async function compile(config: CompileConfig) {
       const res = await babel.transformAsync(
         code,
         getBabelConfig({
-          ...config,
-          legacyDecorator: config.legacyDecorator ?? true,
+          ...babelConfig,
+          legacyDecorator: babelConfig.legacyDecorator ?? true,
           filename: file,
         }),
       )
       if (res) {
         const outFile = join(
-          config.outDir,
+          outDir,
           file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
         )
         await fs.outputFile(outFile, res.code)
       }
     }),
   )
-  if (config.emitDts !== false && tsFiles.length) {
+  if (emitDts !== false && tsFiles.length) {
     spinner.text = '生成类型文件...'
     await exec(
       'node',
@@ -79,7 +81,7 @@ export async function compile(config: CompileConfig) {
         '--jsx',
         'preserve',
         '--outDir',
-        config.outDir,
+        outDir,
         ...tsFiles,
       ],
       {
