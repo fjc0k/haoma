@@ -51,13 +51,9 @@ export async function compile(config: CompileConfig) {
       const res = await babel.transformAsync(
         code,
         getBabelConfig({
+          ...config,
+          legacyDecorator: config.legacyDecorator ?? true,
           filename: file,
-          module: config.module || 'cjs',
-          target: config.target || 'browser',
-          legacyDecorator: true,
-          jsx: config.jsxPragma || 'react',
-          presets: config.babel?.presets || [],
-          plugins: config.babel?.plugins || [],
         }),
       )
       if (res) {

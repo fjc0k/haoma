@@ -121,7 +121,7 @@ export interface BabelConfig extends babel.TransformOptions {
   }>
 }
 
-export interface CompileConfig {
+export interface CompileConfig extends BabelConfig {
   /**
    * 名称，显示用。
    */
@@ -138,25 +138,6 @@ export interface CompileConfig {
   outDir: string
 
   /**
-   * 模块类型。
-   */
-  module: 'cjs' | 'esm'
-
-  /**
-   * 目标类型。
-   *
-   * @default 'browser'
-   */
-  target?: 'node' | 'browser'
-
-  /**
-   * JSX 变种。
-   *
-   * @default 'react'
-   */
-  jsxPragma?: 'react' | 'vue'
-
-  /**
    * 是否编译前清空输出目录。
    *
    * @default true
@@ -169,36 +150,6 @@ export interface CompileConfig {
    * @default true
    */
   emitDts?: boolean
-
-  /**
-   * babel 配置。
-   */
-  babel?: {
-    /**
-     * 额外的预设。
-     */
-    presets?: babel.PluginItem[]
-
-    /**
-     * 额外的插件。
-     */
-    plugins?: babel.PluginItem[]
-
-    /**
-     * 内置插件：导入更名。
-     */
-    renameImports?: Array<{
-      /**
-       * 要更名的导入，正则。
-       */
-      original: string
-
-      /**
-       * 更名后的替换，支持占位符，如：$1。
-       */
-      replacement: string
-    }>
-  }
 }
 
 export type CompileCliConfig = CompileConfig | CompileConfig[]
