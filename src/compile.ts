@@ -55,6 +55,9 @@ export async function compile(config: CompileConfig) {
           module: config.module || 'cjs',
           target: config.target || 'browser',
           legacyDecorator: true,
+          jsx: config.jsxPragma || 'react',
+          presets: config.babel?.presets || [],
+          plugins: config.babel?.plugins || [],
         }),
       )
       if (res) {
