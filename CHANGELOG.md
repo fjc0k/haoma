@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.14.0](https://github.com/fjc0k/haoma/compare/v2.13.3...v2.14.0) (2020-11-11)
+
+### Features
+
+- **compile:** 新增 modularImport 选项 ([413909b](https://github.com/fjc0k/haoma/commit/413909ba07df2223aeac3b08c7e0643cb4575510))
+
 ### [2.13.3](https://github.com/fjc0k/haoma/compare/v2.13.2...v2.13.3) (2020-11-10)
 
 ### Bug Fixes
