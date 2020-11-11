@@ -12,6 +12,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     jsx = (isJsx && 'react') || undefined,
     legacyDecorator = false,
     renameImport = [],
+    modularImport = [],
     presets = [],
     plugins = [],
     ...babelConfig
@@ -75,6 +76,13 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
               },
             ],
           ]
+        : []),
+      ...(modularImport.length
+        ? modularImport.map((item, index) => [
+            require.resolve('babel-plugin-import'),
+            item,
+            `${item.libraryName}_${index}`,
+          ])
         : []),
       ...(plugins || []),
     ],

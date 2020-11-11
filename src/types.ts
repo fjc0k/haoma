@@ -119,6 +119,40 @@ export interface BabelConfig extends babel.TransformOptions {
      */
     replacement: string
   }>
+
+  /**
+   * 是否启用按需导入。
+   */
+  modularImport?: Array<{
+    /**
+     * 包名。
+     */
+    libraryName: string
+
+    /**
+     * 包产物路径。
+     *
+     * @default 'lib'
+     */
+    libraryDirectory?: string
+
+    /**
+     * 是否将驼峰命名转换为横线命名。比如：`TimePicker -> time-picker`
+     *
+     * @default true
+     */
+    camel2DashComponentName?: boolean
+
+    customName?: (name: string, file: Object) => string
+
+    style?: 'css' | true | ((name: string, file: Object) => string | false)
+
+    styleLibraryDirectory?: string
+
+    customStyleName?: (name: string, file: Object) => string
+
+    transformToDefaultImport?: boolean
+  }>
 }
 
 export interface CompileConfig extends BabelConfig {
