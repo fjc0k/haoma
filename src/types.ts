@@ -93,7 +93,7 @@ export interface BabelConfig extends babel.TransformOptions {
   /**
    * 是否启用 JSX。
    */
-  jsx?: 'react' | 'vue'
+  jsx?: 'react' | 'vue' | 'vue2'
 
   /**
    * 是否启用 TypeScript 支持。

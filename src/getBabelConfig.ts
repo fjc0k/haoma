@@ -9,7 +9,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     module = 'cjs',
     target = 'browser',
     typescript = isTs,
-    jsx = (isJsx && 'react') || undefined,
+    jsx = 'react',
     legacyDecorator = false,
     renameImport = [],
     modularImport = [],
@@ -40,6 +40,18 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
                 },
         },
       ],
+      ...(!isJsx
+        ? []
+        : jsx === 'vue2'
+        ? [
+            [
+              require.resolve('@vue/babel-preset-jsx'),
+              {
+                compositionAPI: true,
+              },
+            ],
+          ]
+        : []),
       ...(presets || []),
     ],
     plugins: [
@@ -53,12 +65,12 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
             ],
           ]
         : []),
-      ...(jsx
-        ? [
-            jsx === 'vue'
-              ? require.resolve('@vue/babel-plugin-jsx')
-              : require.resolve('@babel/plugin-transform-react-jsx'),
-          ]
+      ...(!isJsx
+        ? []
+        : jsx === 'react'
+        ? [require.resolve('@babel/plugin-transform-react-jsx')]
+        : jsx === 'vue'
+        ? [require.resolve('@vue/babel-plugin-jsx')]
         : []),
       [
         require.resolve('@babel/plugin-transform-runtime'),
