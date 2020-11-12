@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.15.0](https://github.com/fjc0k/haoma/compare/v2.14.0...v2.15.0) (2020-11-12)
+
+### Features
+
+- **compile:** 支持 vue2 JSX ([bab4837](https://github.com/fjc0k/haoma/commit/bab4837050fb3d7aa66262db539674086c0314bc))
+
 ## [2.14.0](https://github.com/fjc0k/haoma/compare/v2.13.3...v2.14.0) (2020-11-11)
 
 ### Features
