@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.16.0](https://github.com/fjc0k/haoma/compare/v2.15.0...v2.16.0) (2020-11-15)
+
+### Features
+
+- **compile:** 支持编译 CSS 文件 ([c243945](https://github.com/fjc0k/haoma/commit/c243945b922f7f5e4e8241e73d1580ed49d2fe6b))
+
+### Bug Fixes
+
+- dts ([e10367a](https://github.com/fjc0k/haoma/commit/e10367a97b604e67e4a345217cef40f09351742f))
+
 ## [2.15.0](https://github.com/fjc0k/haoma/compare/v2.14.0...v2.15.0) (2020-11-12)
 
 ### Features
