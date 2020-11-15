@@ -4,12 +4,14 @@ import exec from 'execa'
 import fs from 'fs-extra'
 import ora from 'ora'
 import rimraf from 'rimraf'
-import { CompileConfig } from './types'
+import { BabelConfig, CompileConfig } from './types'
 import { getBabelConfig } from './getBabelConfig'
 import { join } from 'path'
 
 // @ts-ignore
 import commonDir from 'common-dir'
+import { AsyncOrSync, Defined } from 'vtils/types'
+import { EventBus } from 'vtils'
 
 export async function compile(config: CompileConfig) {
   const startTime = Date.now()
@@ -45,26 +47,38 @@ export async function compile(config: CompileConfig) {
   const tsFiles: string[] = []
   await Promise.all(
     inputFiles.map(async file => {
+      const outFile = join(
+        outDir,
+        file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
+      )
       const code = await fs.readFile(file, 'utf8')
       const isTs = /\.tsx?/i.test(file)
       if (isTs) {
         tsFiles.push(file)
       }
+      const afterWriteTransformers: Array<(
+        content: string,
+      ) => AsyncOrSync<string>> = []
+      const bus: Defined<BabelConfig['bus']> = new EventBus()
+      bus.on('addAfterWriteTransformer', transformer =>
+        afterWriteTransformers.push(transformer),
+      )
       const res = await babel.transformAsync(
         code,
         getBabelConfig({
           ...babelConfig,
           legacyDecorator: babelConfig.legacyDecorator ?? true,
           filename: file,
+          projectRoot: inputDir,
+          outDir: outDir,
+          bus: bus,
         }),
       )
-      if (res) {
-        const outFile = join(
-          outDir,
-          file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
-        )
-        await fs.outputFile(outFile, res.code)
+      let content = res?.code || ''
+      for (const transformer of afterWriteTransformers) {
+        content = await transformer(content)
       }
+      await fs.outputFile(outFile, content)
     }),
   )
   if (emitDts !== false && tsFiles.length) {

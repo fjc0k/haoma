@@ -1,3 +1,4 @@
+import { basename } from 'path'
 import { getCompileConfig } from './lib'
 
 export default getCompileConfig([
@@ -13,13 +14,21 @@ export default getCompileConfig([
     outDir: 'lib3',
     module: 'esm',
     target: 'node',
-    babel: {
-      renameImports: [
-        {
-          original: '\\./getJestConfig',
-          replacement: 'llllll',
-        },
-      ],
+    renameImport: [
+      {
+        original: '\\./getJestConfig',
+        replacement: 'llllll',
+      },
+    ],
+  },
+  {
+    name: 'esm',
+    inputFiles: ['tests/x.tsx'],
+    outDir: 'lib4',
+    module: 'esm',
+    target: 'node',
+    getCssModulesScopeName({ className, fileName }) {
+      return `${basename(fileName).split('.')[0]}_${className}`
     },
   },
 ])

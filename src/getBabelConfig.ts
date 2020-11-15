@@ -1,4 +1,5 @@
 import { BabelConfig } from './types'
+import { getProcessCssPlugin } from './babelPlugins'
 
 export function getBabelConfig(config: BabelConfig): BabelConfig {
   const hasFileName = !!config.filename
@@ -11,6 +12,10 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     typescript = isTs,
     jsx = 'react',
     legacyDecorator = false,
+    projectRoot,
+    outDir,
+    getCssModulesScopeName,
+    bus,
     renameImport = [],
     modularImport = [],
     presets = [],
@@ -95,6 +100,16 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
             item,
             `${item.libraryName}_${index}`,
           ])
+        : []),
+      ...(projectRoot && outDir && bus
+        ? [
+            getProcessCssPlugin({
+              projectRoot: projectRoot,
+              outDir: outDir,
+              getCssModulesScopeName: getCssModulesScopeName,
+              bus: bus,
+            }),
+          ]
         : []),
       ...(plugins || []),
     ],

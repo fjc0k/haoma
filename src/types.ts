@@ -2,7 +2,8 @@ import * as babel from '@babel/core'
 import * as eslint from 'eslint'
 import * as jest from '@jest/types'
 import * as prettier from 'prettier'
-import { LiteralUnion } from 'vtils/types'
+import { AsyncOrSync, LiteralUnion } from 'vtils/types'
+import { EventBus } from 'vtils'
 
 export type ESLintConfig = eslint.Linter.Config & {
   settings?: {
@@ -106,6 +107,24 @@ export interface BabelConfig extends babel.TransformOptions {
   legacyDecorator?: boolean
 
   /**
+   * 项目根目录。（处理 CSS 有用）
+   */
+  projectRoot?: string
+
+  /**
+   * 输出目录。（处理 CSS 有用）
+   */
+  outDir?: string
+
+  /**
+   * CSSModules 名称。
+   */
+  getCssModulesScopeName?: (payload: {
+    className: string
+    fileName: string
+  }) => string
+
+  /**
    * 是否启用导入更名插件。
    */
   renameImport?: Array<{
@@ -152,6 +171,12 @@ export interface BabelConfig extends babel.TransformOptions {
     customStyleName?: (name: string, file: Object) => string
 
     transformToDefaultImport?: boolean
+  }>
+
+  bus?: EventBus<{
+    addAfterWriteTransformer: (
+      transformer: (content: string) => AsyncOrSync<string>,
+    ) => any
   }>
 }
 

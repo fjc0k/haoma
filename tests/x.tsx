@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import './fn'
-import './xx.scss'
+import './xx.less'
+import './xx2.scss'
 import React, { Component, FC, useState } from 'react'
+
+// @ts-ignore
+import _ from './xx3.less'
+
+console.log(_)
 
 export default class X extends Component {
   static yyy = 3
