@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.16.2](https://github.com/fjc0k/haoma/compare/v2.16.1...v2.16.2) (2020-11-16)
+
+### Bug Fixes
+
+- getCssModulesScopedName ([4ef7487](https://github.com/fjc0k/haoma/commit/4ef7487a8860bdf22f3ea134ce3115ed770b0020))
+
 ### [2.16.1](https://github.com/fjc0k/haoma/compare/v2.16.0...v2.16.1) (2020-11-16)
 
 ### Bug Fixes
