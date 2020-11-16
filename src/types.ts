@@ -119,7 +119,7 @@ export interface BabelConfig extends babel.TransformOptions {
   /**
    * CSSModules 名称。
    */
-  getCssModulesScopeName?: (payload: {
+  getCssModulesScopedName?: (payload: {
     className: string
     fileName: string
   }) => string

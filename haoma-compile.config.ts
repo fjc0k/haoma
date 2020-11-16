@@ -27,7 +27,7 @@ export default getCompileConfig([
     outDir: 'lib4',
     module: 'esm',
     target: 'node',
-    getCssModulesScopeName({ className, fileName }) {
+    getCssModulesScopedName({ className, fileName }) {
       return `${basename(fileName).split('.')[0]}_${className}`
     },
   },

@@ -14,7 +14,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     legacyDecorator = false,
     projectRoot,
     outDir,
-    getCssModulesScopeName,
+    getCssModulesScopedName,
     bus,
     renameImport = [],
     modularImport = [],
@@ -106,7 +106,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
             getProcessCssPlugin({
               projectRoot: projectRoot,
               outDir: outDir,
-              getCssModulesScopeName: getCssModulesScopeName,
+              getCssModulesScopedName: getCssModulesScopedName,
               bus: bus,
             }),
           ]

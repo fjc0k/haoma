@@ -11,7 +11,7 @@ import { dirname, extname, join } from 'path'
 export function getProcessCssPlugin(options: {
   projectRoot: string
   outDir: string
-  getCssModulesScopeName?: Defined<BabelConfig['getCssModulesScopeName']>
+  getCssModulesScopedName?: Defined<BabelConfig['getCssModulesScopedName']>
   bus: Defined<BabelConfig['bus']>
 }) {
   return function processCssPlugin({
@@ -93,13 +93,13 @@ export function getProcessCssPlugin(options: {
                         require('postcss-modules')({
                           getJSON: (_: any, json: any) =>
                             (cssModulesMap = json),
-                          ...(options.getCssModulesScopeName
+                          ...(options.getCssModulesScopedName
                             ? {
                                 generateScopedName: (
                                   name: string,
                                   filename: string,
                                 ) =>
-                                  options.getCssModulesScopeName!({
+                                  options.getCssModulesScopedName!({
                                     className: name,
                                     fileName: filename,
                                   }),
