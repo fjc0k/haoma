@@ -457,7 +457,7 @@ yargs
         [
           '--unhandled-rejections=strict',
           '-r',
-          require.resolve('@swc-node/register'),
+          require.resolve('./swcRegister'),
           argv._[1],
         ],
         {
