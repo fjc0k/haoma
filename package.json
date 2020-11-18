@@ -1,6 +1,6 @@
 {
   "name": "haoma",
-  "version": "2.17.0",
+  "version": "2.17.1",
   "description": "使用 EditorConfig + ESLint + Prettier，助你写出漂亮的前端代码。",
   "keywords": [
     "editorconfig",
