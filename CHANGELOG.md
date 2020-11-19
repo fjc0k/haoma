@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.18.2](https://github.com/fjc0k/haoma/compare/v2.18.1...v2.18.2) (2020-11-19)
+
+### Bug Fixes
+
+- tslib ([980fb92](https://github.com/fjc0k/haoma/commit/980fb92ebe072f6eb405b379637c4d2646af1498))
+
 ### [2.18.1](https://github.com/fjc0k/haoma/compare/v2.18.0...v2.18.1) (2020-11-19)
 
 ### Bug Fixes
