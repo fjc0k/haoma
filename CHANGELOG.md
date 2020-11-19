@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.18.0](https://github.com/fjc0k/haoma/compare/v2.17.1...v2.18.0) (2020-11-19)
+
+### Features
+
+- **compile:** 支持打包类型文件 ([91a01f6](https://github.com/fjc0k/haoma/commit/91a01f6cb3e6a1f35e819ed332ff69eee2fef79a))
+
 ### [2.17.1](https://github.com/fjc0k/haoma/compare/v2.17.0...v2.17.1) (2020-11-18)
 
 ### Bug Fixes
