@@ -60,6 +60,12 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
       ...(presets || []),
     ],
     plugins: [
+      [
+        require.resolve('@babel/plugin-proposal-class-properties'),
+        {
+          loose: true,
+        },
+      ],
       ...(legacyDecorator
         ? [
             [
