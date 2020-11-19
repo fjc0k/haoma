@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.18.1](https://github.com/fjc0k/haoma/compare/v2.18.0...v2.18.1) (2020-11-19)
+
+### Bug Fixes
+
+- add @babel/plugin-proposal-class-properties ([a454e8c](https://github.com/fjc0k/haoma/commit/a454e8cda25466126a55a86a566c668acf63462e))
+
 ## [2.18.0](https://github.com/fjc0k/haoma/compare/v2.17.1...v2.18.0) (2020-11-19)
 
 ### Features
