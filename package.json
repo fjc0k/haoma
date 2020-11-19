@@ -114,6 +114,7 @@
     "sass": "^1.29.0",
     "snapshot-diff": "^0.7.0",
     "ts-jest": "^26.1.0",
+    "tslib": "^2.0.3",
     "vtils": "^3.2.0",
     "vue-eslint-parser": "^7.1.0",
     "yargs": "^15.3.1"
