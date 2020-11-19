@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.19.0](https://github.com/fjc0k/haoma/compare/v2.18.2...v2.19.0) (2020-11-19)
+
+### Features
+
+- 引入 workerpool ([b162fb7](https://github.com/fjc0k/haoma/commit/b162fb7e2a1d6df54f42e3c9ad38a4989eaee8c3))
+
 ### [2.18.2](https://github.com/fjc0k/haoma/compare/v2.18.1...v2.18.2) (2020-11-19)
 
 ### Bug Fixes
