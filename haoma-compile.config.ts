@@ -7,6 +7,9 @@ export default getCompileConfig([
     inputFiles: ['src/*.ts', '!**/*.test.*'],
     outDir: 'lib2',
     module: 'cjs',
+    rollupDts: true,
+    rollupDtsFiles: ['index.d.ts'],
+    rollupDtsIncludedPackages: ['vtils'],
   },
   {
     name: 'esm',

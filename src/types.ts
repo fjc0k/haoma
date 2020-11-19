@@ -209,6 +209,23 @@ export interface CompileConfig extends BabelConfig {
    * @default true
    */
   emitDts?: boolean
+
+  /**
+   * 是否打包类型定义文件。
+   */
+  rollupDts?: boolean
+
+  /**
+   * 打包类型定义文件列表。
+   *
+   * @default ['index.d.ts']
+   */
+  rollupDtsFiles?: string[]
+
+  /**
+   * 打包类型定义文件包括的包。
+   */
+  rollupDtsIncludedPackages?: string[]
 }
 
 export type CompileCliConfig = CompileConfig | CompileConfig[]
