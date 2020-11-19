@@ -1,3 +1,6 @@
+// @ts-ignore
+import commonDir from 'common-dir'
+
 import * as babel from '@babel/core'
 import color from 'chalk'
 import deleteEmptyDirectories from 'delete-empty'
@@ -6,15 +9,12 @@ import fs from 'fs-extra'
 import globby from 'globby'
 import ora from 'ora'
 import rimraf from 'rimraf'
+import workerpool from 'workerpool'
+import { AsyncOrSync, Defined } from 'vtils/types'
 import { BabelConfig, CompileConfig } from './types'
-import { Extractor, ExtractorConfig } from '@microsoft/api-extractor'
+import { EventBus } from 'vtils'
 import { getBabelConfig } from './getBabelConfig'
 import { join } from 'path'
-
-// @ts-ignore
-import commonDir from 'common-dir'
-import { AsyncOrSync, Defined } from 'vtils/types'
-import { EventBus, noop } from 'vtils'
 
 export async function compile(config: CompileConfig) {
   const startTime = Date.now()
@@ -126,36 +126,9 @@ export async function compile(config: CompileConfig) {
         cwd: outDir,
         absolute: true,
       })
-      const consoleLog = console.log
-      console.log = noop
-      await Promise.all(
-        _rollupDtsFiles.map(async dtsFile => {
-          const config = ExtractorConfig.prepare({
-            configObjectFullPath: join(process.cwd(), './api-extractor.json'),
-            configObject: {
-              projectFolder: process.cwd(),
-              mainEntryPointFilePath: dtsFile,
-              bundledPackages: rollupDtsIncludedPackages,
-              apiReport: { enabled: false, reportFileName: 'report.api.md' },
-              dtsRollup: { enabled: true, untrimmedFilePath: dtsFile },
-              tsdocMetadata: { enabled: false },
-              docModel: { enabled: false },
-              compiler: {
-                tsconfigFilePath: join(process.cwd(), './tsconfig.json'),
-              },
-              newlineKind: 'lf',
-            },
-            packageJsonFullPath: join(process.cwd(), './package.json'),
-            packageJson: {
-              name: 'hello',
-            } as any,
-          })
-          Extractor.invoke(config, {
-            localBuild: true,
-          })
-        }),
-      )
-      console.log = consoleLog
+      const pool = workerpool.pool(require.resolve('./rollupDts'))
+      await pool.exec('rollupDts', [_rollupDtsFiles, rollupDtsIncludedPackages])
+      await pool.terminate()
       const scrappedDtsFiles = await globby('**/*.d.ts', {
         cwd: outDir,
         absolute: true,

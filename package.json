@@ -117,6 +117,7 @@
     "tslib": "^2.0.3",
     "vtils": "^3.2.0",
     "vue-eslint-parser": "^7.1.0",
+    "workerpool": "^6.0.3",
     "yargs": "^15.3.1"
   },
   "devDependencies": {
@@ -131,6 +132,7 @@
     "@types/react": "^16.9.32",
     "@types/rimraf": "^3.0.0",
     "@types/sass": "^1.16.0",
+    "@types/workerpool": "^6.0.0",
     "@types/yargs": "^15.0.4",
     "eslint": "^7.2.0",
     "husky": "^4.2.3",
