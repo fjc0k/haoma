@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.20.0](https://github.com/fjc0k/haoma/compare/v2.19.0...v2.20.0) (2020-11-23)
+
+### Features
+
+- renameImport ([36cb7ae](https://github.com/fjc0k/haoma/commit/36cb7aeacd1317e48d84c4e63acd9cdcabac31ae))
+
 ## [2.19.0](https://github.com/fjc0k/haoma/compare/v2.18.2...v2.19.0) (2020-11-19)
 
 ### Features
