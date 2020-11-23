@@ -1,5 +1,6 @@
 import { BabelConfig } from './types'
 import { getProcessCssPlugin } from './babelPlugins'
+import { isRegExp } from 'vtils'
 
 export function getBabelConfig(config: BabelConfig): BabelConfig {
   const hasFileName = !!config.filename
@@ -95,7 +96,12 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
             [
               require.resolve('babel-plugin-transform-rename-import'),
               {
-                replacements: renameImport,
+                replacements: renameImport.map(item => ({
+                  ...item,
+                  original: isRegExp(item.original)
+                    ? String(item.original).replace(/^\/|\/$/g, '')
+                    : item.original,
+                })),
               },
             ],
           ]

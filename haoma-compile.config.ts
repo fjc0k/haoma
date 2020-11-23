@@ -19,7 +19,7 @@ export default getCompileConfig([
     target: 'node',
     renameImport: [
       {
-        original: '\\./getJestConfig',
+        original: /\.\/getJestConfig/,
         replacement: 'llllll',
       },
     ],

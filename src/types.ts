@@ -131,7 +131,7 @@ export interface BabelConfig extends babel.TransformOptions {
     /**
      * 要更名的导入，正则。
      */
-    original: string
+    original: string | RegExp
 
     /**
      * 更名后的替换，支持占位符，如：$1。
