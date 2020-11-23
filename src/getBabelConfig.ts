@@ -99,7 +99,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
                 replacements: renameImport.map(item => ({
                   ...item,
                   original: isRegExp(item.original)
-                    ? String(item.original).replace(/^\/|\/$/g, '')
+                    ? String(item.original).replace(/^\/(.+)\/\w*$/, '$1')
                     : item.original,
                 })),
               },
