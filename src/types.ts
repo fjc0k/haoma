@@ -223,6 +223,11 @@ export interface CompileConfig extends BabelConfig {
   rollupDtsFiles?: string[]
 
   /**
+   * 打包类型定义排除文件列表。
+   */
+  rollupDtsExcludeFiles?: string[]
+
+  /**
    * 打包类型定义文件包括的包。
    */
   rollupDtsIncludedPackages?: string[]

@@ -26,6 +26,7 @@ export async function compile(config: CompileConfig) {
     emitDts,
     rollupDts,
     rollupDtsFiles = ['index.d.ts'],
+    rollupDtsExcludeFiles = [],
     rollupDtsIncludedPackages = [],
     clean,
     ...babelConfig
@@ -125,6 +126,7 @@ export async function compile(config: CompileConfig) {
       const _rollupDtsFiles = await globby(rollupDtsFiles, {
         cwd: outDir,
         absolute: true,
+        ignore: rollupDtsExcludeFiles,
       })
       const pool = workerpool.pool(require.resolve('./rollupDts'))
       await pool.exec('rollupDts', [_rollupDtsFiles, rollupDtsIncludedPackages])
@@ -132,7 +134,7 @@ export async function compile(config: CompileConfig) {
       const scrappedDtsFiles = await globby('**/*.d.ts', {
         cwd: outDir,
         absolute: true,
-        ignore: rollupDtsFiles,
+        ignore: [...rollupDtsFiles, ...rollupDtsExcludeFiles],
       })
       await Promise.all(scrappedDtsFiles.map(file => fs.remove(file)))
     }
