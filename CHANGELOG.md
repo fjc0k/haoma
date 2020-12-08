@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.21.0](https://github.com/fjc0k/haoma/compare/v2.20.1...v2.21.0) (2020-12-08)
+
+### Features
+
+- rollupDtsExcludeFiles ([4ffa115](https://github.com/fjc0k/haoma/commit/4ffa11507cc8028839a7afcc4fcf77276ddbd876))
+
 ### [2.20.1](https://github.com/fjc0k/haoma/compare/v2.20.0...v2.20.1) (2020-11-23)
 
 ### Bug Fixes
