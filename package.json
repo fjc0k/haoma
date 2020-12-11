@@ -88,6 +88,7 @@
     "cuid": "^2.1.8",
     "deepmerge": "^4.2.2",
     "delete-empty": "^3.0.0",
+    "dotenv": "^8.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-formatter-friendly": "^7.0.0",
     "eslint-plugin-react": "^7.20.0",

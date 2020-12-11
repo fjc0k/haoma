@@ -452,6 +452,7 @@ yargs
     'Run a js/ts script',
     () => undefined,
     argv => {
+      require('dotenv').config()
       exec.sync(
         'node',
         [
