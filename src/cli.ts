@@ -452,7 +452,13 @@ yargs
     'Run a js/ts script',
     () => undefined,
     argv => {
-      require('dotenv').config()
+      const dotenv = require('dotenv')
+      // dotenv 不会覆盖，因此优先级高的放前面
+      for (const file of ['.env.local', '.env']) {
+        dotenv.config({
+          path: join(process.cwd(), file),
+        })
+      }
       exec.sync(
         'node',
         [
