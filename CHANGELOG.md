@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.22.0](https://github.com/fjc0k/haoma/compare/v2.21.0...v2.22.0) (2020-12-11)
+
+### Features
+
+- **run:** 支持 .env ([d4bb1ce](https://github.com/fjc0k/haoma/commit/d4bb1ce586f38411ff90b2d075d3e2466210103f))
+
 ## [2.21.0](https://github.com/fjc0k/haoma/compare/v2.20.1...v2.21.0) (2020-12-08)
 
 ### Features
