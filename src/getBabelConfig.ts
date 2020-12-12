@@ -4,8 +4,10 @@ import { isRegExp } from 'vtils'
 
 export function getBabelConfig(config: BabelConfig): BabelConfig {
   const hasFileName = !!config.filename
-  const isTs = hasFileName && /\.tsx?/i.test(config.filename!)
-  const isJsx = hasFileName && /\.[j|t]sx/i.test(config.filename!)
+  const isTs = hasFileName
+    ? /\.tsx?/i.test(config.filename!)
+    : !!config.typescript
+  const isJsx = hasFileName ? /\.[j|t]sx/i.test(config.filename!) : !!config.jsx
 
   const {
     module = 'cjs',
