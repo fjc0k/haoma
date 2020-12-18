@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.23.2](https://github.com/fjc0k/haoma/compare/v2.23.1...v2.23.2) (2020-12-18)
+
+### Bug Fixes
+
+- **run:** 不抛出 execa 的错误 ([064f747](https://github.com/fjc0k/haoma/commit/064f7477b3b83873a685428fd2d5bf9d9b624a77))
+
 ### [2.23.1](https://github.com/fjc0k/haoma/compare/v2.23.0...v2.23.1) (2020-12-12)
 
 ### Bug Fixes
