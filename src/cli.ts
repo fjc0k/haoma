@@ -459,20 +459,22 @@ yargs
           path: join(process.cwd(), file),
         })
       }
-      exec.sync(
-        'node',
-        [
-          '--unhandled-rejections=strict',
-          '-r',
-          require.resolve('./swcRegister'),
-          argv._[1],
-        ],
-        {
-          cwd: process.cwd(),
-          env: process.env,
-          stdio: 'inherit',
-        },
-      )
+      try {
+        exec.sync(
+          'node',
+          [
+            '--unhandled-rejections=strict',
+            '-r',
+            require.resolve('./swcRegister'),
+            argv._[1],
+          ],
+          {
+            cwd: process.cwd(),
+            env: process.env,
+            stdio: 'inherit',
+          },
+        )
+      } catch {}
     },
   )
   .command(
