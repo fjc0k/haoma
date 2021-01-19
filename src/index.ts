@@ -1,4 +1,5 @@
-// @index('./{get*,types.ts}', f => `export * from '${f.path}'`)
+// @index('./{{get,define}*,types.ts}', f => `export * from '${f.path}'`)
+export * from './defineBabelPlugin'
 export * from './getBabelConfig'
 export * from './getCompileConfig'
 export * from './getESLintConfig'
