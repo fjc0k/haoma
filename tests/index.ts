@@ -94,7 +94,7 @@ export default class Disposer {
   /**
    * 处置所有未处置项目。
    */
-  public disposeAll<T>(): void {
+  public disposeAll(): void {
     for (const key in this.jar) {
       this.dispose(key)
     }
@@ -148,11 +148,9 @@ export function p(): Promise<{
   return Promise.resolve({ x: 1 })
 }
 
-class Component<T> {}
+class Component {}
 
-export class Button extends Component<{
-  s: number
-}> {
+export class Button extends Component {
   public constructor() {
     super()
   }

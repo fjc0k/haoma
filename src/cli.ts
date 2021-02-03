@@ -466,7 +466,7 @@ yargs
             '--unhandled-rejections=strict',
             '-r',
             require.resolve('./swcRegister'),
-            argv._[1],
+            argv._[1] as any,
           ],
           {
             cwd: process.cwd(),

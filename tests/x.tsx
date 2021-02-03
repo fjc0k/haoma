@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 // import './fn'
-// import './xx.less'
-// import './xx2.scss'
+import './xx.less'
+import './xx2.scss'
 // import React, { Component, FC, useState } from 'react'
 
 export class Xxx {
@@ -13,6 +13,8 @@ export class Xxx {
     console.log(this.id)
   }
 }
+
+export default Xxx
 
 // // @ts-ignore
 // import _ from './xx3.less'

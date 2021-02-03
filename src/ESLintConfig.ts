@@ -1,13 +1,18 @@
 import { Defined } from 'vtils/types'
 import { ESLintConfig as ESLintConfigTypes } from './types'
+import { getBabelConfig } from './getBabelConfig'
 
 const ESLintConfig: ESLintConfigTypes = {
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
+    requireConfigFile: false,
+    babelOptions: getBabelConfig({
+      typescript: true,
+    }),
   },
   extends: ['eslint:recommended', 'prettier'],
   settings: {
