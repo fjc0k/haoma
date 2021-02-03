@@ -32,6 +32,10 @@ pnpx haoma init
 yarn haoma init
 ```
 
+## 限制
+
+`compile` browser 时对 ts 的 `constructor(private x: xxx)` 不支持，原因未知。
+
 ## 许可
 
 Jay Fong (c) MIT

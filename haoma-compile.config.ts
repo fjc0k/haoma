@@ -1,4 +1,4 @@
-import { basename } from 'path'
+// import { basename } from 'path'
 import { getCompileConfig } from './lib/index'
 
 export default getCompileConfig([
@@ -24,14 +24,21 @@ export default getCompileConfig([
   //     },
   //   ],
   // },
+  // {
+  //   name: 'esm',
+  //   inputFiles: ['tests/x.tsx'],
+  //   outDir: 'lib4',
+  //   module: 'esm',
+  //   target: 'browser',
+  //   getCssModulesScopedName({ className, fileName }) {
+  //     return `${basename(fileName).split('.')[0]}_${className}`
+  //   },
+  // },
   {
     name: 'esm',
-    inputFiles: ['tests/x.tsx'],
-    outDir: 'lib4',
+    inputFiles: ['tests/privateProp.ts'],
+    outDir: 'lib5',
     module: 'esm',
     target: 'browser',
-    getCssModulesScopedName({ className, fileName }) {
-      return `${basename(fileName).split('.')[0]}_${className}`
-    },
   },
 ])

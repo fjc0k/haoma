@@ -31,11 +31,12 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     configFile: false,
     ...babelConfig,
     presets: [
-      ...(typescript ? [require.resolve('@babel/preset-typescript')] : []),
+      ...(typescript ? [[require.resolve('@babel/preset-typescript')]] : []),
       [
         require.resolve('@babel/preset-env'),
         {
           loose: true,
+          bugfixes: true,
           modules: module === 'esm' ? false : 'cjs',
           targets:
             target === 'node'
