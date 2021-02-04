@@ -116,6 +116,7 @@ yargs
               *.mp3 binary
               *.aac binary
               *.mp4 binary
+              *.sketch binary
               *.json linguist-language=JSON-with-Comments
             `}\n`,
           )
