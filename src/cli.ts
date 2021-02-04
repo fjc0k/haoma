@@ -2,6 +2,7 @@
 import deepmerge from 'deepmerge'
 import exec from 'execa'
 import globby from 'globby'
+import JSON5 from 'json5'
 import rimraf from 'rimraf'
 import spawn from 'cross-spawn'
 import yargs from 'yargs'
@@ -295,6 +296,7 @@ yargs
         console.log('Install dependencies...')
 
         const currentPackageJson = join(cwd, 'package.json')
+        const currentTsConfig = join(cwd, 'tsconfig.json')
         const currentPackageInfo: PackageJson = existsSync(currentPackageJson)
           ? JSON.parse(readFileSync(currentPackageJson).toString())
           : {}
@@ -310,16 +312,18 @@ yargs
             name: packageName!,
             version: `^${packageVersion!.split('.')[0]}`,
           },
-          { name: 'typescript', version: '^3' },
+          { name: 'typescript', version: '^4' },
           { name: 'eslint', version: '^7' },
           { name: 'prettier', version: '^2' },
           { name: 'husky', version: '^4' },
           { name: 'lint-staged', version: '^10' },
+          { name: 'standard-version', version: '^9' },
           ...(!argv.jest
             ? []
             : ([
                 { name: 'jest', version: '^26' },
                 { name: 'codecov', version: '^3' },
+                { name: 'typescript-snapshots-plugin', version: '^1' },
               ] as Array<{ name: string; version: string }>)),
         ] as Array<{ name: string; version: string }>).filter(
           pkg => !currentPackageDeps.has(pkg.name),
@@ -406,15 +410,42 @@ yargs
           }
         }
 
+        const nextTsInfo: TsConfigJson = existsSync(currentTsConfig)
+          ? JSON5.parse(readFileSync(currentTsConfig).toString())
+          : {}
+
+        if (
+          !nextTsInfo.compilerOptions?.plugins?.some(
+            plugin => plugin.name === 'typescript-snapshots-plugin',
+          )
+        ) {
+          nextTsInfo.compilerOptions = nextTsInfo.compilerOptions || {}
+          nextTsInfo.compilerOptions.plugins =
+            nextTsInfo.compilerOptions.plugins || []
+          nextTsInfo.compilerOptions.plugins.push({
+            name: 'typescript-snapshots-plugin',
+            snapshotCallIdentifiers: [
+              'toMatchSnapshot',
+              'toThrowErrorMatchingSnapshot',
+              'toMatchDiffSnapshot',
+            ],
+          })
+        }
+
         writeFileSync(
           currentPackageJson,
           JSON.stringify(nextPackageInfo, null, 2),
         )
-        spawn.sync('npx', ['prettier', '--write', currentPackageJson], {
-          stdio: 'inherit',
-          cwd: cwd,
-          env: process.env,
-        })
+        writeFileSync(currentTsConfig, JSON.stringify(nextTsInfo, null, 2))
+        spawn.sync(
+          'npx',
+          ['prettier', '--write', currentPackageJson, currentTsConfig],
+          {
+            stdio: 'inherit',
+            cwd: cwd,
+            env: process.env,
+          },
+        )
 
         console.log('✔️ Install dependencies')
       }
