@@ -30,8 +30,12 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     babelrc: false,
     configFile: false,
     ...babelConfig,
+    // babel 的 preset 执行顺序是倒置的，即从后往前，
+    // 因此，此处应将 typescript 放在 env 后，
+    // 避免 class 构造函数的 private 等属性被移除
+    // https://babeljs.io/docs/en/presets#preset-ordering
     presets: [
-      ...(typescript ? [[require.resolve('@babel/preset-typescript')]] : []),
+      ...(presets || []),
       [
         require.resolve('@babel/preset-env'),
         {
@@ -49,6 +53,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
                 },
         },
       ],
+      ...(typescript ? [[require.resolve('@babel/preset-typescript')]] : []),
       ...(!isJsx
         ? []
         : jsx === 'vue2'
@@ -61,8 +66,10 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
             ],
           ]
         : []),
-      ...(presets || []),
     ],
+    // babel 中 plugin 会在 preset 前执行，
+    // plugin 的执行顺序是正序的，即从前往后
+    // https://babeljs.io/docs/en/plugins#plugin-ordering
     plugins: [
       [
         require.resolve('@babel/plugin-proposal-class-properties'),
