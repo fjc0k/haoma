@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.25.0](https://github.com/fjc0k/haoma/compare/v2.24.0...v2.25.0) (2021-02-08)
+
+### Features
+
+- typescript-snapshots-plugin ([3c1443a](https://github.com/fjc0k/haoma/commit/3c1443a75fa7ec86e36ae41f4e2c41909f22d12f))
+- 升级依赖 ([b339135](https://github.com/fjc0k/haoma/commit/b339135c6e0c91bd1961748a6d0911c90a0b31ee))
+
+### Bug Fixes
+
+- babel 的 preset 执行顺序是倒置的 ([0f5facd](https://github.com/fjc0k/haoma/commit/0f5facd8d21d9eea441b6fef97c6859aa13cef00))
+- sketch binary ([1ad92b0](https://github.com/fjc0k/haoma/commit/1ad92b0fbdea30994722b35bfe3444d3984d7a02))
+
 ## [2.24.0](https://github.com/fjc0k/haoma/compare/v2.23.2...v2.24.0) (2021-01-19)
 
 ### Features
