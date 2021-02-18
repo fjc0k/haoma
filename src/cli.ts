@@ -483,7 +483,7 @@ yargs
     'run',
     'Run a js/ts script',
     () => undefined,
-    argv => {
+    () => {
       const dotenv = require('dotenv')
       // dotenv 不会覆盖，因此优先级高的放前面
       for (const file of ['.env.local', '.env']) {
@@ -498,7 +498,7 @@ yargs
             '--unhandled-rejections=strict',
             '-r',
             require.resolve('./swcRegister'),
-            argv._[1] as any,
+            ...process.argv.slice(3),
           ],
           {
             cwd: process.cwd(),
