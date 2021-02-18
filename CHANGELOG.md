@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.25.1](https://github.com/fjc0k/haoma/compare/v2.25.0...v2.25.1) (2021-02-18)
+
+### Bug Fixes
+
+- **run:** 透传参数 ([c17656c](https://github.com/fjc0k/haoma/commit/c17656c73a41d19cbf821c82b866d01532ec4364))
+
 ## [2.25.0](https://github.com/fjc0k/haoma/compare/v2.24.0...v2.25.0) (2021-02-08)
 
 ### Features
