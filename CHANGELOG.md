@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.26.0](https://github.com/fjc0k/haoma/compare/v2.25.1...v2.26.0) (2021-02-21)
+
+### Features
+
+- environmentVariables ([326b611](https://github.com/fjc0k/haoma/commit/326b61184e9d601635f24124f8f48e1527f5a4d2))
+- polyfill ([172d985](https://github.com/fjc0k/haoma/commit/172d9853ef8f7d8e3fee27be6aa224d9d5c4f127))
+
 ### [2.25.1](https://github.com/fjc0k/haoma/compare/v2.25.0...v2.25.1) (2021-02-18)
 
 ### Bug Fixes
