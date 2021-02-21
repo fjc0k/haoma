@@ -21,6 +21,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     bus,
     renameImport = [],
     modularImport = [],
+    environmentVariables = [],
     presets = [],
     plugins = [],
     ...babelConfig
@@ -122,6 +123,18 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
             item,
             `${item.libraryName}_${index}`,
           ])
+        : []),
+      ...(environmentVariables.length
+        ? [
+            [
+              require.resolve(
+                'babel-plugin-transform-inline-environment-variables',
+              ),
+              {
+                include: environmentVariables,
+              },
+            ],
+          ]
         : []),
       ...(projectRoot && outDir && bus
         ? [

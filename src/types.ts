@@ -173,6 +173,13 @@ export interface BabelConfig extends babel.TransformOptions {
     transformToDefaultImport?: boolean
   }>
 
+  /**
+   * 是否启用环境变量替换。
+   *
+   * @example ['NODE_ENV']
+   */
+  environmentVariables?: string[]
+
   bus?: EventBus<{
     addAfterWriteTransformer: (
       transformer: (content: string) => AsyncOrSync<string>,
