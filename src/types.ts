@@ -89,12 +89,19 @@ export interface BabelConfig extends babel.TransformOptions {
    *
    * @default 'browser'
    */
-  target?: 'node' | 'browser'
+  target?: 'node' | 'browser' | 'browserslist'
 
   /**
    * 是否启用 JSX。
    */
   jsx?: 'react' | 'vue' | 'vue2'
+
+  /**
+   * 是否启用 core-js 垫片。
+   *
+   * @default false
+   */
+  polyfill?: boolean
 
   /**
    * 是否启用 TypeScript 支持。

@@ -14,6 +14,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     target = 'browser',
     typescript = isTs,
     jsx = 'react',
+    polyfill = false,
     legacyDecorator = false,
     projectRoot,
     outDir,
@@ -48,10 +49,22 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
               ? {
                   node: '12',
                 }
-              : {
+              : target === 'browser'
+              ? {
                   ios: '8',
                   android: '4',
+                }
+              : {},
+          ...(polyfill
+            ? {
+                useBuiltIns: 'usage',
+                corejs: {
+                  version: require(require.resolve('core-js/package.json'))
+                    .version,
+                  proposals: true,
                 },
+              }
+            : {}),
         },
       ],
       ...(typescript ? [[require.resolve('@babel/preset-typescript')]] : []),

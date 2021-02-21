@@ -85,6 +85,7 @@
     "babel-plugin-transform-rename-import": "^2.3.0",
     "chalk": "^4.1.0",
     "common-dir": "^3.0.0",
+    "core-js": "^3.9.0",
     "cross-spawn": "^7.0.3",
     "cuid": "^2.1.8",
     "deepmerge": "^4.2.2",
