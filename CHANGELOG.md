@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.26.1](https://github.com/fjc0k/haoma/compare/v2.26.0...v2.26.1) (2021-02-21)
+
+### Bug Fixes
+
+- regenerator: !polyfill ([88a7f42](https://github.com/fjc0k/haoma/commit/88a7f423c8d27033e8efec787e60497f1940e358))
+
 ## [2.26.0](https://github.com/fjc0k/haoma/compare/v2.25.1...v2.26.0) (2021-02-21)
 
 ### Features
