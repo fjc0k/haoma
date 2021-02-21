@@ -111,6 +111,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
       [
         require.resolve('@babel/plugin-transform-runtime'),
         {
+          regenerator: !polyfill,
           useESModules: module === 'esm',
           version: require('@babel/runtime/package.json').version,
         },
