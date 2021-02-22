@@ -76,20 +76,22 @@ export type JestConfig = Partial<jest.Config.InitialOptions> & {
   jsxPragma?: 'React' | 'Vue'
 }
 
+export type BabelConfigDynamicallyItem<T> = T | ((file: string) => T)
+
 export interface BabelConfig extends babel.TransformOptions {
   /**
    * 模块类型。
    *
    * @default 'cjs'
    */
-  module?: 'cjs' | 'esm'
+  module?: BabelConfigDynamicallyItem<'cjs' | 'esm'>
 
   /**
    * 目标类型。
    *
    * @default 'browser'
    */
-  target?: 'node' | 'browser' | 'browserslist'
+  target?: BabelConfigDynamicallyItem<'node' | 'browser' | 'browserslist'>
 
   /**
    * 是否启用 JSX。
@@ -101,7 +103,7 @@ export interface BabelConfig extends babel.TransformOptions {
    *
    * @default false
    */
-  polyfill?: boolean
+  polyfill?: BabelConfigDynamicallyItem<boolean>
 
   /**
    * 是否启用 TypeScript 支持。
