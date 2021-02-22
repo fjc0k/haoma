@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.28.0](https://github.com/fjc0k/haoma/compare/v2.27.0...v2.28.0) (2021-02-22)
+
+### Features
+
+- babelRegister ([8a18b5f](https://github.com/fjc0k/haoma/commit/8a18b5f4241cdec9c774efb35e5ff2ebc598b119))
+
 ## [2.27.0](https://github.com/fjc0k/haoma/compare/v2.26.1...v2.27.0) (2021-02-22)
 
 ### Features
