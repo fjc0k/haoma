@@ -45,13 +45,8 @@ export function getJestConfig(
                 require.resolve('./jestJavaScriptTransform'),
               ),
             }
-          : customConfig.transformer === 'babel'
-          ? {
-              '^.+\\.[j|t]sx?$': normalizeFilePath(
-                require.resolve('./jestJavaScriptTransform'),
-              ),
-            }
-          : (() => {
+          : customConfig.transformer === 'swc'
+          ? (() => {
               const tsConfigFile = join(projectRoot, './tsconfig.json')
               const tsConfig = existsSync(tsConfigFile)
                 ? json5.parse(readFileSync(tsConfigFile, 'utf8'))
@@ -71,7 +66,12 @@ export function getJestConfig(
                   },
                 ],
               } as any
-            })(),
+            })()
+          : {
+              '^.+\\.[j|t]sx?$': normalizeFilePath(
+                require.resolve('./jestJavaScriptTransform'),
+              ),
+            },
       transformIgnorePatterns: [
         ...transformIgnorePatterns,
         ...(customConfig.transformIgnorePatterns || []),

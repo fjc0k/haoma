@@ -497,7 +497,7 @@ yargs
           [
             '--unhandled-rejections=strict',
             '-r',
-            require.resolve('./swcRegister'),
+            require.resolve('./babelRegister'),
             ...process.argv.slice(3),
           ],
           {
