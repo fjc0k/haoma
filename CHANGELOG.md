@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.27.0](https://github.com/fjc0k/haoma/compare/v2.26.1...v2.27.0) (2021-02-22)
+
+### Features
+
+- BabelConfigDynamicallyItem ([279a51a](https://github.com/fjc0k/haoma/commit/279a51a1cee5742edb01a85d18c7159ac5dd2e4c))
+
 ### [2.26.1](https://github.com/fjc0k/haoma/compare/v2.26.0...v2.26.1) (2021-02-21)
 
 ### Bug Fixes
