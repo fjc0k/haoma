@@ -96,7 +96,7 @@ export interface BabelConfig extends babel.TransformOptions {
   /**
    * 是否启用 JSX。
    */
-  jsx?: 'react' | 'vue' | 'vue2'
+  jsx?: BabelConfigDynamicallyItem<'react' | 'vue' | 'vue2'>
 
   /**
    * 是否启用 core-js 垫片。
@@ -108,12 +108,12 @@ export interface BabelConfig extends babel.TransformOptions {
   /**
    * 是否启用 TypeScript 支持。
    */
-  typescript?: boolean
+  typescript?: BabelConfigDynamicallyItem<boolean>
 
   /**
    * 是否启用初版装饰器支持。
    */
-  legacyDecorator?: boolean
+  legacyDecorator?: BabelConfigDynamicallyItem<boolean>
 
   /**
    * 项目根目录。（处理 CSS 有用）

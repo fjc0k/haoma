@@ -47,6 +47,9 @@ export default getCompileConfig([
     outDir: 'lib_babel',
     module: 'cjs',
     target: 'browserslist',
-    polyfill: true,
+    polyfill: file => {
+      console.log(file)
+      return false
+    },
   },
 ])

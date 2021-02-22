@@ -1,6 +1,7 @@
+/* eslint-disable prefer-const */
 import { BabelConfig } from './types'
 import { getProcessCssPlugin } from './babelPlugins'
-import { isRegExp } from 'vtils'
+import { isFunction, isRegExp } from 'vtils'
 
 export function getBabelConfig(config: BabelConfig): BabelConfig {
   const hasFileName = !!config.filename
@@ -9,7 +10,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     : !!config.typescript
   const isJsx = hasFileName ? /\.[j|t]sx/i.test(config.filename!) : !!config.jsx
 
-  const {
+  let {
     module = 'cjs',
     target = 'browser',
     typescript = isTs,
@@ -27,6 +28,17 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     plugins = [],
     ...babelConfig
   } = config
+
+  module = isFunction(module) ? module(config.filename!) : module
+  target = isFunction(target) ? target(config.filename!) : target
+  typescript = isFunction(typescript)
+    ? typescript(config.filename!)
+    : typescript
+  jsx = isFunction(jsx) ? jsx(config.filename!) : jsx
+  polyfill = isFunction(polyfill) ? polyfill(config.filename!) : polyfill
+  legacyDecorator = isFunction(legacyDecorator)
+    ? legacyDecorator(config.filename!)
+    : legacyDecorator
 
   return {
     babelrc: false,
