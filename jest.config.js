@@ -2,5 +2,5 @@
 module.exports = require('./lib').getJestConfig({
   transformPackages: ['lodash-es'],
   transformer: 'babel',
-  jsxPragma: 'Vue',
+  jsxPragma: 'React',
 })

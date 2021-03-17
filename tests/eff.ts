@@ -1,5 +1,10 @@
 console.log(111)
 
+if (typeof window === 'undefined') {
+  // @ts-ignore
+  global.window = {}
+}
+
 const x = () => {
   const y = window?.top
   return y
@@ -7,7 +12,7 @@ const x = () => {
 
 console.log(x)
 
-const c = window.top ?? 'd'
+const c = window?.top ?? 'd'
 
 console.log(c)
 

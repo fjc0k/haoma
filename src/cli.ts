@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import deepmerge from 'deepmerge'
-import exec from 'execa'
 import globby from 'globby'
 import JSON5 from 'json5'
 import rimraf from 'rimraf'
@@ -18,7 +17,8 @@ import {
   writeFileSync,
 } from 'fs-extra'
 import { getBabelConfig } from './getBabelConfig'
-import { PackageJson, TsConfigJson } from 'type-fest'
+import { PackageJson, TsConfigJson } from 'vtils/types'
+import { run } from './run'
 
 require('@babel/register')({
   ...getBabelConfig({
@@ -481,32 +481,41 @@ yargs
   )
   .command(
     'run',
-    'Run a js/ts script',
+    'Run a js/ts script with the babel register',
     () => undefined,
-    () => {
-      const dotenv = require('dotenv')
-      // dotenv 不会覆盖，因此优先级高的放前面
-      for (const file of ['.env.local', '.env']) {
-        dotenv.config({
-          path: join(process.cwd(), file),
-        })
-      }
-      try {
-        exec.sync(
-          'node',
-          [
-            '--unhandled-rejections=strict',
-            '-r',
-            require.resolve('./babelRegister'),
-            ...process.argv.slice(3),
-          ],
-          {
-            cwd: process.cwd(),
-            env: process.env,
-            stdio: 'inherit',
-          },
-        )
-      } catch {}
+    async () => {
+      await run({
+        transformer: 'babel',
+        args: process.argv.slice(3),
+        cwd: process.cwd(),
+        env: process.env,
+      })
+    },
+  )
+  .command(
+    'runs',
+    'Run a js/ts script with the swc register',
+    () => undefined,
+    async () => {
+      await run({
+        transformer: 'swc',
+        args: process.argv.slice(3),
+        cwd: process.cwd(),
+        env: process.env,
+      })
+    },
+  )
+  .command(
+    'rune',
+    'Run a js/ts script with the esbuild register',
+    () => undefined,
+    async () => {
+      await run({
+        transformer: 'esbuild',
+        args: process.argv.slice(3),
+        cwd: process.cwd(),
+        env: process.env,
+      })
     },
   )
   .command(
