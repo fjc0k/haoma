@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.29.0](https://github.com/fjc0k/haoma/compare/v2.28.0...v2.29.0) (2021-03-17)
+
+### Features
+
+- **cli:** add runs, rune ([5dfc963](https://github.com/fjc0k/haoma/commit/5dfc96359b559efad99dd7800a5afb087ca07b70))
+
+### Bug Fixes
+
+- **babel:** decorators before class properties ([ffdcd18](https://github.com/fjc0k/haoma/commit/ffdcd18aed3c2b73c4d3a9fae3740bdf15a82301))
+
 ## [2.28.0](https://github.com/fjc0k/haoma/compare/v2.27.0...v2.28.0) (2021-02-22)
 
 ### Features
