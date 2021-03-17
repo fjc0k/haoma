@@ -97,12 +97,6 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     // plugin 的执行顺序是正序的，即从前往后
     // https://babeljs.io/docs/en/plugins#plugin-ordering
     plugins: [
-      [
-        require.resolve('@babel/plugin-proposal-class-properties'),
-        {
-          loose: true,
-        },
-      ],
       ...(legacyDecorator
         ? [
             [
@@ -113,6 +107,12 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
             ],
           ]
         : []),
+      [
+        require.resolve('@babel/plugin-proposal-class-properties'),
+        {
+          loose: true,
+        },
+      ],
       ...(!isJsx
         ? []
         : jsx === 'react'
