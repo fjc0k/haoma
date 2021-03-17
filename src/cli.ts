@@ -6,6 +6,7 @@ import rimraf from 'rimraf'
 import spawn from 'cross-spawn'
 import yargs from 'yargs'
 import { basename, join, resolve } from 'path'
+import { bundle } from './bundle'
 import { castArray, dedent, uniq } from 'vtils'
 import { compile } from './compile'
 import { CompileCliConfig } from './types'
@@ -548,5 +549,52 @@ yargs
           outDir,
         })
       }
+    },
+  )
+  .command<{
+    input: string
+    output: string
+    externals: string[]
+    minify: boolean
+    nodeEnv: string
+  }>(
+    'bundle [input]',
+    'Bundle a nodejs file using esbuild',
+    yargs => {
+      yargs
+        .option('output', {
+          alias: 'o',
+          type: 'string',
+          describe: 'Output file',
+          demandOption: true,
+        })
+        .option('externals', {
+          alias: 'e',
+          type: 'array',
+          describe: 'External packages',
+          coerce: (value: string[]) =>
+            value.map(item => item.split(',')).flat(),
+          default: [],
+        })
+        .option('minify', {
+          alias: 'm',
+          type: 'boolean',
+          describe: 'Minify',
+          default: false,
+        })
+        .option('nodeEnv', {
+          type: 'string',
+          describe: 'process.env.NODE_ENV',
+          default: undefined,
+        })
+    },
+    async args => {
+      await bundle({
+        input: resolve(process.cwd(), args.input),
+        output: resolve(process.cwd(), args.output),
+        externals: args.externals,
+        minify: args.minify,
+        nodeEnv: args.nodeEnv,
+      })
     },
   ).argv
