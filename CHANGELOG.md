@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.31.0](https://github.com/fjc0k/haoma/compare/v2.30.0...v2.31.0) (2021-03-20)
+
+### Features
+
+- **bundle:** format ([0ece3a7](https://github.com/fjc0k/haoma/commit/0ece3a7235cd7bd0e6c91afabf1691aaf8b257e8))
+
 ## [2.30.0](https://github.com/fjc0k/haoma/compare/v2.29.0...v2.30.0) (2021-03-17)
 
 ### Features
