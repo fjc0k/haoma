@@ -554,6 +554,7 @@ yargs
   .command<{
     input: string
     output: string
+    format: 'cjs' | 'esm' | 'iife'
     externals: string[]
     minify: boolean
     nodeEnv: string
@@ -567,6 +568,12 @@ yargs
           type: 'string',
           describe: 'Output file',
           demandOption: true,
+        })
+        .option('format', {
+          alias: 'f',
+          type: 'string',
+          describe: 'Format',
+          default: undefined,
         })
         .option('externals', {
           alias: 'e',
@@ -592,6 +599,7 @@ yargs
       await bundle({
         input: resolve(process.cwd(), args.input),
         output: resolve(process.cwd(), args.output),
+        format: args.format,
         externals: args.externals,
         minify: args.minify,
         nodeEnv: args.nodeEnv,
