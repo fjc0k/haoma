@@ -41,15 +41,22 @@ export default getCompileConfig([
   //   module: 'esm',
   //   target: 'browser',
   // },
+  // {
+  //   name: 'esm',
+  //   inputFiles: ['tests/babel.ts'],
+  //   outDir: 'lib_babel',
+  //   module: 'cjs',
+  //   target: 'browserslist',
+  //   polyfill: file => {
+  //     console.log(file)
+  //     return false
+  //   },
+  // },
   {
     name: 'esm',
-    inputFiles: ['tests/babel.ts'],
-    outDir: 'lib_babel',
-    module: 'cjs',
-    target: 'browserslist',
-    polyfill: file => {
-      console.log(file)
-      return false
-    },
+    inputFiles: ['tests/yy.vue'],
+    outDir: 'lib_vue',
+    module: 'esm',
+    target: 'browser',
   },
 ])

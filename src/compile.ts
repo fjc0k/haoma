@@ -65,14 +65,26 @@ export async function compile(config: CompileConfig) {
         outDir,
         file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
       )
-      const code = await fs.readFile(file, 'utf8')
-      const isTs = /\.tsx?/i.test(file)
+      let code = await fs.readFile(file, 'utf8')
+      const isTs = /\.tsx?$/i.test(file)
       if (isTs) {
         tsFiles.push(file)
       }
-      const afterWriteTransformers: Array<(
-        content: string,
-      ) => AsyncOrSync<string>> = []
+      const isVue = /\.vue$/i.test(file)
+      if (isVue) {
+        const compiler: typeof import('vue-template-compiler') = require('vue-template-compiler')
+        const sfc = compiler.parseComponent(code)
+        // const templateContent = sfc.template?.content || ''
+        const scriptContent = sfc.script?.content || ''
+        // const styleContent = sfc.styles.map(style => style.content).join('\n')
+        // const renderFn = templateContent
+        //   ? compiler.compile(templateContent)
+        //   : 'null'
+        code = scriptContent
+      }
+      const afterWriteTransformers: Array<
+        (content: string) => AsyncOrSync<string>
+      > = []
       const bus: Defined<BabelConfig['bus']> = new EventBus()
       bus.on('addAfterWriteTransformer', transformer =>
         afterWriteTransformers.push(transformer),
