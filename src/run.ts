@@ -3,7 +3,7 @@ import exec from 'execa'
 import { join } from 'path'
 
 export async function run(payload: {
-  transformer: 'babel' | 'swc' | 'esbuild'
+  transformer: 'babel' | 'esbuild'
   args: string[]
   cwd: string
   env: NodeJS.ProcessEnv
@@ -20,9 +20,7 @@ export async function run(payload: {
       [
         '--unhandled-rejections=strict',
         '-r',
-        payload.transformer === 'swc'
-          ? require.resolve('./swcRegister')
-          : payload.transformer === 'esbuild'
+        payload.transformer === 'esbuild'
           ? require.resolve('./esbuildRegister')
           : require.resolve('./babelRegister'),
         ...payload.args,

@@ -62,10 +62,8 @@ yargs
     },
     argv => {
       const cwd = process.cwd()
-      const {
-        name: packageName,
-        version: packageVersion,
-      } = require('../package.json') as PackageJson
+      const { name: packageName, version: packageVersion } =
+        require('../package.json') as PackageJson
 
       // ========= 文件写入 =========
       {
@@ -309,27 +307,27 @@ yargs
           }),
         )
 
-        const needInstallPackages = ([
-          {
-            name: packageName!,
-            version: `^${packageVersion!.split('.')[0]}`,
-          },
-          { name: 'typescript', version: '^4' },
-          { name: 'eslint', version: '^7' },
-          { name: 'prettier', version: '^2' },
-          { name: 'husky', version: '^4' },
-          { name: 'lint-staged', version: '^10' },
-          { name: 'standard-version', version: '^9' },
-          ...(!argv.jest
-            ? []
-            : ([
-                { name: 'jest', version: '^26' },
-                { name: 'codecov', version: '^3' },
-                { name: 'typescript-snapshots-plugin', version: '^1' },
-              ] as Array<{ name: string; version: string }>)),
-        ] as Array<{ name: string; version: string }>).filter(
-          pkg => !currentPackageDeps.has(pkg.name),
-        )
+        const needInstallPackages = (
+          [
+            {
+              name: packageName!,
+              version: `^${packageVersion!.split('.')[0]}`,
+            },
+            { name: 'typescript', version: '^4' },
+            { name: 'eslint', version: '^7' },
+            { name: 'prettier', version: '^2' },
+            { name: 'husky', version: '^4' },
+            { name: 'lint-staged', version: '^10' },
+            { name: 'standard-version', version: '^9' },
+            ...(!argv.jest
+              ? []
+              : ([
+                  { name: 'jest', version: '^26' },
+                  { name: 'codecov', version: '^3' },
+                  { name: 'typescript-snapshots-plugin', version: '^1' },
+                ] as Array<{ name: string; version: string }>)),
+          ] as Array<{ name: string; version: string }>
+        ).filter(pkg => !currentPackageDeps.has(pkg.name))
 
         const userAgent = process.env.npm_config_user_agent
         const userAgentX = basename(process.env._ || '')
@@ -487,19 +485,6 @@ yargs
     async () => {
       await run({
         transformer: 'babel',
-        args: process.argv.slice(3),
-        cwd: process.cwd(),
-        env: process.env,
-      })
-    },
-  )
-  .command(
-    'runs',
-    'Run a js/ts script with the swc register',
-    () => undefined,
-    async () => {
-      await run({
-        transformer: 'swc',
         args: process.argv.slice(3),
         cwd: process.cwd(),
         env: process.env,

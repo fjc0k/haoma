@@ -60,13 +60,12 @@ export type JestConfig = Partial<jest.Config.InitialOptions> & {
   /**
    * 转换器。
    *
-   * - `swc`: 快，但覆盖率有问题
    * - `typescript+babel`: 可以找出类型问题，js 将用 babel 进行简单转义
    * - `babel`: 使用 babel 深度转义，测试 Vue JSX 必须用这个
    *
    * @default babel
    */
-  transformer?: 'swc' | 'typescript+babel' | 'babel'
+  transformer?: 'typescript+babel' | 'babel'
 
   /**
    * jsx 变种。

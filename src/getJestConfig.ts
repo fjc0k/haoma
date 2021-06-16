@@ -1,8 +1,7 @@
 import './jestSetup'
-import json5 from 'json5'
 import merge from 'deepmerge'
 import { escapeRegExp, omitStrict } from 'vtils'
-import { existsSync, readFileSync } from 'fs'
+import { existsSync } from 'fs'
 import { JestConfig } from './types'
 import { join, relative } from 'path'
 
@@ -19,9 +18,10 @@ export function getJestConfig(
 
   const normalizeFilePath = (filePath: string) => {
     const relativeFilePath = relative(projectRoot, filePath).replace(/\\/g, '/')
-    return (/^[.]+\//.test(relativeFilePath)
-      ? relativeFilePath
-      : `./${relativeFilePath}`
+    return (
+      /^[.]+\//.test(relativeFilePath)
+        ? relativeFilePath
+        : `./${relativeFilePath}`
     ).replace(/\/{2,}/g, '/')
   }
 
@@ -45,28 +45,6 @@ export function getJestConfig(
                 require.resolve('./jestJavaScriptTransform'),
               ),
             }
-          : customConfig.transformer === 'swc'
-          ? (() => {
-              const tsConfigFile = join(projectRoot, './tsconfig.json')
-              const tsConfig = existsSync(tsConfigFile)
-                ? json5.parse(readFileSync(tsConfigFile, 'utf8'))
-                : {}
-              const compilerOptions = tsConfig.compilerOptions || {}
-              return {
-                '^.+\\.(t|j)sx?$': [
-                  require.resolve('@swc-node/jest'),
-                  {
-                    dynamicImport: true,
-                    experimentalDecorators: Boolean(
-                      compilerOptions.experimentalDecorators,
-                    ),
-                    emitDecoratorMetadata: Boolean(
-                      compilerOptions.emitDecoratorMetadata,
-                    ),
-                  },
-                ],
-              } as any
-            })()
           : {
               '^.+\\.[j|t]sx?$': normalizeFilePath(
                 require.resolve('./jestJavaScriptTransform'),
@@ -77,9 +55,8 @@ export function getJestConfig(
         ...(customConfig.transformIgnorePatterns || []),
       ],
       moduleNameMapper: {
-        '\\.(css|less|scss|sass|styl|md|html|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': require.resolve(
-          'identity-obj-proxy',
-        ),
+        '\\.(css|less|scss|sass|styl|md|html|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+          require.resolve('identity-obj-proxy'),
       },
       globals:
         customConfig.transformer === 'typescript+babel'
