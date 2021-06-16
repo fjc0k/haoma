@@ -74,6 +74,7 @@ export async function compile(config: CompileConfig) {
       if (isVue) {
         const compiler: typeof import('vue-template-compiler') = require('vue-template-compiler')
         const sfc = compiler.parseComponent(code)
+        // https://github.com/vuejs/rollup-plugin-vue/blob/next/src/index.ts
         // const templateContent = sfc.template?.content || ''
         const scriptContent = sfc.script?.content || ''
         // const styleContent = sfc.styles.map(style => style.content).join('\n')
