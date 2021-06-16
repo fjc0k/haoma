@@ -12,9 +12,9 @@ import rimraf from 'rimraf'
 import workerpool from 'workerpool'
 import { AsyncOrSync, Defined } from 'vtils/types'
 import { BabelConfig, CompileConfig } from './types'
-import { EventBus } from 'vtils'
+import { basename, join } from 'path'
+import { dedent, EventBus } from 'vtils'
 import { getBabelConfig } from './getBabelConfig'
-import { join } from 'path'
 
 export async function compile(config: CompileConfig) {
   const startTime = Date.now()
@@ -73,14 +73,68 @@ export async function compile(config: CompileConfig) {
       const isVue = /\.vue$/i.test(file)
       if (isVue) {
         const compiler: typeof import('vue-template-compiler') = require('vue-template-compiler')
+        const transpile = require('vue-template-es2015-compiler')
         const sfc = compiler.parseComponent(code)
-        // https://github.com/vuejs/rollup-plugin-vue/blob/next/src/index.ts
-        // const templateContent = sfc.template?.content || ''
-        const scriptContent = sfc.script?.content || ''
-        // const styleContent = sfc.styles.map(style => style.content).join('\n')
-        // const renderFn = templateContent
-        //   ? compiler.compile(templateContent)
-        //   : 'null'
+        const vcr = `__vue_component_raw__`
+        const vc = `__vue_component__`
+        const vs = `__vue_styles__`
+        const vsi = `__vue_styles_inject__`
+        const style = sfc.styles[0]
+        const styleContent = style?.content || ''
+        const styleLang = style.lang || 'css'
+        const styleIsModule = !!style.module
+        const templateContent = sfc.template?.content || ''
+        const renderFns = compiler.compileToFunctions(templateContent)
+        const renderStr = transpile(renderFns.render.toString())
+        const staticRenderStr = renderFns.staticRenderFns.map(fn =>
+          transpile(fn.toString()),
+        )
+        let scriptContent = sfc.script?.content || ''
+        if (styleContent) {
+          const styleFileName = basename(file).replace(
+            /\.[^.]+$/,
+            `.${styleLang}`,
+          )
+          const styleFile = `./@@LOCAL@@/${encodeURIComponent(
+            styleContent,
+          )}/@@LOCAL@@/./${styleFileName}`
+          scriptContent = dedent`
+            ${
+              styleIsModule
+                ? `import ${vs} from '${styleFile}';`
+                : `import '${styleFile}';`
+            }
+            ${scriptContent}
+          `
+        }
+        scriptContent = scriptContent.replace(
+          /^\s*export\s+default\s+/m,
+          `const ${vcr} = `,
+        )
+        // https://github.com/vuejs/vue-component-compiler/blob/master/src/assembler.ts#L266
+        // https://github.com/vuejs/component-compiler-utils/blob/master/lib/compileTemplate.ts#L158
+        scriptContent += dedent`
+          ;const ${vc} = (typeof ${vcr} === 'function' ? ${vcr}.options : ${vcr}) || {};
+          ${vc}.__file = ${JSON.stringify(basename(file))};
+          if (!${vc}.render) {
+            ${vc}.render = ${renderStr};
+            ${vc}.staticRenderFns = [${staticRenderStr.join(',')}];
+            ${vc}._compiled = true
+          }
+        `
+        if (styleIsModule) {
+          scriptContent += dedent`
+            ;const ${vsi} = function() {
+              Object.defineProperty(this, '$style', {
+                value: ${vs}
+              });
+            }
+            ${vc}.beforeCreate = ${vc}.beforeCreate ? [${vc}.beforeCreate, ${vsi}] : [${vsi}];
+          `
+        }
+        scriptContent += dedent`
+          ;export default ${vcr};
+        `
         code = scriptContent
       }
       const afterWriteTransformers: Array<

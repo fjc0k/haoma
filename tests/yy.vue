@@ -27,7 +27,7 @@
   })
 </script>
 
-<style>
+<style module>
   .dd {
     color: red;
   }

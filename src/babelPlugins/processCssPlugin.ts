@@ -32,6 +32,16 @@ export function getProcessCssPlugin(options: {
               (isCssModule || isScssModule || isLessModule) &&
               modulePath.startsWith('.')
             ) {
+              const isLocalCss = modulePath.startsWith('./@@LOCAL@@/')
+              // eslint-disable-next-line prefer-const
+              let [, localStyleContent, localStyleFilePath] = isLocalCss
+                ? modulePath.match(/^\.\/@@LOCAL@@\/(.+)\/@@LOCAL@@\/(.+)$/)!
+                : []
+              localStyleContent = decodeURIComponent(localStyleContent)
+              if (isLocalCss) {
+                path.node.source.value = localStyleFilePath
+              }
+
               const isCssModules = path.node.specifiers.length > 0
               let cssModulesMap: Record<string, string> = {}
 
@@ -51,7 +61,7 @@ export function getProcessCssPlugin(options: {
 
               const moduleAbsolutePath = join(
                 dirname(state.filename),
-                modulePath,
+                isLocalCss ? localStyleFilePath : modulePath,
               )
               const outFile = join(
                 options.outDir,
@@ -61,7 +71,9 @@ export function getProcessCssPlugin(options: {
               )
 
               const processCss = async () => {
-                let outContent = await fs.readFile(moduleAbsolutePath, 'utf8')
+                let outContent = isLocalCss
+                  ? localStyleContent
+                  : await fs.readFile(moduleAbsolutePath, 'utf8')
                 if (isScssModule) {
                   outContent = await new Promise<string>((resolve, reject) => {
                     sass.render(

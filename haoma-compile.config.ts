@@ -56,7 +56,7 @@ export default getCompileConfig([
     name: 'esm',
     inputFiles: ['tests/yy.vue'],
     outDir: 'lib_vue',
-    module: 'esm',
+    module: 'cjs',
     target: 'browser',
   },
 ])
