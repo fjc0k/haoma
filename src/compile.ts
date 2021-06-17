@@ -129,7 +129,7 @@ export async function compile(config: CompileConfig) {
                 value: ${vs}
               });
             }
-            ${vc}.beforeCreate = ${vc}.beforeCreate ? [${vc}.beforeCreate, ${vsi}] : [${vsi}];
+            ${vc}.beforeCreate = [].concat(${vc}.beforeCreate || [], ${vsi});
           `
         }
         scriptContent += dedent`
