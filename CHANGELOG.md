@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/fjc0k/haoma/compare/v2.31.0...v3.0.0) (2021-06-17)
+
+### ⚠ BREAKING CHANGES
+
+- 不再支持 swc
+
+### Features
+
+- jest 升级到 27, testEnvironment 默认为 node ([d679bf9](https://github.com/fjc0k/haoma/commit/d679bf932e69c02b46ba180de59e2da1c9740ca5))
+- 去除 swc ([3733dcd](https://github.com/fjc0k/haoma/commit/3733dcda73b4ad35eb625b71507e07e27454fd52))
+- 支持编译 .vue 单文件 ([9e6bf18](https://github.com/fjc0k/haoma/commit/9e6bf18959e12990c896d7a8e68af0ffcdf4bc78))
+
+### Bug Fixes
+
+- .vue 编译 beforeCreate 问题 ([f092696](https://github.com/fjc0k/haoma/commit/f0926962fd898dba50fd831a64348c974b0f9f5f))
+
 ## [2.31.0](https://github.com/fjc0k/haoma/compare/v2.30.0...v2.31.0) (2021-03-20)
 
 ### Features
