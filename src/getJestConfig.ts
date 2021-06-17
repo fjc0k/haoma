@@ -38,8 +38,12 @@ export function getJestConfig(
     {
       rootDir: projectRoot,
       testEnvironment: customConfig.testEnvironment || 'node',
-      transform:
-        customConfig.transformer === 'typescript+babel'
+      moduleFileExtensions: ['ts', 'js', 'tsx', 'jsx', 'json', 'vue'],
+      transform: {
+        '\\.(css|less|scss|sass|styl|md|html|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+          require.resolve('jest-transform-stub'),
+        '^.+\\.vue$': require.resolve('vue-jest'),
+        ...(customConfig.transformer === 'typescript+babel'
           ? {
               '^.+\\.tsx?$': require.resolve('ts-jest'),
               '^.+\\.jsx?$': normalizeFilePath(
@@ -50,17 +54,20 @@ export function getJestConfig(
               '^.+\\.[j|t]sx?$': normalizeFilePath(
                 require.resolve('./jestJavaScriptTransform'),
               ),
-            },
+            }),
+      },
+      moduleNameMapper: {
+        '^@/(.*)$': '<rootDir>/src/$1',
+      },
       transformIgnorePatterns: [
         ...transformIgnorePatterns,
         ...(customConfig.transformIgnorePatterns || []),
       ],
-      moduleNameMapper: {
-        '\\.(css|less|scss|sass|styl|md|html|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-          require.resolve('identity-obj-proxy'),
-      },
-      globals:
-        customConfig.transformer === 'typescript+babel'
+      globals: {
+        'vue-jest': {
+          experimentalCSSCompile: false,
+        },
+        ...(customConfig.transformer === 'typescript+babel'
           ? {
               'ts-jest': {
                 packageJson: join(projectRoot, './package.json'),
@@ -70,7 +77,8 @@ export function getJestConfig(
                   : join(projectRoot, './tsconfig.json'),
               },
             }
-          : {},
+          : {}),
+      },
       collectCoverageFrom: [
         '<rootDir>/src/**/*.{ts,tsx}',
         '!<rootDir>/src/**/__*__/**/*',
@@ -78,6 +86,10 @@ export function getJestConfig(
       ],
       setupFilesAfterEnv: [normalizeFilePath(require.resolve('./jestSetup'))],
       snapshotSerializers: [
+        // 适用 Vue
+        normalizeFilePath(
+          require.resolve('jest-serializer-vue/index.js', { paths }),
+        ),
         // 使用函数名称作为快照
         normalizeFilePath(
           require.resolve('jest-snapshot-serializer-function-name/index.js', {
