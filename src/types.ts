@@ -2,7 +2,7 @@ import * as babel from '@babel/core'
 import * as eslint from 'eslint'
 import * as jest from '@jest/types'
 import * as prettier from 'prettier'
-import { AsyncOrSync, LiteralUnion } from 'vtils/types'
+import { AsyncOrSync, LiteralUnion, Merge } from 'vtils/types'
 import { EventBus } from 'vtils'
 
 export type ESLintConfig = eslint.Linter.Config & {
@@ -49,31 +49,41 @@ export type PrettierConfig = prettier.Options & {
   }>
 }
 
-export type JestConfig = Partial<jest.Config.InitialOptions> & {
-  /**
-   * 要转换的包的名称列表。
-   *
-   * @example ['lodash-es']
-   */
-  transformPackages?: string[]
+export type JestConfig = Merge<
+  Partial<jest.Config.InitialOptions>,
+  {
+    /**
+     * 测试环境。
+     *
+     * @default 'node'
+     */
+    testEnvironment?: 'jsdom' | 'node'
 
-  /**
-   * 转换器。
-   *
-   * - `typescript+babel`: 可以找出类型问题，js 将用 babel 进行简单转义
-   * - `babel`: 使用 babel 深度转义，测试 Vue JSX 必须用这个
-   *
-   * @default babel
-   */
-  transformer?: 'typescript+babel' | 'babel'
+    /**
+     * 要转换的包的名称列表。
+     *
+     * @example ['lodash-es']
+     */
+    transformPackages?: string[]
 
-  /**
-   * jsx 变种。
-   *
-   * @default React
-   */
-  jsxPragma?: 'React' | 'Vue'
-}
+    /**
+     * 转换器。
+     *
+     * - `typescript+babel`: 可以找出类型问题，js 将用 babel 进行简单转义
+     * - `babel`: 使用 babel 深度转义，测试 Vue JSX 必须用这个
+     *
+     * @default babel
+     */
+    transformer?: 'typescript+babel' | 'babel'
+
+    /**
+     * jsx 变种。
+     *
+     * @default React
+     */
+    jsxPragma?: 'React' | 'Vue'
+  }
+>
 
 export type BabelConfigDynamicallyItem<T> = T | ((file: string) => T)
 

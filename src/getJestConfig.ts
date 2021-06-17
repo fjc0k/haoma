@@ -37,6 +37,7 @@ export function getJestConfig(
   return merge<JestConfig>(
     {
       rootDir: projectRoot,
+      testEnvironment: customConfig.testEnvironment || 'node',
       transform:
         customConfig.transformer === 'typescript+babel'
           ? {
@@ -94,6 +95,11 @@ export function getJestConfig(
       ],
       cacheDirectory: '<rootDir>/node_modules/.cache/jest',
     },
-    omitStrict(customConfig, ['transformPackages', 'transformer', 'jsxPragma']),
+    omitStrict(customConfig, [
+      'testEnvironment',
+      'transformPackages',
+      'transformer',
+      'jsxPragma',
+    ]),
   )
 }

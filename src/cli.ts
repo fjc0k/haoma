@@ -322,7 +322,7 @@ yargs
             ...(!argv.jest
               ? []
               : ([
-                  { name: 'jest', version: '^26' },
+                  { name: 'jest', version: '^27' },
                   { name: 'codecov', version: '^3' },
                   { name: 'typescript-snapshots-plugin', version: '^1' },
                 ] as Array<{ name: string; version: string }>)),
