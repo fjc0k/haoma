@@ -16,6 +16,9 @@
     "preserveSymlinks": true,
     "jsx": "react",
     "outDir": "./lib",
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

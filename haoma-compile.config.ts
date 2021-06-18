@@ -11,19 +11,23 @@ export default getCompileConfig([
   //   rollupDtsFiles: ['index.d.ts'],
   //   rollupDtsIncludedPackages: ['vtils'],
   // },
-  // {
-  //   name: 'esm',
-  //   inputFiles: ['src/index.ts'],
-  //   outDir: 'lib3',
-  //   module: 'esm',
-  //   target: 'node',
-  //   renameImport: [
-  //     {
-  //       original: /\.\/getJestConfig/,
-  //       replacement: 'llllll',
-  //     },
-  //   ],
-  // },
+  {
+    name: 'esm',
+    inputFiles: ['tests/alias.ts'],
+    outDir: 'lib3',
+    module: 'esm',
+    target: 'node',
+    // renameImport: [
+    //   {
+    //     original: /\.\/getJestConfig/,
+    //     replacement: 'llllll',
+    //   },
+    // ],
+    alias: {
+      'yup/es': 'yup/lib',
+      'date-fns/esm': 'date-fns',
+    },
+  },
   // {
   //   name: 'esm',
   //   inputFiles: ['tests/x.tsx'],
@@ -52,11 +56,11 @@ export default getCompileConfig([
   //     return false
   //   },
   // },
-  {
-    name: 'esm',
-    inputFiles: ['tests/yy.vue'],
-    outDir: 'lib_vue',
-    module: 'cjs',
-    target: 'browser',
-  },
+  // {
+  //   name: 'esm',
+  //   inputFiles: ['tests/yy.vue'],
+  //   outDir: 'lib_vue',
+  //   module: 'cjs',
+  //   target: 'browser',
+  // },
 ])

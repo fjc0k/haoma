@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import { BabelConfig } from './types'
 import { getProcessCssPlugin } from './babelPlugins'
-import { isFunction, isRegExp } from 'vtils'
+import { isFunction, mapValues } from 'vtils'
 
 export function getBabelConfig(config: BabelConfig): BabelConfig {
   const hasFileName = !!config.filename
@@ -21,7 +21,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     outDir,
     getCssModulesScopedName,
     bus,
-    renameImport = [],
+    alias = {},
     modularImport = [],
     environmentVariables = [],
     presets = [],
@@ -128,21 +128,19 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
           version: require('@babel/runtime/package.json').version,
         },
       ],
-      ...(renameImport.length
-        ? [
-            [
-              require.resolve('babel-plugin-transform-rename-import'),
-              {
-                replacements: renameImport.map(item => ({
-                  ...item,
-                  original: isRegExp(item.original)
-                    ? String(item.original).replace(/^\/(.+)\/\w*$/, '$1')
-                    : item.original,
-                })),
-              },
-            ],
-          ]
-        : []),
+      [
+        require.resolve('babel-plugin-module-resolver'),
+        {
+          alias: {
+            '@': './src',
+            ...mapValues(alias, value =>
+              typeof value === 'string'
+                ? value.replace(/\$(\d+)/g, '\\$1')
+                : value,
+            ),
+          },
+        },
+      ],
       ...(modularImport.length
         ? modularImport.map((item, index) => [
             require.resolve('babel-plugin-import'),

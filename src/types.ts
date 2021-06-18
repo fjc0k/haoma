@@ -143,19 +143,15 @@ export interface BabelConfig extends babel.TransformOptions {
   }) => string
 
   /**
-   * 是否启用导入更名插件。
+   * 别名。
+   *
+   * 键以 `^` 开头或以 `$` 结尾时会被认为是正则。
+   *
+   * 值为字符串时支持占位符，如：$1。
+   *
+   * 值为函数时第一个参数是所有匹配的数组。
    */
-  renameImport?: Array<{
-    /**
-     * 要更名的导入，正则。
-     */
-    original: string | RegExp
-
-    /**
-     * 更名后的替换，支持占位符，如：$1。
-     */
-    replacement: string
-  }>
+  alias?: Record<string, string | ((matches: string[]) => string)>
 
   /**
    * 是否启用按需导入。
