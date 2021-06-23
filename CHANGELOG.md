@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.1](https://github.com/fjc0k/haoma/compare/v3.1.0...v3.1.1) (2021-06-23)
+
+### Bug Fixes
+
+- vue-jest & babel ([e982bd4](https://github.com/fjc0k/haoma/commit/e982bd4fb0bd48f24016efdec717d410328e3ff4))
+
 ## [3.1.0](https://github.com/fjc0k/haoma/compare/v3.0.0...v3.1.0) (2021-06-18)
 
 ### Features
