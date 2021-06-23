@@ -65,7 +65,6 @@ export function getJestConfig(
       ],
       globals: {
         'vue-jest': {
-          experimentalCSSCompile: false,
           transform:
             customConfig.transformer === 'typescript+babel'
               ? {
