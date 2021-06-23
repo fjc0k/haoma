@@ -89,6 +89,11 @@ export type BabelConfigDynamicallyItem<T> = T | ((file: string) => T)
 
 export interface BabelConfig extends babel.TransformOptions {
   /**
+   * @default false
+   */
+  fromConfigFile?: boolean
+
+  /**
    * 模块类型。
    *
    * @default 'cjs'

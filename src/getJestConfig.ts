@@ -66,6 +66,19 @@ export function getJestConfig(
       globals: {
         'vue-jest': {
           experimentalCSSCompile: false,
+          transform:
+            customConfig.transformer === 'typescript+babel'
+              ? {
+                  '^(javascript|jsx?)$': require.resolve(
+                    './jestJavaScriptTransform',
+                  ),
+                  '^(typescript|tsx?)$': require.resolve('ts-jest'),
+                }
+              : {
+                  '^(javascript|jsx?|typescript|tsx?)$': require.resolve(
+                    './jestJavaScriptTransform',
+                  ),
+                },
         },
         ...(customConfig.transformer === 'typescript+babel'
           ? {

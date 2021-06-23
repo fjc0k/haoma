@@ -11,6 +11,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
   const isJsx = hasFileName ? /\.[j|t]sx/i.test(config.filename!) : !!config.jsx
 
   let {
+    fromConfigFile = false,
     module = 'cjs',
     target = 'browser',
     typescript = isTs,
@@ -41,8 +42,12 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     : legacyDecorator
 
   return {
-    babelrc: false,
-    configFile: false,
+    ...(fromConfigFile
+      ? {}
+      : {
+          babelrc: false,
+          configFile: false,
+        }),
     ...babelConfig,
     // babel 的 preset 执行顺序是倒置的，即从后往前，
     // 因此，此处应将 typescript 放在 env 后，
