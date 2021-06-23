@@ -1,4 +1,4 @@
-// import { basename } from 'path'
+import { basename } from 'path'
 import { getCompileConfig } from './lib/index'
 
 export default getCompileConfig([
@@ -11,33 +11,33 @@ export default getCompileConfig([
   //   rollupDtsFiles: ['index.d.ts'],
   //   rollupDtsIncludedPackages: ['vtils'],
   // },
-  {
-    name: 'esm',
-    inputFiles: ['tests/alias.ts'],
-    outDir: 'lib3',
-    module: 'esm',
-    target: 'node',
-    // renameImport: [
-    //   {
-    //     original: /\.\/getJestConfig/,
-    //     replacement: 'llllll',
-    //   },
-    // ],
-    alias: {
-      'yup/es': 'yup/lib',
-      'date-fns/esm': 'date-fns',
-    },
-  },
   // {
   //   name: 'esm',
-  //   inputFiles: ['tests/x.tsx'],
-  //   outDir: 'lib4',
+  //   inputFiles: ['tests/alias.ts'],
+  //   outDir: 'lib3',
   //   module: 'esm',
-  //   target: 'browser',
-  //   getCssModulesScopedName({ className, fileName }) {
-  //     return `${basename(fileName).split('.')[0]}_${className}`
+  //   target: 'node',
+  //   // renameImport: [
+  //   //   {
+  //   //     original: /\.\/getJestConfig/,
+  //   //     replacement: 'llllll',
+  //   //   },
+  //   // ],
+  //   alias: {
+  //     'yup/es': 'yup/lib',
+  //     'date-fns/esm': 'date-fns',
   //   },
   // },
+  {
+    name: 'esm',
+    inputFiles: ['tests/x.tsx'],
+    outDir: 'lib_style',
+    module: 'esm',
+    target: 'browser',
+    getCssModulesScopedName({ className, fileName }) {
+      return `${basename(fileName).split('.')[0]}_${className}`
+    },
+  },
   // {
   //   name: 'esm',
   //   inputFiles: ['tests/privateProp.ts'],

@@ -2,6 +2,10 @@
 // import './fn'
 import './xx.less'
 import './xx2.scss'
+
+// @ts-ignore
+import xx3 from './xx3.less'
+console.log(xx3)
 // import React, { Component, FC, useState } from 'react'
 
 export class Xxx {

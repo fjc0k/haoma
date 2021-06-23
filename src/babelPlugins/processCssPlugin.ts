@@ -1,12 +1,10 @@
 import cuid from 'cuid'
 import fs from 'fs-extra'
-import less from 'less'
-import postcss from 'postcss'
-import sass from 'sass'
 import { BabelConfig } from '../types'
 import { types as babelTypes, PluginObj } from '@babel/core'
 import { Defined } from 'vtils/types'
 import { dirname, extname, join } from 'path'
+import { renderStyle } from '../renderStyle'
 
 export function getProcessCssPlugin(options: {
   projectRoot: string
@@ -71,62 +69,24 @@ export function getProcessCssPlugin(options: {
               )
 
               const processCss = async () => {
-                let outContent = isLocalCss
+                const outContent = isLocalCss
                   ? localStyleContent
                   : await fs.readFile(moduleAbsolutePath, 'utf8')
-                if (isScssModule) {
-                  outContent = await new Promise<string>((resolve, reject) => {
-                    sass.render(
-                      {
-                        data: outContent,
-                        file: moduleAbsolutePath,
-                        sourceMap: false,
-                      },
-                      (err, res) =>
-                        err ? reject(err) : resolve(res.css.toString()),
-                    )
-                  })
-                } else if (isLessModule) {
-                  outContent = await new Promise<string>((resolve, reject) => {
-                    less.render(
-                      outContent,
-                      {
-                        filename: moduleAbsolutePath,
-                      },
-                      (err, res) =>
-                        err || !res ? reject(err) : resolve(res.css),
-                    )
-                  })
-                }
-                outContent = await postcss([
-                  require('autoprefixer'),
-                  ...(isCssModules
-                    ? [
-                        require('postcss-modules')({
-                          getJSON: (_: any, json: any) =>
-                            (cssModulesMap = json),
-                          ...(options.getCssModulesScopedName
-                            ? {
-                                generateScopedName: (
-                                  name: string,
-                                  filename: string,
-                                ) =>
-                                  options.getCssModulesScopedName!({
-                                    className: name,
-                                    fileName: filename,
-                                  }),
-                              }
-                            : {}),
-                        }),
-                      ]
-                    : []),
-                ])
-                  .process(outContent, {
-                    from: moduleAbsolutePath,
-                    map: false,
-                  })
-                  .then(res => res.css)
-                await fs.outputFile(outFile, outContent)
+                const { css, cls } = await renderStyle({
+                  filePath: moduleAbsolutePath,
+                  fileContent: outContent,
+                  lang: isScssModule ? 'scss' : isLessModule ? 'less' : 'css',
+                  cssModules: isCssModules,
+                  cssModulesScopedName:
+                    options.getCssModulesScopedName &&
+                    (payload =>
+                      options.getCssModulesScopedName!({
+                        fileName: payload.filePath,
+                        className: payload.className,
+                      })),
+                })
+                cssModulesMap = cls
+                await fs.outputFile(outFile, css)
               }
 
               const processCssResult = processCss()
