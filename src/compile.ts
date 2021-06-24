@@ -97,7 +97,7 @@ export async function compile(config: CompileConfig) {
           )
           const styleFile = `./@@LOCAL@@/${encodeURIComponent(
             styleContent,
-          )}/@@LOCAL@@/./${styleFileName}`
+          ).replace(/'/g, '%27')}/@@LOCAL@@/./${styleFileName}`
           scriptContent = dedent`
             ${
               styleIsModule
