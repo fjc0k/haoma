@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0](https://github.com/fjc0k/haoma/compare/v3.2.1...v3.3.0) (2021-06-30)
+
+### Features
+
+- 新增一系列 cli 工具 ([f36ca9d](https://github.com/fjc0k/haoma/commit/f36ca9de06ec500ce05f34a8797e6a25fcb11478))
+
+### Bug Fixes
+
+- 编译 vue 样式优化 ([52be8cd](https://github.com/fjc0k/haoma/commit/52be8cd676d68c91ec2352c9cc971cdbee8a236f))
+
 ### [3.2.1](https://github.com/fjc0k/haoma/compare/v3.2.0...v3.2.1) (2021-06-24)
 
 ### Bug Fixes
