@@ -32,3 +32,19 @@
     color: red;
   }
 </style>
+
+<style module="styles">
+  .dd2 {
+    color: red;
+  }
+</style>
+
+<style lang="scss">
+  .xxx {
+    color: red;
+
+    &.oo {
+      font-size: 20px;
+    }
+  }
+</style>

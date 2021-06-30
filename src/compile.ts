@@ -79,10 +79,7 @@ export async function compile(config: CompileConfig) {
         const vc = `__vue_component__`
         const vs = `__vue_styles__`
         const vsi = `__vue_styles_inject__`
-        const style = sfc.styles[0]
-        const styleContent = style?.content || ''
-        const styleLang = style.lang || 'css'
-        const styleIsModule = !!style.module
+        const styles = sfc.styles
         const templateContent = sfc.template?.content || ''
         const renderFns = compiler.compileToFunctions(templateContent)
         const renderStr = transpile(renderFns.render.toString())
@@ -90,48 +87,76 @@ export async function compile(config: CompileConfig) {
           transpile(fn.toString()),
         )
         let scriptContent = sfc.script?.content || ''
-        if (styleContent) {
-          const styleFileName = basename(file).replace(
-            /\.[^.]+$/,
-            `.${styleLang}`,
-          )
-          const styleFile = `./@@LOCAL@@/${encodeURIComponent(
-            styleContent,
-          ).replace(/'/g, '%27')}/@@LOCAL@@/./${styleFileName}`
-          scriptContent = dedent`
-            ${
-              styleIsModule
-                ? `import ${vs} from '${styleFile}';`
-                : `import '${styleFile}';`
-            }
-            ${scriptContent}
-          `
-        }
         scriptContent = scriptContent.replace(
           /^\s*export\s+default\s+/m,
-          `const ${vcr} = `,
+          `var ${vcr} = `,
         )
         // https://github.com/vuejs/vue-component-compiler/blob/master/src/assembler.ts#L266
         // https://github.com/vuejs/component-compiler-utils/blob/master/lib/compileTemplate.ts#L158
         scriptContent += dedent`
-          ;const ${vc} = (typeof ${vcr} === 'function' ? ${vcr}.options : ${vcr}) || {};
+          ;var ${vc} = (typeof ${vcr} === 'function' ? ${vcr}.options : ${vcr}) || {};
           ${vc}.__file = ${JSON.stringify(basename(file))};
           if (!${vc}.render) {
             ${vc}.render = ${renderStr};
             ${vc}.staticRenderFns = [${staticRenderStr.join(',')}];
-            ${vc}._compiled = true
+            ${vc}._compiled = true;
           }
         `
-        if (styleIsModule) {
-          scriptContent += dedent`
-            ;const ${vsi} = function() {
-              Object.defineProperty(this, '$style', {
-                value: ${vs}
-              });
+
+        if (styles.length) {
+          const _vsl: Array<[string, string]> = []
+          styles.reverse().forEach((style, index, { length }) => {
+            index = length - index
+            const styleContent = style.content || ''
+            const styleLang = style.lang || 'css'
+            const styleIsModule = !!style.module
+            const styleModuleName =
+              typeof style.module === 'string' ? style.module : '$style'
+            const styleModuleNameRef = `${vs}${index}`
+            const styleFileName = basename(file).replace(
+              /\.[^.]+$/,
+              `.${styleLang}`,
+            )
+            const styleOutFileName = basename(file).replace(
+              /\.[^.]+$/,
+              `${length === 1 ? '' : `_${index}`}.${styleLang}`,
+            )
+            const styleFile = `./@@LOCAL@@/${encodeURIComponent(
+              styleContent,
+            ).replace(
+              /'/g,
+              '%27',
+            )}/@@LOCAL@@/./${styleFileName}/@@LOCAL@@/./${styleOutFileName}`
+            scriptContent = dedent`
+              ${
+                styleIsModule
+                  ? `import ${styleModuleNameRef} from '${styleFile}';`
+                  : `import '${styleFile}';`
+              }
+              ${scriptContent}
+            `
+            if (styleIsModule) {
+              _vsl.unshift([styleModuleName, styleModuleNameRef])
             }
-            ${vc}.beforeCreate = [].concat(${vc}.beforeCreate || [], ${vsi});
-          `
+          })
+          if (_vsl.length) {
+            scriptContent += dedent`
+              ;var ${vsi} = function() {
+                ${_vsl
+                  .map(
+                    item => dedent`
+                      Object.defineProperty(this, ${JSON.stringify(item[0])}, {
+                        value: ${item[1]}
+                      });
+                    `,
+                  )
+                  .join('\n')}
+              };
+              ${vc}.beforeCreate = [].concat(${vc}.beforeCreate || [], ${vsi});
+            `
+          }
         }
+
         scriptContent += dedent`
           ;export default ${vcr};
         `

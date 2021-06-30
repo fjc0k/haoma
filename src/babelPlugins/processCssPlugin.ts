@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import cuid from 'cuid'
 import fs from 'fs-extra'
 import { BabelConfig } from '../types'
@@ -31,13 +32,19 @@ export function getProcessCssPlugin(options: {
               modulePath.startsWith('.')
             ) {
               const isLocalCss = modulePath.startsWith('./@@LOCAL@@/')
-              // eslint-disable-next-line prefer-const
-              let [, localStyleContent, localStyleFilePath] = isLocalCss
-                ? modulePath.match(/^\.\/@@LOCAL@@\/(.+)\/@@LOCAL@@\/(.+)$/)!
+              let [
+                ,
+                localStyleContent,
+                localStyleFilePath,
+                localStyleOutFilePath,
+              ] = isLocalCss
+                ? modulePath.match(
+                    /^\.\/@@LOCAL@@\/(.+)\/@@LOCAL@@\/(.+)\/@@LOCAL@@\/(.+)$/,
+                  )!
                 : []
               localStyleContent = decodeURIComponent(localStyleContent)
               if (isLocalCss) {
-                path.node.source.value = localStyleFilePath
+                path.node.source.value = localStyleOutFilePath
               }
 
               const isCssModules = path.node.specifiers.length > 0
@@ -61,9 +68,13 @@ export function getProcessCssPlugin(options: {
                 dirname(state.filename),
                 isLocalCss ? localStyleFilePath : modulePath,
               )
+              const moduleOutAbsolutePath = join(
+                dirname(state.filename),
+                isLocalCss ? localStyleOutFilePath : modulePath,
+              )
               const outFile = join(
                 options.outDir,
-                moduleAbsolutePath
+                moduleOutAbsolutePath
                   .replace(options.projectRoot, '')
                   .replace(/\.[^.]+$/, '.css'),
               )

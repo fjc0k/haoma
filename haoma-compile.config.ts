@@ -1,4 +1,4 @@
-import { basename } from 'path'
+// import { basename } from 'path'
 import { getCompileConfig } from './lib/index'
 
 export default getCompileConfig([
@@ -28,16 +28,16 @@ export default getCompileConfig([
   //     'date-fns/esm': 'date-fns',
   //   },
   // },
-  {
-    name: 'esm',
-    inputFiles: ['tests/x.tsx'],
-    outDir: 'lib_style',
-    module: 'esm',
-    target: 'browser',
-    getCssModulesScopedName({ className, fileName }) {
-      return `${basename(fileName).split('.')[0]}_${className}`
-    },
-  },
+  // {
+  //   name: 'esm',
+  //   inputFiles: ['tests/x.tsx'],
+  //   outDir: 'lib_style',
+  //   module: 'esm',
+  //   target: 'browser',
+  //   getCssModulesScopedName({ className, fileName }) {
+  //     return `${basename(fileName).split('.')[0]}_${className}`
+  //   },
+  // },
   // {
   //   name: 'esm',
   //   inputFiles: ['tests/privateProp.ts'],
@@ -56,11 +56,11 @@ export default getCompileConfig([
   //     return false
   //   },
   // },
-  // {
-  //   name: 'esm',
-  //   inputFiles: ['tests/yy.vue'],
-  //   outDir: 'lib_vue',
-  //   module: 'cjs',
-  //   target: 'browser',
-  // },
+  {
+    name: 'esm',
+    inputFiles: ['tests/yy.vue'],
+    outDir: 'lib_vue',
+    module: 'cjs',
+    target: 'browser',
+  },
 ])
