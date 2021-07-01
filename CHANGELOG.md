@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.3.1](https://github.com/fjc0k/haoma/compare/v3.3.0...v3.3.1) (2021-07-01)
+
+### Bug Fixes
+
+- eslint jsx ([e2841ab](https://github.com/fjc0k/haoma/commit/e2841ab4eaafe7bfc7b37ec4f0b6e3172843c309))
+
 ## [3.3.0](https://github.com/fjc0k/haoma/compare/v3.2.1...v3.3.0) (2021-06-30)
 
 ### Features
