@@ -12,6 +12,7 @@ const ESLintConfig: ESLintConfigTypes = {
     requireConfigFile: false,
     babelOptions: getBabelConfig({
       typescript: true,
+      jsx: 'react',
     }),
   },
   extends: ['eslint:recommended', 'prettier'],
