@@ -34,15 +34,30 @@ export function getJestConfig(
         ]
       : ['<rootDir>/node_modules/']
 
+  let supportVueTemplate = false
+  try {
+    require.resolve('vue')
+    require.resolve('vue-template-compiler')
+    supportVueTemplate = true
+  } catch {
+    supportVueTemplate = false
+  }
+
   return merge<JestConfig>(
     {
       rootDir: projectRoot,
       testEnvironment: customConfig.testEnvironment || 'node',
-      moduleFileExtensions: ['ts', 'js', 'tsx', 'jsx', 'json', 'vue'],
+      moduleFileExtensions: [
+        'ts',
+        'js',
+        'tsx',
+        'jsx',
+        'json',
+        ...(supportVueTemplate ? ['vue'] : []),
+      ],
       transform: {
         '\\.(css|less|scss|sass|styl|md|html|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
           require.resolve('jest-transform-stub'),
-        '^.+\\.vue$': require.resolve('vue-jest'),
         ...(customConfig.transformer === 'typescript+babel'
           ? {
               '^.+\\.tsx?$': require.resolve('ts-jest'),
@@ -55,6 +70,9 @@ export function getJestConfig(
                 require.resolve('./jestJavaScriptTransform'),
               ),
             }),
+        ...(supportVueTemplate
+          ? { '^.+\\.vue$': require.resolve('vue-jest') }
+          : {}),
       },
       moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
@@ -64,21 +82,25 @@ export function getJestConfig(
         ...(customConfig.transformIgnorePatterns || []),
       ],
       globals: {
-        'vue-jest': {
-          transform:
-            customConfig.transformer === 'typescript+babel'
-              ? {
-                  '^(javascript|jsx?)$': require.resolve(
-                    './jestJavaScriptTransform',
-                  ),
-                  '^(typescript|tsx?)$': require.resolve('ts-jest'),
-                }
-              : {
-                  '^(javascript|jsx?|typescript|tsx?)$': require.resolve(
-                    './jestJavaScriptTransform',
-                  ),
-                },
-        },
+        ...(supportVueTemplate
+          ? {
+              'vue-jest': {
+                transform:
+                  customConfig.transformer === 'typescript+babel'
+                    ? {
+                        '^(javascript|jsx?)$': require.resolve(
+                          './jestJavaScriptTransform',
+                        ),
+                        '^(typescript|tsx?)$': require.resolve('ts-jest'),
+                      }
+                    : {
+                        '^(javascript|jsx?|typescript|tsx?)$': require.resolve(
+                          './jestJavaScriptTransform',
+                        ),
+                      },
+              },
+            }
+          : {}),
         ...(customConfig.transformer === 'typescript+babel'
           ? {
               'ts-jest': {
@@ -98,10 +120,14 @@ export function getJestConfig(
       ],
       setupFilesAfterEnv: [normalizeFilePath(require.resolve('./jestSetup'))],
       snapshotSerializers: [
-        // 适用 Vue
-        normalizeFilePath(
-          require.resolve('jest-serializer-vue/index.js', { paths }),
-        ),
+        ...(supportVueTemplate
+          ? [
+              // 适用 Vue
+              normalizeFilePath(
+                require.resolve('jest-serializer-vue/index.js', { paths }),
+              ),
+            ]
+          : []),
         // 使用函数名称作为快照
         normalizeFilePath(
           require.resolve('jest-snapshot-serializer-function-name/index.js', {
