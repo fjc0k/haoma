@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.3.2](https://github.com/fjc0k/haoma/compare/v3.3.1...v3.3.2) (2021-07-05)
+
+### Bug Fixes
+
+- **jest:** 按需测试 .vue ([2bfe2b2](https://github.com/fjc0k/haoma/commit/2bfe2b23840359343557457824cc56ed8471328c))
+
 ### [3.3.1](https://github.com/fjc0k/haoma/compare/v3.3.0...v3.3.1) (2021-07-01)
 
 ### Bug Fixes
