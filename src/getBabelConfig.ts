@@ -9,14 +9,17 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     ? /\.tsx?/i.test(config.filename!)
     : !!config.typescript
   const isJsx = hasFileName ? /\.[j|t]sx/i.test(config.filename!) : !!config.jsx
+  const isTestEnv =
+    process.env.JEST_WORKER_ID != null || process.env.NODE_ENV === 'test'
 
   let {
     fromConfigFile = false,
     module = 'cjs',
-    target = 'browser',
+    target = isTestEnv ? 'node' : 'browser',
     typescript = isTs,
     jsx = 'react',
     polyfill = false,
+    runtime = !isTestEnv,
     legacyDecorator = false,
     projectRoot,
     outDir,
@@ -125,14 +128,18 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
         : jsx === 'vue'
         ? [require.resolve('@vue/babel-plugin-jsx')]
         : []),
-      [
-        require.resolve('@babel/plugin-transform-runtime'),
-        {
-          regenerator: !polyfill,
-          useESModules: module === 'esm',
-          version: require('@babel/runtime/package.json').version,
-        },
-      ],
+      ...(!runtime
+        ? []
+        : [
+            [
+              require.resolve('@babel/plugin-transform-runtime'),
+              {
+                regenerator: !polyfill,
+                useESModules: module === 'esm',
+                version: require('@babel/runtime/package.json').version,
+              },
+            ],
+          ]),
       [
         require.resolve('babel-plugin-module-resolver'),
         {

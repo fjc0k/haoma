@@ -120,6 +120,13 @@ export interface BabelConfig extends babel.TransformOptions {
   polyfill?: BabelConfigDynamicallyItem<boolean>
 
   /**
+   * 是否引入 @babel/runtime。
+   *
+   * @default true
+   */
+  runtime?: boolean
+
+  /**
    * 是否启用 TypeScript 支持。
    */
   typescript?: BabelConfigDynamicallyItem<boolean>

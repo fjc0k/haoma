@@ -25,14 +25,11 @@ export function getJestConfig(
     ).replace(/\/{2,}/g, '/')
   }
 
-  const transformIgnorePatterns: string[] =
-    customConfig.transformPackages && customConfig.transformPackages.length > 0
-      ? [
-          `<rootDir>/node_modules/(?!.*/(${customConfig.transformPackages
-            .map(pkg => escapeRegExp(pkg))
-            .join('|')})/)`,
-        ]
-      : ['<rootDir>/node_modules/']
+  const transformPackages = [
+    ...(customConfig.transformPackages || []),
+    '@babel/runtime/helpers/esm',
+    '@babel/runtime-corejs3/helpers/esm',
+  ]
 
   let supportVueTemplate = false
   try {
@@ -78,8 +75,10 @@ export function getJestConfig(
         '^@/(.*)$': '<rootDir>/src/$1',
       },
       transformIgnorePatterns: [
-        ...transformIgnorePatterns,
-        ...(customConfig.transformIgnorePatterns || []),
+        // 兼容 pnpm: node_modules/.pnpm/xxx/node_modules/xx
+        `<rootDir>/.+/node_modules/(?!(${transformPackages
+          .map(pkg => escapeRegExp(pkg))
+          .join('|')})/)`,
       ],
       globals: {
         ...(supportVueTemplate
