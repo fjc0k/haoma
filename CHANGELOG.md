@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.3.3](https://github.com/fjc0k/haoma/compare/v3.3.2...v3.3.3) (2021-07-06)
+
+### Bug Fixes
+
+- 兼容 pnpm: node_modules/.pnpm/xxx/node_modules/xx ([cdc7875](https://github.com/fjc0k/haoma/commit/cdc78758bcde4f9498e54320d9a9cc86e987c00f))
+
 ### [3.3.2](https://github.com/fjc0k/haoma/compare/v3.3.1...v3.3.2) (2021-07-05)
 
 ### Bug Fixes
