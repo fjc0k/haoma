@@ -71,10 +71,11 @@ export type JestConfig = Merge<
      *
      * - `typescript+babel`: 可以找出类型问题，js 将用 babel 进行简单转义
      * - `babel`: 使用 babel 深度转义，测试 Vue JSX 必须用这个
+     * - `esbuild`: 使用 esbuild 转义代码
      *
      * @default babel
      */
-    transformer?: 'typescript+babel' | 'babel'
+    transformer?: 'typescript+babel' | 'babel' | 'esbuild'
 
     /**
      * jsx 变种。

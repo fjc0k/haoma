@@ -62,6 +62,16 @@ export function getJestConfig(
                 require.resolve('./jestJavaScriptTransform'),
               ),
             }
+          : customConfig.transformer === 'esbuild'
+          ? {
+              '^.+\\.[j|t]sx?$': [
+                require.resolve('esbuild-jest'),
+                {
+                  target: 'es2019',
+                  sourcemap: 'inline',
+                },
+              ],
+            }
           : {
               '^.+\\.[j|t]sx?$': normalizeFilePath(
                 require.resolve('./jestJavaScriptTransform'),
@@ -91,6 +101,11 @@ export function getJestConfig(
                           './jestJavaScriptTransform',
                         ),
                         '^(typescript|tsx?)$': require.resolve('ts-jest'),
+                      }
+                    : customConfig.transformer === 'esbuild'
+                    ? {
+                        '^(javascript|jsx?|typescript|tsx?)$':
+                          require.resolve('esbuild-jest'),
                       }
                     : {
                         '^(javascript|jsx?|typescript|tsx?)$': require.resolve(

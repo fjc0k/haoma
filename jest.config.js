@@ -2,6 +2,6 @@
 module.exports = require('./lib').getJestConfig({
   testEnvironment: 'jsdom',
   transformPackages: ['lodash-es', 'yup'],
-  transformer: 'babel',
+  transformer: 'esbuild',
   jsxPragma: 'React',
 })
