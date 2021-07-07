@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://github.com/fjc0k/haoma/compare/v3.3.3...v3.4.0) (2021-07-07)
+
+### Features
+
+- jest 支持 esbuild 作为代码转换器 ([ee2706c](https://github.com/fjc0k/haoma/commit/ee2706c9ed5dc1d8c4a827d2293165659f5153ef))
+
 ### [3.3.3](https://github.com/fjc0k/haoma/compare/v3.3.2...v3.3.3) (2021-07-06)
 
 ### Bug Fixes
