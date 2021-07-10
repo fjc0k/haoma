@@ -6,7 +6,7 @@ if (typeof expect === 'undefined') {
   }
 }
 
-import 'jest-chain'
+import './jestPlugins/chain'
 
 import 'jest-extended'
 
