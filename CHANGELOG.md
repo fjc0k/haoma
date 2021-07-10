@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.4.1](https://github.com/fjc0k/haoma/compare/v3.4.0...v3.4.1) (2021-07-10)
+
+### Bug Fixes
+
+- **jest:** 内部维护 jest-chain ([a506ef4](https://github.com/fjc0k/haoma/commit/a506ef4e243c34553565574f6c02846a51904618))
+
 ## [3.4.0](https://github.com/fjc0k/haoma/compare/v3.3.3...v3.4.0) (2021-07-07)
 
 ### Features
