@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.4.2](https://github.com/fjc0k/haoma/compare/v3.4.1...v3.4.2) (2021-07-11)
+
+
+### Bug Fixes
+
+* kill ([10aeb56](https://github.com/fjc0k/haoma/commit/10aeb564f268f5a941ea08afb0a56d7dc397cb2a))
+
 ### [3.4.1](https://github.com/fjc0k/haoma/compare/v3.4.0...v3.4.1) (2021-07-10)
 
 ### Bug Fixes
