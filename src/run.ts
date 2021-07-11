@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import exec from 'execa'
+import onExit from 'exit-hook'
 import { join } from 'path'
 
 export async function run(payload: {
@@ -15,7 +16,7 @@ export async function run(payload: {
     })
   }
   try {
-    await exec(
+    const _exec = exec(
       'node',
       [
         '--unhandled-rejections=strict',
@@ -31,5 +32,7 @@ export async function run(payload: {
         stdio: 'inherit',
       },
     )
+    onExit(() => _exec.kill('SIGTERM'))
+    await _exec
   } catch {}
 }
