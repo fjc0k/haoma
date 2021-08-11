@@ -61,39 +61,47 @@ export async function compile(config: CompileConfig) {
   const tsFiles: string[] = []
   await Promise.all(
     inputFiles.map(async file => {
+      const isDts = /\.d\.ts$/i.test(file)
       const outFile = join(
         outDir,
-        file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
+        isDts
+          ? file.replace(inputDir, '')
+          : file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
       )
       let code = await fs.readFile(file, 'utf8')
-      const isTs = /\.tsx?$/i.test(file)
-      if (isTs) {
-        tsFiles.push(file)
-      }
-      const isVue = /\.vue$/i.test(file)
-      if (isVue) {
-        const compiler: typeof import('vue-template-compiler') = require('vue-template-compiler')
-        const transpile = require('vue-template-es2015-compiler')
-        const sfc = compiler.parseComponent(code)
-        const vcr = `__vue_component_raw__`
-        const vc = `__vue_component__`
-        const vs = `__vue_styles__`
-        const vsi = `__vue_styles_inject__`
-        const styles = sfc.styles
-        const templateContent = sfc.template?.content || ''
-        const renderFns = compiler.compileToFunctions(templateContent)
-        const renderStr = transpile(renderFns.render.toString())
-        const staticRenderStr = renderFns.staticRenderFns.map(fn =>
-          transpile(fn.toString()),
-        )
-        let scriptContent = sfc.script?.content || ''
-        scriptContent = scriptContent.replace(
-          /^\s*export\s+default\s+/m,
-          `var ${vcr} = `,
-        )
-        // https://github.com/vuejs/vue-component-compiler/blob/master/src/assembler.ts#L266
-        // https://github.com/vuejs/component-compiler-utils/blob/master/lib/compileTemplate.ts#L158
-        scriptContent += dedent`
+      if (isDts) {
+        if (emitDts) {
+          await fs.outputFile(outFile, code)
+        }
+      } else {
+        const isTs = /\.tsx?$/i.test(file)
+        if (isTs) {
+          tsFiles.push(file)
+        }
+        const isVue = /\.vue$/i.test(file)
+        if (isVue) {
+          const compiler: typeof import('vue-template-compiler') = require('vue-template-compiler')
+          const transpile = require('vue-template-es2015-compiler')
+          const sfc = compiler.parseComponent(code)
+          const vcr = `__vue_component_raw__`
+          const vc = `__vue_component__`
+          const vs = `__vue_styles__`
+          const vsi = `__vue_styles_inject__`
+          const styles = sfc.styles
+          const templateContent = sfc.template?.content || ''
+          const renderFns = compiler.compileToFunctions(templateContent)
+          const renderStr = transpile(renderFns.render.toString())
+          const staticRenderStr = renderFns.staticRenderFns.map(fn =>
+            transpile(fn.toString()),
+          )
+          let scriptContent = sfc.script?.content || ''
+          scriptContent = scriptContent.replace(
+            /^\s*export\s+default\s+/m,
+            `var ${vcr} = `,
+          )
+          // https://github.com/vuejs/vue-component-compiler/blob/master/src/assembler.ts#L266
+          // https://github.com/vuejs/component-compiler-utils/blob/master/lib/compileTemplate.ts#L158
+          scriptContent += dedent`
           ;var ${vc} = (typeof ${vcr} === 'function' ? ${vcr}.options : ${vcr}) || {};
           ${vc}.__file = ${JSON.stringify(basename(file))};
           if (!${vc}.render) {
@@ -103,31 +111,31 @@ export async function compile(config: CompileConfig) {
           }
         `
 
-        if (styles.length) {
-          const _vsl: Array<[string, string]> = []
-          styles.reverse().forEach((style, index, { length }) => {
-            index = length - index
-            const styleContent = style.content || ''
-            const styleLang = style.lang || 'css'
-            const styleIsModule = !!style.module
-            const styleModuleName =
-              typeof style.module === 'string' ? style.module : '$style'
-            const styleModuleNameRef = `${vs}${index}`
-            const styleFileName = basename(file).replace(
-              /\.[^.]+$/,
-              `.${styleLang}`,
-            )
-            const styleOutFileName = basename(file).replace(
-              /\.[^.]+$/,
-              `${length === 1 ? '' : `_${index}`}.${styleLang}`,
-            )
-            const styleFile = `./@@LOCAL@@/${encodeURIComponent(
-              styleContent,
-            ).replace(
-              /'/g,
-              '%27',
-            )}/@@LOCAL@@/./${styleFileName}/@@LOCAL@@/./${styleOutFileName}`
-            scriptContent = dedent`
+          if (styles.length) {
+            const _vsl: Array<[string, string]> = []
+            styles.reverse().forEach((style, index, { length }) => {
+              index = length - index
+              const styleContent = style.content || ''
+              const styleLang = style.lang || 'css'
+              const styleIsModule = !!style.module
+              const styleModuleName =
+                typeof style.module === 'string' ? style.module : '$style'
+              const styleModuleNameRef = `${vs}${index}`
+              const styleFileName = basename(file).replace(
+                /\.[^.]+$/,
+                `.${styleLang}`,
+              )
+              const styleOutFileName = basename(file).replace(
+                /\.[^.]+$/,
+                `${length === 1 ? '' : `_${index}`}.${styleLang}`,
+              )
+              const styleFile = `./@@LOCAL@@/${encodeURIComponent(
+                styleContent,
+              ).replace(
+                /'/g,
+                '%27',
+              )}/@@LOCAL@@/./${styleFileName}/@@LOCAL@@/./${styleOutFileName}`
+              scriptContent = dedent`
               ${
                 styleIsModule
                   ? `import ${styleModuleNameRef} from '${styleFile}';`
@@ -135,12 +143,12 @@ export async function compile(config: CompileConfig) {
               }
               ${scriptContent}
             `
-            if (styleIsModule) {
-              _vsl.unshift([styleModuleName, styleModuleNameRef])
-            }
-          })
-          if (_vsl.length) {
-            scriptContent += dedent`
+              if (styleIsModule) {
+                _vsl.unshift([styleModuleName, styleModuleNameRef])
+              }
+            })
+            if (_vsl.length) {
+              scriptContent += dedent`
               ;var ${vsi} = function() {
                 ${_vsl
                   .map(
@@ -154,37 +162,38 @@ export async function compile(config: CompileConfig) {
               };
               ${vc}.beforeCreate = [].concat(${vc}.beforeCreate || [], ${vsi});
             `
+            }
           }
-        }
 
-        scriptContent += dedent`
+          scriptContent += dedent`
           ;export default ${vcr};
         `
-        code = scriptContent
+          code = scriptContent
+        }
+        const afterWriteTransformers: Array<
+          (content: string) => AsyncOrSync<string>
+        > = []
+        const bus: Defined<BabelConfig['bus']> = new EventBus()
+        bus.on('addAfterWriteTransformer', transformer =>
+          afterWriteTransformers.push(transformer),
+        )
+        const res = await babel.transformAsync(
+          code,
+          getBabelConfig({
+            ...babelConfig,
+            legacyDecorator: babelConfig.legacyDecorator ?? true,
+            filename: file,
+            projectRoot: inputDir,
+            outDir: outDir,
+            bus: bus,
+          }),
+        )
+        let content = res?.code || ''
+        for (const transformer of afterWriteTransformers) {
+          content = await transformer(content)
+        }
+        await fs.outputFile(outFile, content)
       }
-      const afterWriteTransformers: Array<
-        (content: string) => AsyncOrSync<string>
-      > = []
-      const bus: Defined<BabelConfig['bus']> = new EventBus()
-      bus.on('addAfterWriteTransformer', transformer =>
-        afterWriteTransformers.push(transformer),
-      )
-      const res = await babel.transformAsync(
-        code,
-        getBabelConfig({
-          ...babelConfig,
-          legacyDecorator: babelConfig.legacyDecorator ?? true,
-          filename: file,
-          projectRoot: inputDir,
-          outDir: outDir,
-          bus: bus,
-        }),
-      )
-      let content = res?.code || ''
-      for (const transformer of afterWriteTransformers) {
-        content = await transformer(content)
-      }
-      await fs.outputFile(outFile, content)
     }),
   )
   if (emitDts !== false && tsFiles.length) {
