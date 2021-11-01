@@ -7,16 +7,19 @@ export async function bundle(payload: {
   externals?: string[]
   minify?: boolean
   nodeEnv?: string
+  target?: string
+  sourcemap?: 'inline' | 'external'
 }) {
   await esbuild.build({
     entryPoints: [payload.input],
     bundle: true,
     outfile: payload.output,
     platform: 'node',
-    target: 'node10.4',
+    target: payload.target || `node${process.version.slice(1)}`,
     external: payload.externals,
     minify: payload.minify,
     format: payload.format,
+    sourcemap: payload.sourcemap,
     define: {
       ...(payload.nodeEnv != null
         ? {

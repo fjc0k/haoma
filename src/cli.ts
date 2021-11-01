@@ -557,6 +557,8 @@ yargs
     externals: string[]
     minify: boolean
     nodeEnv: string
+    target: string
+    sourcemap: 'inline' | 'external'
   }>(
     'bundle [input]',
     'Bundle a nodejs file using esbuild',
@@ -593,6 +595,18 @@ yargs
           describe: 'process.env.NODE_ENV',
           default: undefined,
         })
+        .option('target', {
+          alias: 't',
+          type: 'string',
+          describe: 'Target',
+          default: undefined,
+        })
+        .option('sourcemap', {
+          alias: 's',
+          type: 'string',
+          describe: 'Sourcemap',
+          default: undefined,
+        })
     },
     async args => {
       await bundle({
@@ -602,6 +616,8 @@ yargs
         externals: args.externals,
         minify: args.minify,
         nodeEnv: args.nodeEnv,
+        target: args.target,
+        sourcemap: args.sourcemap,
       })
     },
   ).argv

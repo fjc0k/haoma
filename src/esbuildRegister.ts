@@ -1,3 +1,3 @@
 require('esbuild-register/dist/node').register({
-  target: 'es2019',
+  target: `node${process.version.slice(1)}`,
 })
