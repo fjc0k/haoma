@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://github.com/fjc0k/haoma/compare/v3.4.4...v3.5.0) (2021-11-01)
+
+### Features
+
+- **bundle:** 支持 target, sourcemap ([ec42efd](https://github.com/fjc0k/haoma/commit/ec42efd33d7497e59492bb12f0e6e3f265723981))
+
 ### [3.4.4](https://github.com/fjc0k/haoma/compare/v3.4.4-beta.0...v3.4.4) (2021-11-01)
 
 ### [3.4.4-beta.0](https://github.com/fjc0k/haoma/compare/v3.4.3...v3.4.4-beta.0) (2021-11-01)
