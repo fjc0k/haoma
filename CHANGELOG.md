@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.4.4-beta.0](https://github.com/fjc0k/haoma/compare/v3.4.3...v3.4.4-beta.0) (2021-11-01)
+
+### Bug Fixes
+
+- 去除 vtils, 优化代码 ([afa72ee](https://github.com/fjc0k/haoma/commit/afa72eeac83ecf0d55609a30a3b8444b049b7440))
+
 ### [3.4.3](https://github.com/fjc0k/haoma/compare/v3.4.2...v3.4.3) (2021-08-11)
 
 ### Bug Fixes
