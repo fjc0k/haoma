@@ -1,6 +1,6 @@
 import { join } from 'path'
 import { read } from 'fs'
-import { sum } from 'vtils'
+import { sum } from 'lodash-uni'
 
 console.log(
   process.env.NODE_ENV,

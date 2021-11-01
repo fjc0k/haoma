@@ -8,7 +8,7 @@
 <script>
   import xx from './index'
   import Vue from 'vue'
-  import { wait } from 'vtils'
+  import { wait } from 'lodash-uni'
 
   export default Vue.extend({
     data: () => ({

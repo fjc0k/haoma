@@ -3,15 +3,14 @@ import cuid from 'cuid'
 import fs from 'fs-extra'
 import { BabelConfig } from '../types'
 import { types as babelTypes, PluginObj } from '@babel/core'
-import { Defined } from 'vtils/types'
 import { dirname, extname, join } from 'path'
 import { renderStyle } from '../renderStyle'
 
 export function getProcessCssPlugin(options: {
   projectRoot: string
   outDir: string
-  getCssModulesScopedName?: Defined<BabelConfig['getCssModulesScopedName']>
-  bus: Defined<BabelConfig['bus']>
+  getCssModulesScopedName?: NonNullable<BabelConfig['getCssModulesScopedName']>
+  bus: NonNullable<BabelConfig['bus']>
 }) {
   return function processCssPlugin({
     types: t,
@@ -65,11 +64,11 @@ export function getProcessCssPlugin(options: {
               }
 
               const moduleAbsolutePath = join(
-                dirname(state.filename),
+                dirname(state.filename!),
                 isLocalCss ? localStyleFilePath : modulePath,
               )
               const moduleOutAbsolutePath = join(
-                dirname(state.filename),
+                dirname(state.filename!),
                 isLocalCss ? localStyleOutFilePath : modulePath,
               )
               const outFile = join(

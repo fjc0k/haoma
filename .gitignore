@@ -3,6 +3,5 @@ node_modules
 lib*
 example
 package-lock.json
-yarn.lock
 pnpm-lock.yaml
 coverage

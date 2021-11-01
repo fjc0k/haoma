@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import { BabelConfig } from './types'
 import { getProcessCssPlugin } from './babelPlugins'
-import { isFunction, mapValues } from 'vtils'
+import { isFunction, mapValues } from 'lodash-uni'
 
 export function getBabelConfig(config: BabelConfig): BabelConfig {
   const hasFileName = !!config.filename

@@ -1,9 +1,9 @@
-import './jestSetup'
 import merge from 'deepmerge'
-import { escapeRegExp, omitStrict } from 'vtils'
+import { escapeRegExp } from 'lodash-uni'
 import { existsSync } from 'fs'
 import { JestConfig } from './types'
 import { join, relative } from 'path'
+import { omitStrict } from './utils'
 
 export function getJestConfig(
   customConfig: JestConfig = {},

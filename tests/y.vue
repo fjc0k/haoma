@@ -9,7 +9,6 @@
 <script lang="ts">
   import Vue from 'vue'
   import xx from './index'
-  import { wait } from 'vtils'
 
   export interface x {
     x: 1

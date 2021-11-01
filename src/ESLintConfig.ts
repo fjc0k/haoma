@@ -1,4 +1,3 @@
-import { Defined } from 'vtils/types'
 import { ESLintConfig as ESLintConfigTypes } from './types'
 import { getBabelConfig } from './getBabelConfig'
 
@@ -159,7 +158,7 @@ const ESLintConfig: ESLintConfigTypes = {
               'vue/html-self-closing': 'error',
             },
           },
-        ] as Defined<ESLintConfigTypes['overrides']>)),
+        ] as NonNullable<ESLintConfigTypes['overrides']>)),
   ],
 }
 

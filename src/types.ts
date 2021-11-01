@@ -2,8 +2,9 @@ import * as babel from '@babel/core'
 import * as eslint from 'eslint'
 import * as jest from '@jest/types'
 import * as prettier from 'prettier'
-import { AsyncOrSync, LiteralUnion, Merge } from 'vtils/types'
-import { EventBus } from 'vtils'
+import { AsyncOrSync } from 'ts-essentials'
+import { EventBus } from './utils'
+import { LiteralUnion, Merge } from 'type-fest'
 
 export type ESLintConfig = eslint.Linter.Config & {
   settings?: {

@@ -1,7 +1,7 @@
 import workerpool from 'workerpool'
 import { Extractor, ExtractorConfig } from '@microsoft/api-extractor'
 import { join } from 'path'
-import { noop } from 'vtils'
+import { noop } from 'lodash-uni'
 
 function rollupDts(dtsFiles: string[], includedPackages: string[] = []) {
   const consoleLog = console.log

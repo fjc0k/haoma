@@ -1,5 +1,5 @@
 // import { basename } from 'path'
-import { getCompileConfig } from './lib/index'
+import { getCompileConfig } from './src'
 
 export default getCompileConfig([
   // {

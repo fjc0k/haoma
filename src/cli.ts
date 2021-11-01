@@ -7,9 +7,10 @@ import spawn from 'cross-spawn'
 import yargs from 'yargs'
 import { basename, join, resolve } from 'path'
 import { bundle } from './bundle'
-import { castArray, dedent, uniq } from 'vtils'
+import { castArray, uniq } from 'lodash-uni'
 import { compile } from './compile'
 import { CompileCliConfig } from './types'
+import { dedent } from './utils'
 import {
   existsSync,
   mkdirSync,
@@ -18,7 +19,7 @@ import {
   writeFileSync,
 } from 'fs-extra'
 import { getBabelConfig } from './getBabelConfig'
-import { PackageJson, TsConfigJson } from 'vtils/types'
+import { PackageJson, TsConfigJson } from 'type-fest'
 import { run } from './run'
 
 require('@babel/register')({
@@ -504,16 +505,29 @@ yargs
       })
     },
   )
-  .command(
+  .command<{
+    config: string
+  }>(
     'compile',
     'Compile files',
-    () => undefined,
-    async () => {
-      const configTsFile = join(process.cwd(), 'haoma-compile.config.ts')
-      const configJsFile = join(process.cwd(), 'haoma-compile.config.js')
-      const configFile = (await pathExists(configTsFile))
-        ? configTsFile
-        : configJsFile
+    yargs =>
+      yargs.option('config', {
+        alias: 'c',
+        type: 'string',
+        describe: 'Config file',
+        default: undefined,
+      }),
+    async args => {
+      let configFile: string
+      if (!args.config) {
+        const configTsFile = join(process.cwd(), 'haoma-compile.config.ts')
+        const configJsFile = join(process.cwd(), 'haoma-compile.config.js')
+        configFile = (await pathExists(configTsFile))
+          ? configTsFile
+          : configJsFile
+      } else {
+        configFile = join(process.cwd(), args.config)
+      }
       if (!(await pathExists(configFile))) {
         throw new Error('找不到配置文件')
       }

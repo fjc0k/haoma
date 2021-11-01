@@ -10,10 +10,10 @@ import globby from 'globby'
 import ora from 'ora'
 import rimraf from 'rimraf'
 import workerpool from 'workerpool'
-import { AsyncOrSync, Defined } from 'vtils/types'
+import { AsyncOrSync } from 'ts-essentials'
 import { BabelConfig, CompileConfig } from './types'
 import { basename, join } from 'path'
-import { dedent, EventBus } from 'vtils'
+import { dedent, EventBus } from './utils'
 import { getBabelConfig } from './getBabelConfig'
 
 export async function compile(config: CompileConfig) {
@@ -173,7 +173,7 @@ export async function compile(config: CompileConfig) {
         const afterWriteTransformers: Array<
           (content: string) => AsyncOrSync<string>
         > = []
-        const bus: Defined<BabelConfig['bus']> = new EventBus()
+        const bus: NonNullable<BabelConfig['bus']> = new EventBus()
         bus.on('addAfterWriteTransformer', transformer =>
           afterWriteTransformers.push(transformer),
         )
