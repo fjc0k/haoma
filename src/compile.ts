@@ -22,6 +22,7 @@ export async function compile(config: CompileConfig) {
   const {
     name,
     inputFiles,
+    copyOnly = () => false,
     outDir,
     emitDts,
     rollupDts,
@@ -61,15 +62,18 @@ export async function compile(config: CompileConfig) {
   const tsFiles: string[] = []
   await Promise.all(
     inputFiles.map(async file => {
+      const isCopyOnly = copyOnly(file)
       const isDts = /\.d\.ts$/i.test(file)
       const outFile = join(
         outDir,
-        isDts
+        isCopyOnly || isDts
           ? file.replace(inputDir, '')
           : file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
       )
       let code = await fs.readFile(file, 'utf8')
-      if (isDts) {
+      if (isCopyOnly) {
+        await fs.outputFile(outFile, code)
+      } else if (isDts) {
         if (emitDts) {
           await fs.outputFile(outFile, code)
         }
@@ -237,7 +241,11 @@ export async function compile(config: CompileConfig) {
         absolute: true,
         ignore: [...rollupDtsFiles, ...rollupDtsExcludeFiles],
       })
-      await Promise.all(scrappedDtsFiles.map(file => fs.remove(file)))
+      await Promise.all(
+        scrappedDtsFiles
+          .filter(file => !copyOnly(file))
+          .map(file => fs.remove(file)),
+      )
     }
   }
 

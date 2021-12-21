@@ -227,6 +227,11 @@ export interface CompileConfig extends BabelConfig {
   inputFiles: string[]
 
   /**
+   * 仅复制的文件。
+   */
+  copyOnly?: (file: string) => boolean
+
+  /**
    * 输出目录。
    */
   outDir: string

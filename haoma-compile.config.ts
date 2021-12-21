@@ -59,6 +59,7 @@ export default getCompileConfig([
   {
     name: 'esm',
     inputFiles: ['tests/yy.vue'],
+    copyOnly: file => file.includes('.vue'),
     outDir: 'lib_vue',
     module: 'cjs',
     target: 'browser',
