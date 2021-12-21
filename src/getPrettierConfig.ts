@@ -22,7 +22,7 @@ export function getPrettierConfig(
       jsxSingleQuote: true,
       trailingComma: 'all',
       bracketSpacing: true,
-      jsxBracketSameLine: true,
+      bracketSameLine: true,
       arrowParens: 'avoid',
       endOfLine: 'lf',
       vueIndentScriptAndStyle: true,
