@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.6.0](https://github.com/fjc0k/haoma/compare/v3.5.0...v3.6.0) (2021-12-21)
+
+### Features
+
+- compile 支持 copyOnly 配置项 ([613a0d2](https://github.com/fjc0k/haoma/commit/613a0d209837a90ead100f8576769eb5009f19ec))
+
 ## [3.5.0](https://github.com/fjc0k/haoma/compare/v3.4.4...v3.5.0) (2021-11-01)
 
 ### Features
