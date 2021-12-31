@@ -2717,18 +2717,6 @@ commander@^6.2.0:
   resolved "https://registry.npmmirror.com/commander/download/commander-6.2.1.tgz#0792eb682dfbc325999bb2b84fddddba110ac73c"
   integrity sha1-B5LraC37wyWZm7K4T93duhEKxzw=
 
-common-dir@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.npmmirror.com/common-dir/download/common-dir-3.0.1.tgz#c328570baebd5a6afb929ba762e816d74742d979"
-  integrity sha1-wyhXC669Wmr7kpunYugW10dC2Xk=
-  dependencies:
-    common-sequence "^2.0.0"
-
-common-sequence@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.npmmirror.com/common-sequence/download/common-sequence-2.0.2.tgz#accc76bdc5876a1fcd92b73484d4285fff99d838"
-  integrity sha1-rMx2vcWHah/Nkrc0hNQoX/+Z2Dg=
-
 commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmmirror.com/commondir/download/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"

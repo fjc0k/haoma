@@ -1,5 +1,5 @@
 // @ts-ignore
-import commonDir from 'common-dir'
+import commonDir from 'commondir'
 
 import * as babel from '@babel/core'
 import color from 'chalk'

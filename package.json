@@ -84,7 +84,7 @@
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "chalk": "^4.1.0",
     "chokidar": "^3.5.2",
-    "common-dir": "^3.0.0",
+    "commondir": "^1.0.1",
     "core-js": "^3.9.0",
     "cross-spawn": "^7.0.3",
     "cuid": "^2.1.8",
