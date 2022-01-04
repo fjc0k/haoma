@@ -1,6 +1,6 @@
 import pkgDir from 'pkg-dir'
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
-import { join } from 'path'
+import { join } from 'pathe'
 import { PackageJson } from 'type-fest'
 
 const appRoot = pkgDir.sync(join(__dirname, '../..'))

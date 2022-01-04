@@ -3,7 +3,7 @@ import cuid from 'cuid'
 import fs from 'fs-extra'
 import { BabelConfig } from '../types'
 import { types as babelTypes, PluginObj } from '@babel/core'
-import { dirname, extname, join } from 'path'
+import { dirname, extname, join } from 'pathe'
 import { renderStyle } from '../renderStyle'
 
 export function getProcessCssPlugin(options: {

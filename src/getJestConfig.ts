@@ -2,7 +2,7 @@ import merge from 'deepmerge'
 import { escapeRegExp } from 'lodash-uni'
 import { existsSync } from 'fs'
 import { JestConfig } from './types'
-import { join, relative } from 'path'
+import { join, relative } from 'pathe'
 import { omitStrict } from './utils'
 
 export function getJestConfig(

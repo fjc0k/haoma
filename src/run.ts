@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import exec from 'execa'
 import onExit from 'exit-hook'
-import { join } from 'path'
+import { join } from 'pathe'
 
 export async function run(payload: {
   transformer: 'babel' | 'esbuild'

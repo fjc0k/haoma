@@ -12,7 +12,7 @@ import rimraf from 'rimraf'
 import workerpool from 'workerpool'
 import { AsyncOrSync } from 'ts-essentials'
 import { BabelConfig, CompileConfig } from './types'
-import { basename, join } from 'path'
+import { basename, join } from 'pathe'
 import { dedent, EventBus } from './utils'
 import { getBabelConfig } from './getBabelConfig'
 

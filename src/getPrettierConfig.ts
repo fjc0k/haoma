@@ -1,5 +1,5 @@
 import merge from 'deepmerge'
-import { join } from 'path'
+import { join } from 'pathe'
 import { PrettierConfig } from './types'
 
 export function getPrettierConfig(
