@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.6.1](https://github.com/fjc0k/haoma/compare/v3.6.0...v3.6.1) (2022-01-04)
+
+### Bug Fixes
+
+- 使用 commondir 代替 common-dir 以解决 Windows 环境问题 ([41a760c](https://github.com/fjc0k/haoma/commit/41a760c1d118ce6f22c2b11d6cb9a8977d3359a8))
+- 用 pathe 代替 path 以兼容 Windows ([3247c44](https://github.com/fjc0k/haoma/commit/3247c4457c72aa867cab57856d49f52da7929c1f))
+
 ## [3.6.0](https://github.com/fjc0k/haoma/compare/v3.5.0...v3.6.0) (2021-12-21)
 
 ### Features
