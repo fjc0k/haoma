@@ -128,9 +128,9 @@ export function getJestConfig(
           : {}),
       },
       collectCoverageFrom: [
-        '<rootDir>/src/**/*.{ts,tsx}',
+        '<rootDir>/src/**/*.{js,jsx,ts,tsx}',
         '!<rootDir>/src/**/__*__/**/*',
-        '!<rootDir>/src/**/*.test.*',
+        '!<rootDir>/src/**/*.{test,perf}.*',
       ],
       setupFilesAfterEnv: [normalizeFilePath(require.resolve('./jestSetup'))],
       snapshotSerializers: [
