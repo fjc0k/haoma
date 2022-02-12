@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.6.3](https://github.com/fjc0k/haoma/compare/v3.6.2...v3.6.3) (2022-02-12)
+
+### Bug Fixes
+
+- **bundle:** target 支持 es5 ([c116e12](https://github.com/fjc0k/haoma/commit/c116e12404ad3b9b1f41698ba40669def18cd987))
+
 ### [3.6.2](https://github.com/fjc0k/haoma/compare/v3.6.1...v3.6.2) (2022-02-07)
 
 ### Bug Fixes
