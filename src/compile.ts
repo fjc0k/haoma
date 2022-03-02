@@ -12,7 +12,7 @@ import rimraf from 'rimraf'
 import workerpool from 'workerpool'
 import { AsyncOrSync } from 'ts-essentials'
 import { BabelConfig, CompileConfig } from './types'
-import { basename, join } from 'pathe'
+import { basename, dirname, join } from 'pathe'
 import { dedent, EventBus } from './utils'
 import { getBabelConfig } from './getBabelConfig'
 
@@ -58,7 +58,8 @@ export async function compile(config: CompileConfig) {
   }
 
   spinner.text = '编译文件...'
-  const inputDir = commonDir(inputFiles)
+  const inputDir =
+    inputFiles.length === 1 ? dirname(inputFiles[0]) : commonDir(inputFiles)
   const tsFiles: string[] = []
   await Promise.all(
     inputFiles.map(async file => {
