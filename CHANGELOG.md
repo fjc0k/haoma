@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.6.5](https://github.com/fjc0k/haoma/compare/v3.6.4...v3.6.5) (2023-01-05)
+
+### Bug Fixes
+
+- **compile:** copyOnly 应该复制原始文件 ([f2bcc8f](https://github.com/fjc0k/haoma/commit/f2bcc8f2c11b83698605a1fb7acbb991e5672ff9))
+
 ### [3.6.4](https://github.com/fjc0k/haoma/compare/v3.6.3...v3.6.4) (2022-03-02)
 
 ### Bug Fixes
