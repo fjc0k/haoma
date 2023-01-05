@@ -72,6 +72,7 @@ export async function compile(config: CompileConfig) {
           : file.replace(inputDir, '').replace(/\.[^.]+$/, '.js'),
       )
       if (isCopyOnly) {
+        await fs.ensureDir(dirname(outFile))
         await fs.copyFile(file, outFile)
       } else {
         let code = await fs.readFile(file, 'utf8')
