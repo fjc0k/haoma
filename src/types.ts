@@ -44,12 +44,6 @@ export type ESLintConfig = eslint.Linter.Config & {
 }
 
 export type PrettierConfig = prettier.Options & {
-  /**
-   * @package prettier-plugin-organize-imports
-   *
-   * If you don't want destructive code actions (like removing unused imports), you can enable the option organizeImportsSkipDestructiveCodeActions via your Prettier config.
-   */
-  organizeImportsSkipDestructiveCodeActions?: boolean
   overrides?: Array<{
     files: string | string[]
     options: prettier.Options
