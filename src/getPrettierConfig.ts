@@ -29,6 +29,7 @@ export function getPrettierConfig(
       plugins: [
         require.resolve('prettier-plugin-packagejson', { paths }),
         require.resolve('prettier-plugin-sh', { paths }),
+        require.resolve('prettier-plugin-organize-imports', { paths }),
       ],
       overrides: [
         {

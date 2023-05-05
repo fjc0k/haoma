@@ -1,5 +1,5 @@
-import { ESLintConfig as ESLintConfigTypes } from './types'
 import { getBabelConfig } from './getBabelConfig'
+import { ESLintConfig as ESLintConfigTypes } from './types'
 
 const ESLintConfig: ESLintConfigTypes = {
   parser: '@babel/eslint-parser',
@@ -28,7 +28,6 @@ const ESLintConfig: ESLintConfigTypes = {
     es6: true,
     jest: true,
   },
-  plugins: ['sort-imports-es6-autofix'],
   rules: {
     'no-var': 'error',
     'prefer-const': 'error',
@@ -49,14 +48,6 @@ const ESLintConfig: ESLintConfigTypes = {
         newIsCap: true,
         capIsNew: false,
         properties: true,
-      },
-    ],
-    'sort-imports-es6-autofix/sort-imports-es6': [
-      'error',
-      {
-        ignoreCase: true,
-        ignoreMemberSort: false,
-        memberSyntaxSortOrder: ['none', 'all', 'single', 'multiple'],
       },
     ],
     'no-control-regex': 'off',
