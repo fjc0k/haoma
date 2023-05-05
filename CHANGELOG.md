@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://github.com/fjc0k/haoma/compare/v3.6.6...v3.7.0) (2023-05-05)
+
+### Features
+
+- 使用 prettier-plugin-organize-imports 代替 eslint-plugin-sort-imports-es6-autofix ([4e08ba9](https://github.com/fjc0k/haoma/commit/4e08ba9e986a7bb00d9dec214378065c008942ed))
+
 ### [3.6.6](https://github.com/fjc0k/haoma/compare/v3.6.5...v3.6.6) (2023-01-05)
 
 ### Bug Fixes
