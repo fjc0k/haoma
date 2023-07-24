@@ -1,8 +1,8 @@
 import merge from 'deepmerge'
-import { escapeRegExp } from 'lodash-uni'
 import { existsSync } from 'fs'
-import { JestConfig } from './types'
+import { escapeRegExp } from 'lodash-uni'
 import { join, relative } from 'pathe'
+import { JestConfig } from './types'
 import { omitStrict } from './utils'
 
 export function getJestConfig(
@@ -53,8 +53,12 @@ export function getJestConfig(
         ...(supportVueTemplate ? ['vue'] : []),
       ],
       transform: {
-        '\\.(css|less|scss|sass|styl|md|html|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+        '\\.(md|html|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
           require.resolve('jest-transform-stub'),
+        '\\.(css|less|scss|sass|styl)$':
+          customConfig.cssTransformer === 'css-modules'
+            ? require.resolve('jest-css-modules-transform')
+            : require.resolve('jest-transform-stub'),
         ...(customConfig.transformer === 'typescript+babel'
           ? {
               '^.+\\.tsx?$': require.resolve('ts-jest'),
@@ -163,6 +167,7 @@ export function getJestConfig(
       'testEnvironment',
       'transformPackages',
       'transformer',
+      'cssTransformer',
       'jsxPragma',
     ]),
   )

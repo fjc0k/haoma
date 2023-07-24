@@ -79,6 +79,16 @@ export type JestConfig = Merge<
     transformer?: 'typescript+babel' | 'babel' | 'esbuild'
 
     /**
+     * CSS 转换器。
+     *
+     * - `stub`: 假值
+     * - `css-modules`: CSS Modules
+     *
+     * @default stub
+     */
+    cssTransformer?: 'stub' | 'css-modules'
+
+    /**
      * jsx 变种。
      *
      * @default React
