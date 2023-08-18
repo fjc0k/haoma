@@ -1,6 +1,6 @@
-// @ts-ignore
 import * as babel from '@babel/core'
 import color from 'chalk'
+// @ts-ignore
 import commonDir from 'commondir'
 import deleteEmptyDirectories from 'delete-empty'
 import exec from 'execa'
