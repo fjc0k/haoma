@@ -1,20 +1,19 @@
 // @ts-ignore
-import commonDir from 'commondir'
-
 import * as babel from '@babel/core'
 import color from 'chalk'
+import commonDir from 'commondir'
 import deleteEmptyDirectories from 'delete-empty'
 import exec from 'execa'
 import fs from 'fs-extra'
 import globby from 'globby'
 import ora from 'ora'
-import rimraf from 'rimraf'
-import workerpool from 'workerpool'
-import { AsyncOrSync } from 'ts-essentials'
-import { BabelConfig, CompileConfig } from './types'
 import { basename, dirname, join } from 'pathe'
-import { dedent, EventBus } from './utils'
+import rimraf from 'rimraf'
+import { AsyncOrSync } from 'ts-essentials'
+import workerpool from 'workerpool'
 import { getBabelConfig } from './getBabelConfig'
+import { BabelConfig, CompileConfig } from './types'
+import { dedent, EventBus } from './utils'
 
 export async function compile(config: CompileConfig) {
   const startTime = Date.now()
@@ -212,6 +211,7 @@ export async function compile(config: CompileConfig) {
       'node',
       [
         require.resolve('typescript').replace(/typescript\.js$/, 'tsc.js'),
+        '--strict',
         '--declaration',
         '--emitDeclarationOnly',
         '--skipLibCheck',
