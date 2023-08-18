@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.8.1](https://github.com/fjc0k/haoma/compare/v3.8.0...v3.8.1) (2023-08-18)
+
+### Bug Fixes
+
+- **compile:** --strict ([786977a](https://github.com/fjc0k/haoma/commit/786977a768a95d387fbb5df06164124b19b21c20))
+
 ## [3.8.0](https://github.com/fjc0k/haoma/compare/v3.7.1...v3.8.0) (2023-07-24)
 
 ### Features
