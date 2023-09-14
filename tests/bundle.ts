@@ -1,6 +1,6 @@
-import { join } from 'path'
 import { read } from 'fs'
 import { sum } from 'lodash-uni'
+import { join } from 'path'
 
 const x = {
   ...window,
