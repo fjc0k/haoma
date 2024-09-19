@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.9.0](https://github.com/fjc0k/haoma/compare/v3.8.3...v3.9.0) (2024-09-19)
+
+### Features
+
+- 支持 jsxReact 选项 ([428ceff](https://github.com/fjc0k/haoma/commit/428ceff8e982a4bd2dba6393fc689165af11ff02))
+
 ### [3.8.3](https://github.com/fjc0k/haoma/compare/v3.8.2...v3.8.3) (2023-09-14)
 
 ### [3.8.2](https://github.com/fjc0k/haoma/compare/v3.8.1...v3.8.2) (2023-08-18)
