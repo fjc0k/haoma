@@ -125,6 +125,19 @@ export interface BabelConfig extends babel.TransformOptions {
   jsx?: BabelConfigDynamicallyItem<'react' | 'vue' | 'vue2'>
 
   /**
+   * @see https://babeljs.io/docs/babel-plugin-transform-react-jsx
+   */
+  jsxReact?: {
+    throwIfNamespace?: boolean
+    runtime?: 'classic' | 'automatic'
+    importSource?: string
+    pragma?: string
+    pragmaFrag?: string
+    useBuiltIns?: boolean
+    useSpread?: boolean
+  }
+
+  /**
    * 是否启用 core-js 垫片。
    *
    * @default false

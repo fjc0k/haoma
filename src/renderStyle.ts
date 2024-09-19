@@ -21,8 +21,8 @@ export async function renderStyle(payload: {
     lang = filePath.endsWith('.scss')
       ? 'scss'
       : filePath.endsWith('.less')
-      ? 'less'
-      : 'css',
+        ? 'less'
+        : 'css',
     cssModules = false,
     cssModulesScopedName = payload => payload.className,
   } = payload
@@ -36,7 +36,7 @@ export async function renderStyle(payload: {
           file: filePath,
           sourceMap: false,
         },
-        (err, res) => (err ? reject(err) : resolve(res.css.toString())),
+        (err, res) => (err ? reject(err) : resolve(res!.css.toString())),
       )
     })
   } else if (lang === 'less') {
