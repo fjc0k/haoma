@@ -125,7 +125,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
       ...(!isJsx
         ? []
         : jsx === 'react'
-          ? [require.resolve('@babel/plugin-transform-react-jsx'), jsxReact]
+          ? [[require.resolve('@babel/plugin-transform-react-jsx'), jsxReact]]
           : jsx === 'vue'
             ? [require.resolve('@vue/babel-plugin-jsx')]
             : []),
