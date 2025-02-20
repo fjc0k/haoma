@@ -121,21 +121,23 @@ export interface BabelConfig extends babel.TransformOptions {
     | 'node'
     | 'browser'
     | 'browserslist'
-    | Record<
-        | 'android'
-        | 'chrome'
-        | 'deno'
-        | 'edge'
-        | 'electron'
-        | 'firefox'
-        | 'ie'
-        | 'ios'
-        | 'node'
-        | 'opera'
-        | 'rhino'
-        | 'safari'
-        | 'samsung',
-        string | number
+    | Partial<
+        Record<
+          | 'android'
+          | 'chrome'
+          | 'deno'
+          | 'edge'
+          | 'electron'
+          | 'firefox'
+          | 'ie'
+          | 'ios'
+          | 'node'
+          | 'opera'
+          | 'rhino'
+          | 'safari'
+          | 'samsung',
+          string | number
+        >
       >
   >
 
