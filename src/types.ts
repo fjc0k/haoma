@@ -117,7 +117,27 @@ export interface BabelConfig extends babel.TransformOptions {
    *
    * @default 'browser'
    */
-  target?: BabelConfigDynamicallyItem<'node' | 'browser' | 'browserslist'>
+  target?: BabelConfigDynamicallyItem<
+    | 'node'
+    | 'browser'
+    | 'browserslist'
+    | Record<
+        | 'android'
+        | 'chrome'
+        | 'deno'
+        | 'edge'
+        | 'electron'
+        | 'firefox'
+        | 'ie'
+        | 'ios'
+        | 'node'
+        | 'opera'
+        | 'rhino'
+        | 'safari'
+        | 'samsung',
+        string | number
+      >
+  >
 
   /**
    * 是否启用 JSX。

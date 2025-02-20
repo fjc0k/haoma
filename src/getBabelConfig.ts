@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { isFunction, mapValues } from 'lodash-uni'
+import { isFunction, isPlainObject, mapValues } from 'lodash-uni'
 import { getProcessCssPlugin } from './babelPlugins'
 import { BabelConfig } from './types'
 
@@ -66,17 +66,18 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
           loose: true,
           bugfixes: true,
           modules: module === 'esm' ? false : 'cjs',
-          targets:
-            target === 'node'
-              ? {
-                  node: '12',
-                }
-              : target === 'browser'
-              ? {
-                  ios: '8',
-                  android: '4',
-                }
-              : {},
+          targets: isPlainObject(target)
+            ? target
+            : target === 'node'
+            ? {
+                node: '12',
+              }
+            : target === 'browser'
+            ? {
+                ios: '8',
+                android: '4',
+              }
+            : {},
           ...(polyfill
             ? {
                 useBuiltIns: 'usage',
