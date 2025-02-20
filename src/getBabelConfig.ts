@@ -22,6 +22,7 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
     polyfill = false,
     runtime = !isTestEnv,
     legacyDecorator = false,
+    preserveDynamicImport = false,
     projectRoot,
     outDir,
     getCssModulesScopedName,
@@ -71,11 +72,11 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
                   node: '12',
                 }
               : target === 'browser'
-                ? {
-                    ios: '8',
-                    android: '4',
-                  }
-                : {},
+              ? {
+                  ios: '8',
+                  android: '4',
+                }
+              : {},
           ...(polyfill
             ? {
                 useBuiltIns: 'usage',
@@ -86,21 +87,26 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
                 },
               }
             : {}),
+          ...(preserveDynamicImport
+            ? {
+                exclude: ['proposal-dynamic-import'],
+              }
+            : {}),
         },
       ],
       ...(typescript ? [[require.resolve('@babel/preset-typescript')]] : []),
       ...(!isJsx
         ? []
         : jsx === 'vue2'
-          ? [
-              [
-                require.resolve('@vue/babel-preset-jsx'),
-                {
-                  compositionAPI: true,
-                },
-              ],
-            ]
-          : []),
+        ? [
+            [
+              require.resolve('@vue/babel-preset-jsx'),
+              {
+                compositionAPI: true,
+              },
+            ],
+          ]
+        : []),
     ],
     // babel 中 plugin 会在 preset 前执行，
     // plugin 的执行顺序是正序的，即从前往后
@@ -125,10 +131,10 @@ export function getBabelConfig(config: BabelConfig): BabelConfig {
       ...(!isJsx
         ? []
         : jsx === 'react'
-          ? [[require.resolve('@babel/plugin-transform-react-jsx'), jsxReact]]
-          : jsx === 'vue'
-            ? [require.resolve('@vue/babel-plugin-jsx')]
-            : []),
+        ? [[require.resolve('@babel/plugin-transform-react-jsx'), jsxReact]]
+        : jsx === 'vue'
+        ? [require.resolve('@vue/babel-plugin-jsx')]
+        : []),
       ...(!runtime
         ? []
         : [

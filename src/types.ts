@@ -162,6 +162,11 @@ export interface BabelConfig extends babel.TransformOptions {
   legacyDecorator?: BabelConfigDynamicallyItem<boolean>
 
   /**
+   * 是否保留动态导入语法。
+   */
+  preserveDynamicImport?: boolean
+
+  /**
    * 项目根目录。（处理 CSS 有用）
    */
   projectRoot?: string
