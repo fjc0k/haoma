@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.10.1](https://github.com/fjc0k/haoma/compare/v3.10.0...v3.10.1) (2025-02-20)
+
+### Bug Fixes
+
+- target ([263ea2f](https://github.com/fjc0k/haoma/commit/263ea2fbae3c842c7ef199113d2b9fb382d3595e))
+
 ## [3.10.0](https://github.com/fjc0k/haoma/compare/v3.9.1...v3.10.0) (2025-02-20)
 
 ### Features
